@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:29:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/14 15:33:42 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:14:37 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 /* GLOBAL VARIABLE */
 
-extern int	g_last_exit_code;
+extern int	last_exit_code;
 
 /* STRUCTS */
 

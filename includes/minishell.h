@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:13:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/14 15:37:50 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:58:21 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <term.h>
 
 # include "libft.h"
 # include "minishell_define.h"
@@ -38,6 +39,8 @@
 /************* FUNCTIONS *************/
 
 /* INITIALIZATION */
+
+bool	init_data(t_data *data, char **env);
 
 /* LEXER */
 
@@ -48,6 +51,13 @@
 /* EXECUTION */
 
 /* UTILS */
+
+/* EXIT */
+
+void	exit_minishell(t_data *data, int exno);
+void	free_data(t_data *data, bool clear_history);
+
+
 
 
 
