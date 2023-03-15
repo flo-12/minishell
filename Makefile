@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/03/14 14:53:08 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/03/14 19:20:35 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,11 @@ INC			=	-I ./includes/\
 
 # Sources
 SRC_PATH	=	srcs/
-SRC			=	main.c 
+SRC			=	main.c \
+				exit/exit_minishell.c \
+				exit/free_data.c \
+				initialization/init_data.c \
+
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 # Objects
@@ -40,16 +44,18 @@ all: $(LIBFT) $(OBJ_PATH) $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "Compiling minishell..."
-	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -lreadline
-	@echo "\n\t\033[35;1;3mMinishell ready\033[0m\n"
+	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -lreadline -lhistory -ltermcap
+	@echo "\n\t\033[33;1;3mMinishell ready\033[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 #	@echo "Compiling object files"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJ_PATH):
-	@echo "Generating obj folder"
+	@echo "Generating obj folders"
 	@mkdir $(OBJ_PATH)
+	@mkdir $(OBJ_PATH)/exit
+	@mkdir $(OBJ_PATH)/initialization
 
 $(LIBFT):
 	@echo "Making libft..."
