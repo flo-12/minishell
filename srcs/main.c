@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/14 19:14:20 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:59:33 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,7 @@ int main(int ac, char **av, char **env)
 	
 	(void)av;
 	printf("hello world!\n");
+
+	exit_minishell(&data, last_exit_code);
+	return (0);
 }
