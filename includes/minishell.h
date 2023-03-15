@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:13:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/14 18:58:21 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:36:50 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 
 # include "libft.h"
 # include "minishell_define.h"
+
+# include "minishell_marco.h"
 
 /************* FUNCTIONS *************/
 

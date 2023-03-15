@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/03/14 19:20:35 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/03/15 18:38:50 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC			=	main.c \
 				exit/exit_minishell.c \
 				exit/free_data.c \
 				initialization/init_data.c \
+				test/test_token_list.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
@@ -44,7 +45,7 @@ all: $(LIBFT) $(OBJ_PATH) $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "Compiling minishell..."
-	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -lreadline -lhistory -ltermcap
+	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -lreadline -lhistory -ltermcap 
 	@echo "\n\t\033[33;1;3mMinishell ready\033[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
@@ -56,6 +57,7 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 	@mkdir $(OBJ_PATH)/exit
 	@mkdir $(OBJ_PATH)/initialization
+	@mkdir $(OBJ_PATH)/test
 
 $(LIBFT):
 	@echo "Making libft..."
