@@ -78,6 +78,10 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*get_next_line(int fd);
+char	*gnl_ft_strdup(const char *s);
+char	*gnl_ft_strjoin(char *s1, char const *s2);
+size_t	gnl_ft_strlen(const char *s);
+char	*gnl_ft_strchr(const char *s, int c);
 
 #endif
 
