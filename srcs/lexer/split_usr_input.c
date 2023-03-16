@@ -33,7 +33,7 @@ char	**add_str(char **src_ptr, char *src, int size)
 	int		size_ptr;
 	char	**dst_ptr;
 
-	size_ptr = get_size_ptr(str_old);
+	size_ptr = get_size_ptr(src_ptr);
 	dst_ptr = (char **)ft_calloc(sizeof(char *), size_ptr + 2);
 	if (!dst_ptr)
 	{
@@ -48,8 +48,23 @@ char	**add_str(char **src_ptr, char *src, int size)
 		free_ptr(dst_ptr);
 		return (NULL);
 	}
-	ft_strlcpy(dst_ptr[size_ptr], src, size);
+	ft_strlcpy(dst_ptr[size_ptr], src, size + 1);
 	return (dst_ptr);
+}
+
+_bool	del_found(char cmp, char del)
+{
+	if (del == '\"' || del == '\'')
+	{
+		if (del == cmp)
+			return (true);
+	}
+	else
+	{
+		if (cmp == ' ' || cmp == '\"' || cmp == '\'')
+			return (true);
+	}
+	return (false);
 }
 
 int	find_dstsize(char *str, int *quote)
@@ -71,14 +86,14 @@ int	find_dstsize(char *str, int *quote)
 	i = 1;
 	while (str[i])
 	{
-		if (str[i] == del)
-			return (i);
+		if (del_found(*(str + i), del))
+			return (i + get_i_del_spaces(str + i));
 		i++;
 	}
-	if (quote)
+	if (*quote)
 		return (-1);
 	else
-		return (i - 1);
+		return (i);
 }
 
 /*
@@ -99,14 +114,18 @@ char	**split_usr_input(char *usr_input)
 	int		quote;
 	char	**usr_split;
 	int		dstsize;
+	int		spaces;
 
 	if (nbr_quotes(usr_input, '\'') % 2 != 0
 		|| nbr_quotes(usr_input, '\"') % 2 != 0)
 		return (NULL);
+	spaces = 0;
+	usr_split = NULL;
 	quote = 0;
 	while (*usr_input)
 	{
 		dstsize = find_dstsize(usr_input, &quote);
+printf("dstsize=%d\n", dstsize);
 		if (quote && dstsize < 0)
 		{
 			free_ptr(usr_split);
@@ -117,7 +136,7 @@ char	**split_usr_input(char *usr_input)
 		usr_split = add_str(usr_split, usr_input, dstsize);
 		if (!usr_split)
 			return (NULL);
-		usr_input += dstsize + 1;
+		usr_input += dstsize;
 	}
 	return (usr_split);
 }
