@@ -4,6 +4,6 @@
 
 /* TEST */
 
-void	test();
+void	test_token_list(t_data *data);
 
 #endif

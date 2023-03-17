@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/15 17:37:43 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:22:30 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int main(int ac, char **av, char **env)
 		return (ft_putendl_fd("minishell doesn't accept arguments!", 2), 1);
 	if (!init_data(&data, env))
 		exit_minishell(&data, EXIT_FAILURE);
-	(void)minishell(&data);
+
+	test_token_list(&data);
+	
 	minishell(&data);
 	
-	test();
+	
 	(void)av;
 	printf("hello world!\n");
 
