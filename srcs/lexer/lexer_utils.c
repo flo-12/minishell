@@ -50,12 +50,16 @@ void	cpy_ptrs(char **dst, char **src)
 	}
 }
 
-int	get_i_del_spaces(char *str)
+/*
+Finds and returns the consecutive number of spaces
+at the beginning of the string
+*/
+int	get_nbr_spaces(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && (str[i] == ' ' || str[i] == '\'' || str[i] == '\"'))
+	while (str[i] && str[i] == ' ')
 		i++;
 	return (i);
 }

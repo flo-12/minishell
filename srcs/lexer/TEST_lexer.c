@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (1);
 	ptr = split_usr_input(argv[1]);
-	printf("split_usr_input DONE\n");
+	printf("split_input_by_space DONE\n");
 	printf_ptrs(ptr);
 	printf("\n");
 	return (0);

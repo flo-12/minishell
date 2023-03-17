@@ -18,13 +18,14 @@
 # include <sys/wait.h>
 # include <term.h>
 
+
 # include "../libft/libft.h"
 
 char	**split_usr_input(char *usr_input);
 void	free_ptr(char **ptr);
 int		get_size_ptr(char **ptr);
 void	cpy_ptrs(char **dst, char **src);
-int		get_i_del_spaces(char *str);
+int		get_nbr_spaces(char *str);
 
 /* TESTING FUNCTIONS */
 void	printf_ptrs(char **ptr);

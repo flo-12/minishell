@@ -23,15 +23,6 @@ _bool	is_spaces(char *str)
 	return (true);
 }
 
-int	get_i_spaces(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] == ' ')
-		i++;
-	return (i);
-}
 
 /*
 Triggers all sub-functions to split the user input into
@@ -46,7 +37,7 @@ _bool	lexer(t_data *data)
 		return (false);
 	if (*data == '\0' || is_spaces(data))
 		return (false);
-	usr_split = split_usr_input(data->usr_input + get_i_spaces(data->usr_input));
+	usr_split = split_usr_input(data->usr_input + get_nbr_spaces(data->usr_input));
 	if (!usr_split)
 		return (false);
 	var_expansion(usr_split, data->env);	// returning usr_split??
