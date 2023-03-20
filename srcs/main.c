@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/16 16:22:30 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:12:33 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static void	minishell(t_data *data)
 	{
 		//set_signals_interactive();
 		data->user_input = readline(PROMPT);
+		/* if (lexer(data) && parser(data))
+			last_exit_code = execute(data);
+		else
+			g_last_exit_code = 1; */
+			
 		//set_signals_noninteractive();
 		/* if (parse_user_input(data) == true)
 			g_last_exit_code = execute(data);
