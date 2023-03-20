@@ -6,13 +6,13 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:03:48 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/20 17:20:48 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:14:35 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	initialize_cmd(t_command **cmd)
+static void	cmd_init(t_command **cmd)
 {
 	(*cmd)->command = NULL;
 	(*cmd)->path = NULL;
@@ -31,7 +31,7 @@ t_command	*cmd_lst_new(void)
 	if (!(new_node))
 		return (NULL);
 	ft_memset(new_node, 0, sizeof(t_command));
-	initialize_cmd(&new_node);
+	cmd_init(&new_node);
 	return (new_node);
 }
 
