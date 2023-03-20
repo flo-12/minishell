@@ -14,8 +14,15 @@
 
 #include "../../includes/minishell_flo.h"
 
+/*
+Free each string of a pointer, pointing to several strings
+At the end, free the pointer
+*/
 void	free_ptr(char **ptr)
 {
+	char	**tmp;
+
+	tmp = ptr;
 	if (!ptr)
 		return ;
 	while (*ptr)
@@ -23,9 +30,12 @@ void	free_ptr(char **ptr)
 		free(*ptr);
 		ptr++;
 	}
-	free(ptr);
+	free(tmp);
 }
 
+/*
+get the number of strings in a ptr to strings
+*/
 int	get_size_ptr(char **ptr)
 {
 	int	i;
@@ -38,6 +48,9 @@ int	get_size_ptr(char **ptr)
 	return (i);
 }
 
+/*
+copy each str-ptr of a ptr to an other ptr
+*/
 void	cpy_ptrs(char **dst, char **src)
 {
 	if (!src)

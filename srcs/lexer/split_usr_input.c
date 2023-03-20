@@ -103,7 +103,7 @@ int	find_dstsize(char *str)
 		if (del_found(*(str + i), del))
 		{
 			if (del == ' ' && str[i] == ' ')
-				return (i + get_nbr_spaces(str + i + 1));	// check that!!!!
+				return (i + get_nbr_spaces(str + i + 1));
 			else if (del == ' ')
 				return (i - 1);
 			else
@@ -144,7 +144,6 @@ char	**split_usr_input(char *usr_input)
 	while (*usr_input)
 	{
 		dstsize = find_dstsize(usr_input) + 1;
-printf("usr_input=%s, dstsize=%d\n", usr_input, dstsize);
 		if ((*usr_input == '\'' || *usr_input == '\"')
 			&& dstsize == -1)
 		{
