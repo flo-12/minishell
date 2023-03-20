@@ -26,6 +26,7 @@ void	free_ptr(char **ptr);
 int		get_size_ptr(char **ptr);
 void	cpy_ptrs(char **dst, char **src);
 int		get_nbr_spaces(char *str);
+void	var_expansion(char **usr_split, char **env);
 
 /* TESTING FUNCTIONS */
 void	printf_ptrs(char **ptr);
@@ -35,7 +36,7 @@ void	printf_ptrs(char **ptr);
 ******************************************************************************/
 
 enum e_token_types {
-	SPACES = 1,
+	SPACES,
 	WORD,
 	VAR,
 	PIPE,

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-_bool	is_spaces(char *str)
+_Bool	is_spaces(char *str)
 {
 	while (*str)
 	{
@@ -23,24 +23,25 @@ _bool	is_spaces(char *str)
 	return (true);
 }
 
-
 /*
 Triggers all sub-functions to split the user input into
 words and tokens (including characterization of the token)
 and stores the result in the struct s_token.
 */
-_bool	lexer(t_data *data)
+_Bool	lexer(t_data *data)
 {
 	char	**usr_split;
 
 	if (data == NULL)
 		return (false);
-	if (*data == '\0' || is_spaces(data))
+	if (*data->user_input == '\0' || is_spaces(data->user_input))
 		return (false);
-	usr_split = split_usr_input(data->usr_input + get_nbr_spaces(data->usr_input));
+	usr_split = split_usr_input(data->user_input + get_nbr_spaces(data->user_input));
 	if (!usr_split)
 		return (false);
-	var_expansion(usr_split, data->env);	// returning usr_split??
+	var_expansion(usr_split, data->env);
+	if (!usr_split)
+		return (false);
 	data->token	= init_t_token(char **usr_split);
 	tokenization(data->token);
 	free(usr_split);	// <-- free each string and at the end the pointer
