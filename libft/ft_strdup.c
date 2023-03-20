@@ -29,14 +29,3 @@ char	*ft_strdup(const char *s1)
 	str[i] = '\0';
 	return (str);
 }
-
-/* 
-You just allocate for the length of the string + 1, then you fill it with 
-the same content and you finish with the null terminator.
- */
-
-/* int main(void)
-{
-	char	*str = ft_strdup("Buonasera");
-	printf("%s\n", str);
-} */

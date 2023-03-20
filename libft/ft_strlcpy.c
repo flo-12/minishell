@@ -30,22 +30,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		i++;
 	return (i);
 }
-
-/* 
-
-you just copy the string, add the null terminator and then go on to the 
-end of src because the return value is the length of the source.
-
-Condition size > 0:
-it is because if the size is 0, you don't have to put the final null terminator!
-
-*/
-
-/* int main(void)
-{
-	char	str[] = "Ciao Marc bello";
-	
-	ft_strlcpy(str, str + 5, 0);
-	//strlcpy(str, str + 5, 0);
-	printf("%s\n", str);
-} */
