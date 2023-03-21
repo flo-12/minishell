@@ -37,21 +37,21 @@ void	printf_ptrs(char **ptr);
 ******************************************************************************/
 
 enum e_token_types {
-	SPACES,
+	SPACES =1,
 	WORD,
-	VAR,
+	//VAR,
 	PIPE,
 	INPUT,
 	TRUNC,
 	HEREDOC,
 	APPEND,
-	END
+	//END
 };
 
-enum e_quoting_status {
+/*enum e_quoting_status {
 	DEFAULT,
 	SQUOTE,
 	DQUOTE
-};
+};*/
 
 #endif
