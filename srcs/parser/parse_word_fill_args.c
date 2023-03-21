@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:37:55 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 18:37:51 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:36:23 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	count_arguments(t_token *temp)
 	i = 0;
 	while (temp && (temp->type == WORD || temp->type == SPACES))
 	{
-		i++;
+		if(temp->type == WORD && temp->next->type != WORD)
+			i++;
 		temp = temp->next;
 	}
 	return (i);
@@ -28,10 +29,22 @@ int	count_arguments(t_token *temp)
 
 static void	fill_args_array(t_token **temp, char **args, int *i)
 {
+	char	*str_join;
+	
 	while (*temp && ((*temp)->type == WORD || (*temp)->type == SPACES))
 	{
-		args[*i] = ft_strdup((*temp)->str);
-		*i += 1;
+		while ((*temp)->type == WORD && (*temp)->next->type == WORD)
+		{
+			str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
+			// is it here mallocated? if not control for the frees
+			(*temp)->next->str = str_join;
+			(*temp) = (*temp)->next;
+		}
+		if ((*temp)->type == WORD)
+		{
+			args[*i] = ft_strdup((*temp)->str);
+			*i += 1;
+		}
 		(*temp) = (*temp)->next;
 	}
 	
