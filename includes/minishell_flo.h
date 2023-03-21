@@ -27,6 +27,7 @@ int		get_size_ptr(char **ptr);
 void	cpy_ptrs(char **dst, char **src);
 int		get_nbr_spaces(char *str);
 void	var_expansion(char **usr_split, char **env);
+void	quote_removal(char **usr_split);
 
 /* TESTING FUNCTIONS */
 void	printf_ptrs(char **ptr);
