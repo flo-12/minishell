@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/20 16:12:33 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:02:00 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ int main(int ac, char **av, char **env)
 	if (!init_data(&data, env))
 		exit_minishell(&data, EXIT_FAILURE);
 
-	test_token_list(&data);
+	//test_token_list(&data);
 	
+	
+	token_create_list(&data);
+	print_token_list(&((&data)->token));
+
 	minishell(&data);
-	
 	
 	(void)av;
 	printf("hello world!\n");

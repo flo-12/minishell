@@ -6,13 +6,13 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:43:40 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/14 18:57:00 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:52:28 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_ptr(void *ptr)
+static void	free_pointer(void *ptr)
 {
 	if (ptr != NULL)
 	{
@@ -32,7 +32,7 @@ static void	free_array_str(char **array)
 		{
 			if (array[i])
 			{
-				free_ptr(array[i]);
+				free_pointer(array[i]);
 				array[i] = NULL;
 			}
 			i++;
@@ -46,19 +46,19 @@ void	free_data(t_data *data, bool clear_history)
 {
 	if (data && data->user_input)
 	{
-		free_ptr(data->user_input);
+		free_pointer(data->user_input);
 		data->user_input = NULL;
 	}
 /* 	if (data && data->token)
-		lstclear_token(&data->token, &free_ptr);
+		lstclear_token(&data->token, &free_pointer);
 	if (data && data->cmd)
-		lst_clear_cmd(&data->cmd, &free_ptr); */
+		lst_clear_cmd(&data->cmd, &free_pointer); */
 	if (clear_history == true)
 	{
 		if (data && data->working_dir)
-			free_ptr(data->working_dir);
+			free_pointer(data->working_dir);
 		if (data && data->old_working_dir)
-			free_ptr(data->old_working_dir);
+			free_pointer(data->old_working_dir);
 		if (data && data->env)
 			free_array_str(data->env);
 		rl_clear_history();

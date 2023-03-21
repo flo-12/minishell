@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/03/15 18:38:50 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/03/21 14:06:28 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRC			=	main.c \
 				exit/exit_minishell.c \
 				exit/free_data.c \
 				initialization/init_data.c \
-				test/test_token_list.c
+				test/test_token_list.c \
+				test/print.c \
+				parser/sandbox.c 
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
@@ -58,6 +60,8 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)/exit
 	@mkdir $(OBJ_PATH)/initialization
 	@mkdir $(OBJ_PATH)/test
+	@mkdir $(OBJ_PATH)/parser
+
 
 $(LIBFT):
 	@echo "Making libft..."
