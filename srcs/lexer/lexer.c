@@ -45,7 +45,9 @@ _Bool	lexer(t_data *data)
 	quote_removal(usr_split);
 	if (!usr_split)
 		return (false);
-	data->token	= init_t_token(char **usr_split);
-	tokenization(data->token);
-	free(usr_split);	// <-- free each string and at the end the pointer
+	data->token = tokenization(usr_split);
+	if (!data->token)
+		return (false);
+	free(usr_split);
+	return (true);
 }
