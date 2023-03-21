@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:37:45 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 14:04:28 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:15:45 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void	print_token_type(t_token *token, char *prefix)
 		printf("SPACES\n");
 	else if (token->type == WORD)
 		printf("WORD\n");
-	else if (token->type == VAR)
-		printf("VAR\n");
 	else if (token->type == PIPE)
 		printf("PIPE\n");
 	else if (token->type == INPUT)
@@ -89,8 +87,6 @@ void	print_token_type(t_token *token, char *prefix)
 		printf("HEREDOC\n");
 	else if (token->type == APPEND)
 		printf("APPEND\n");
-	else if (token->type == END)
-		printf("END\n");
 }
 
 void	print_token_list(t_token **tokens)
