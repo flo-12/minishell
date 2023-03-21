@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 14:02:00 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:17:39 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int main(int ac, char **av, char **env)
 	
 	token_create_list(&data);
 	print_token_list(&((&data)->token));
+	parser(&data);
+	print_cmd_list(&data);
 
 	minishell(&data);
 	

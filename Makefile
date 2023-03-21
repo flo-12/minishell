@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/03/21 14:06:28 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/03/21 16:11:51 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,13 @@ SRC			=	main.c \
 				initialization/init_data.c \
 				test/test_token_list.c \
 				test/print.c \
-				parser/sandbox.c 
+				parser/sandbox.c \
+				parser/cmd_list_utils.c \
+				parser/parser.c \
+				parser/parse_word_fill_args.c \
+				parser/parse_pipe.c \
+				parser/parse_word.c	
+
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 

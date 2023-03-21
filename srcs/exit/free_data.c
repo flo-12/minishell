@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:43:40 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 12:52:28 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:00:57 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	free_pointer(void *ptr)
 	}
 }
 
-static void	free_array_str(char **array)
+void	free_array_str(char **array)
 {
 	int	i;
 

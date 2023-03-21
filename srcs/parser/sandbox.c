@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:40:02 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 14:05:05 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:53:57 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 
-t_token	*lst_new_token(char *str, int type, int status)
+t_token	*lst_new_token(char *str, int type)
 {
 	t_token	*new_node;
 
@@ -25,7 +25,7 @@ t_token	*lst_new_token(char *str, int type, int status)
 	new_node->str = str;
 	new_node->var_exists = false;
 	new_node->type = type;
-	new_node->status = status;
+	new_node->status = 0;
 	new_node->join = false;
 	new_node->prev = NULL;
 	new_node->next = NULL;
@@ -53,6 +53,13 @@ void	lst_add_back_token(t_token **alst, t_token *new_node)
 
 void	token_create_list(t_data *data)
 {
-	data->token = lst_new_token("echo", WORD, 0);
-	lst_add_back_token(&data->token, lst_new_token("hello", WORD, 0));
+	data->token = lst_new_token("echo", WORD);
+	lst_add_back_token(&data->token, lst_new_token("hello", WORD));
+	lst_add_back_token(&data->token, lst_new_token("|", PIPE));
+	lst_add_back_token(&data->token, lst_new_token("echo", WORD));
+	lst_add_back_token(&data->token, lst_new_token("ciao", WORD));
+	lst_add_back_token(&data->token, lst_new_token("stop", APPEND));
+
+
+
 }

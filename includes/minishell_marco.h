@@ -21,9 +21,16 @@ t_command	*cmd_lst_new(void);
 void		cmd_lst_add_end(t_command **lst, t_command *new_node);
 t_command	*cmd_lst_get_end(t_command *cmd);
 void		parse_pipe(t_command **cmd, t_token **token_lst);
+void		fill_args(t_token **token_node, t_command *last_cmd);
+void		parse_word(t_command **cmd, t_token **token_lst);
+
 
 // sandbox
 void	token_create_list(t_data *data);
+
+/* UTILS */
+
+void	free_array_str(char **array);
 
 
 
