@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:40:02 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 11:42:47 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:06:26 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("ciao", WORD));
 	lst_add_back_token(&data->token, lst_new_token("marco", WORD));
+	lst_add_back_token(&data->token, lst_new_token("bello", WORD));
 	lst_add_back_token(&data->token, lst_new_token("|", PIPE));
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("echo", WORD));
@@ -75,6 +76,9 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token("ls", WORD));
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("-la", WORD));
+	lst_add_back_token(&data->token, lst_new_token("|", PIPE));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("", WORD));
 	lst_add_back_token(&data->token, lst_new_token("stop", APPEND));
 
 

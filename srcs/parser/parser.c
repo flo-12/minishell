@@ -6,32 +6,22 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:14:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 11:26:11 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:03:38 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	prep_no_arg_commands(t_data *data)
-{
-	t_command	*cmd;
-
-	if (!data || !data->cmd)
-		return ;
-	cmd = data->cmd;
-	while (cmd && cmd->command)
-	{
-		if (!cmd->args)
-		{
-			cmd->args = malloc(sizeof * cmd->args * 2);
-			cmd->args[0] = ft_strdup(cmd->command);
-			cmd->args[1] = NULL;
-		}
-		cmd = cmd->next;
-	}
-	cmd = cmd_lst_get_end(data->cmd);
-}
-
+/* parser:
+	redirecting function, iterates trough the token list and builds the command
+	list. The first if condition is to initialize the command list, the others
+	handle the different type of tokens.
+	-- parse_word() builds the array of strings made by the command and its 
+		arguments
+	-- parse_pipe() handles the pipe and initialize a new node in the 
+		command list
+	-- other functions are about the redirection
+ */
 void	parser(t_data *data)
 {
 	t_token *temp;
@@ -40,16 +30,10 @@ void	parser(t_data *data)
 	// how is the token list in case of no input or input is empty string?
 	while (temp->next != NULL)
 	{
-		printf("\nparser loop - p = %p\n", temp);
 		if (temp == data->token)
 			cmd_lst_add_end(&data->cmd, cmd_lst_new());
-		printf("\ncmd_list - p = %p\n", data->cmd);
 		if (temp->type == WORD)
-		{
-			printf("\nword parsing\n");
-			printf("\ncmd_list - p = %p %p\n", &data->cmd, &temp);
 			parse_word(&data->cmd, &temp);
-		}
 /* 		else if (temp->type == INPUT)
 			parse_input(&data->cmd, &temp);
 		else if (temp->type == TRUNC)
@@ -63,11 +47,12 @@ void	parser(t_data *data)
 		// case for the spaces
 		else if (temp->type == SPACES)
 			temp = temp->next;
-		// case for the end of the list
+		// have to develop the case for the end of line 
+		//else if (temp->type == END)
+		//	break ;
 
 
 		//else if (temp->next == NULL)
 		//	break ;
 	}
-	prep_no_arg_commands(data);
 }

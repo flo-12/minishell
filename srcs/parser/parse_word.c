@@ -6,16 +6,24 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:54:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 11:32:47 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:16:29 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* parse_word:
+	parses the tokens with type WORD.
+	First always goes to the last command.
+	Then, iterates trough the token list: if is the beginning of the tkn list,
+	so ->prev == NULL, or command not initialized or previous node is a PIPE,
+	initializes the command and the args array of strings, just with two strings
+	, the command and a NULL.
+	If the if condition is not meet, the fill args() function is called, to fill
+	all the arguments of the command.
+ */
 void	parse_word(t_command **cmd, t_token **token_lst)
 {
-	printf("entering parse word");
-	
 	t_token		*tkn_temp;
 	t_command	*cmd_temp;
 
@@ -33,12 +41,9 @@ void	parse_word(t_command **cmd, t_token **token_lst)
 				if (!cmd_temp->args)
 					return ;
 				cmd_temp->args[0] = ft_strdup(cmd_temp->command);
-				printf("\n\nCOMMAND: %s\n\n", cmd_temp->args[0]);
 				cmd_temp->args[1] = NULL;
 			}
-			
 			tkn_temp = tkn_temp->next;
-			printf("command set");
 		}
 		else
 			fill_args(&tkn_temp, cmd_temp);
