@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:54:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 18:53:01 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:32:47 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ void	parse_word(t_command **cmd, t_token **token_lst)
 			(tkn_temp->prev && tkn_temp->prev->type == PIPE))
 		{
 			cmd_temp->command = ft_strdup(tkn_temp->str);
+			if (!cmd_temp->args)
+			{
+				cmd_temp->args = malloc(sizeof * cmd_temp->args * 2);
+				if (!cmd_temp->args)
+					return ;
+				cmd_temp->args[0] = ft_strdup(cmd_temp->command);
+				printf("\n\nCOMMAND: %s\n\n", cmd_temp->args[0]);
+				cmd_temp->args[1] = NULL;
+			}
+			
 			tkn_temp = tkn_temp->next;
 			printf("command set");
 		}

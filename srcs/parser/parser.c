@@ -6,11 +6,31 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:14:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 18:48:57 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:26:11 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	prep_no_arg_commands(t_data *data)
+{
+	t_command	*cmd;
+
+	if (!data || !data->cmd)
+		return ;
+	cmd = data->cmd;
+	while (cmd && cmd->command)
+	{
+		if (!cmd->args)
+		{
+			cmd->args = malloc(sizeof * cmd->args * 2);
+			cmd->args[0] = ft_strdup(cmd->command);
+			cmd->args[1] = NULL;
+		}
+		cmd = cmd->next;
+	}
+	cmd = cmd_lst_get_end(data->cmd);
+}
 
 void	parser(t_data *data)
 {
@@ -49,5 +69,5 @@ void	parser(t_data *data)
 		//else if (temp->next == NULL)
 		//	break ;
 	}
-	//prep_no_arg_commands(data);
+	prep_no_arg_commands(data);
 }

@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:37:55 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 19:36:23 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:19:06 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	fill_args_array(t_token **temp, char **args, int *i)
 	
 }
 
-void	create_args_default_mode(t_token **token_node, t_command *last_cmd)
+/* void	create_args_default_mode(t_token **token_node, t_command *last_cmd)
 {
 	int		i;
 	int		nb_args;
@@ -67,16 +67,16 @@ void	create_args_default_mode(t_token **token_node, t_command *last_cmd)
 	last_cmd->args[i] = ft_strdup(last_cmd->command);
 	i++;
 	fill_args_array(&temp, last_cmd->args, &i);
-	/* while (temp->type == WORD || temp->type == SPACES)
+	while (temp->type == WORD || temp->type == SPACES)
 	{
 		last_cmd->args[i] = ft_strdup(temp->str);
 		i++;
 		temp = temp->next;
-	} */
+	}
 	last_cmd->args[i] = NULL;
 	*token_node = temp;
 	return ;
-}
+} */
 
 static char	**copy_default_in_new_tab(
 	int len, char **new_tab, t_command *last_cmd, t_token **tk_node)
@@ -88,10 +88,17 @@ static char	**copy_default_in_new_tab(
 	temp = *tk_node;
 	while (i < len)
 	{
+		printf("\n\nCONVERSION ARRAY: %s , %s\n\n", new_tab[i], last_cmd->args[i]);
+		printf("\nLEN: %d\n", len);
 		new_tab[i] = last_cmd->args[i];
+		printf("\n\nNEW TAB: %s\n\n", new_tab[i]);
 		i++;
 	}
+	printf("\nIterator: %d\n", i);
+	printf("\n\nNEW TAB before: %s\n\n", new_tab[0]);
 	fill_args_array(&temp, new_tab, &i);
+	printf("\n\nNEW TAB after func: %s\n\n", new_tab[0]);
+	printf("\nIterator: %d\n", i);
 	/* while (temp->type == WORD || temp->type == SPACES)
 	{
 		new_tab[i] = ft_strdup(temp->str);
@@ -102,7 +109,7 @@ static char	**copy_default_in_new_tab(
 	return (new_tab);
 }
 
-void	add_args_default_mode(t_token **token_node, t_command *last_cmd)
+void	fill_args(t_token **token_node, t_command *last_cmd)
 {
 	int		i;
 	int		len;
@@ -113,7 +120,8 @@ void	add_args_default_mode(t_token **token_node, t_command *last_cmd)
 	temp = *token_node;
 	while (temp->type == WORD || temp->type == SPACES)
 	{
-		i++;
+		if(temp->type == WORD)
+			i++;
 		temp = temp->next;
 	}
 	len = 0;
@@ -123,16 +131,20 @@ void	add_args_default_mode(t_token **token_node, t_command *last_cmd)
 	if (!new_tab)
 		return ;
 	new_tab = copy_default_in_new_tab(len, new_tab, last_cmd, token_node);
-	free_array_str(last_cmd->args);
+	printf("\n\nNEW TAB second function: %s\n\n", new_tab[0]);
+	free(last_cmd->args);
 	last_cmd->args = new_tab;
+	printf("\n\nNEW TAB second function: %s\n\n", last_cmd->args[0]);
+	printf("\n\nNEW TAB second function: %s\n\n", last_cmd->args[1]);
 	*token_node = temp;
 	return ;
 }
 
-void	fill_args(t_token **token_node, t_command *last_cmd)
+/* void	fill_args(t_token **token_node, t_command *last_cmd)
 {
-		if (last_cmd && !(last_cmd->args))
-			create_args_default_mode(token_node, last_cmd);
-		else
+		//if (last_cmd && !(last_cmd->args))
+		//	create_args_default_mode(token_node, last_cmd);
+		//else
 			add_args_default_mode(token_node, last_cmd);
-}
+			printf("\n\nCOMMAND: %s\n\n", last_cmd->args[0]);
+} */
