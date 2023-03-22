@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:54:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 16:16:29 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:13:19 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 	, the command and a NULL.
 	If the if condition is not meet, the fill args() function is called, to fill
 	all the arguments of the command.
+	sets the token list to the current tkn_temp node, so the parser() function 
+	can go on iterating and parsin all the elements of the list
  */
 void	parse_word(t_command **cmd, t_token **token_lst)
 {
@@ -46,8 +48,7 @@ void	parse_word(t_command **cmd, t_token **token_lst)
 			tkn_temp = tkn_temp->next;
 		}
 		else
-			fill_args(&tkn_temp, cmd_temp);
+			parse_word_fill_args(&tkn_temp, cmd_temp);
 	}
 	*token_lst = tkn_temp;
-	// goes on iterating trough the tkn list
 }

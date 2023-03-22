@@ -6,14 +6,11 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:40:02 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 16:06:26 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:11:39 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-
 
 t_token	*lst_new_token(char *str, int type)
 {
@@ -63,7 +60,12 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("echo", WORD));
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("ciao", WORD));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("ciao", WORD));
+	lst_add_back_token(&data->token, lst_new_token("marco", WORD));
+	lst_add_back_token(&data->token, lst_new_token("bello", WORD));
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("ciao", WORD));
 	lst_add_back_token(&data->token, lst_new_token("marco", WORD));

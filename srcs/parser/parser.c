@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:14:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 16:03:38 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:28:04 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@ void	parser(t_data *data)
 			temp = temp->next;
 		// have to develop the case for the end of line 
 		//else if (temp->type == END)
-		//	break ;
-
-
-		//else if (temp->next == NULL)
 		//	break ;
 	}
 }
