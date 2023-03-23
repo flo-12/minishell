@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:20:26 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/14 19:15:46 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:23:04 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,22 @@ bool	init_data(t_data *data, char **env)
 	data->pid = -1;
 	last_exit_code = 0;
 	return (true);
+}
+
+void	init_io(t_command *cmd)
+{
+	if (!cmd->io_fds)
+	{
+		cmd->io_fds = malloc(sizeof * cmd->io_fds);
+		if (!cmd->io_fds)
+			return ;
+		cmd->io_fds->infile = NULL;
+		cmd->io_fds->outfile = NULL;
+		cmd->io_fds->heredoc_delimiter = NULL;
+		cmd->io_fds->heredoc_quotes = false;
+		cmd->io_fds->fd_in = -1;
+		cmd->io_fds->fd_out = -1;
+		cmd->io_fds->stdin_backup = -1;
+		cmd->io_fds->stdout_backup = -1;
+	}
 }

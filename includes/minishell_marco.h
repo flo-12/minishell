@@ -4,6 +4,10 @@
 
 #include "minishell.h"
 
+/* INITIALIZATION */
+
+void	init_io(t_command *cmd);
+
 /* TEST */
 
 void	test_token_list(t_data *data);
