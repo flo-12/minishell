@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:29:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 13:22:43 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:34:53 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ typedef struct s_io_fds
 	char	*infile;
 	char	*outfile;
 	char	*heredoc_delimiter;
-	bool	heredoc_quotes;
+	//bool	heredoc_quotes;
 	int		fd_in;
 	int		fd_out;
-	int		stdin_backup;
-	int		stdout_backup;
+	//int		stdin_backup;
+	//int		stdout_backup;
 }	t_io_fds;
 
 typedef struct s_command

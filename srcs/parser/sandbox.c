@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:40:02 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 17:11:39 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:50:36 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	lst_add_back_token(t_token **alst, t_token *new_node)
 
 void	token_create_list(t_data *data)
 {
+/* 	// To test multiple commands, pipes, empty strings
+
 	data->token = lst_new_token("echo", WORD);
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("hello", WORD));
@@ -81,8 +83,19 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token("|", PIPE));
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("", WORD));
+	lst_add_back_token(&data->token, lst_new_token("stop", APPEND)); */
+
+	data->token = lst_new_token("echo", WORD);
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("hello", WORD));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("", INPUT));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("new.txt", WORD));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("", INPUT));
+	lst_add_back_token(&data->token, lst_new_token("prova.txt", WORD));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("stop", APPEND));
-
-
 
 }

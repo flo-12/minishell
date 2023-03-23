@@ -6,13 +6,13 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:43:40 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 12:13:35 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:31:53 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_pointer(void *ptr)
+void	free_pointer(void *ptr)
 {
 	if (ptr != NULL)
 	{

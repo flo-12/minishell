@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:37:45 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 14:15:45 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:30:02 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	print_cmd_args(t_command *cmd)
 	}
 }
 
-/* static void	print_cmd_io(t_command *cmd)
+static void	print_cmd_io(t_command *cmd)
 {
 	if (!cmd->io_fds)
 		return ;
@@ -42,7 +42,7 @@ static void	print_cmd_args(t_command *cmd)
 		printf("\tOutfile: %s\n", cmd->io_fds->outfile);
 		printf("\t\tfd_in: %d\n", cmd->io_fds->fd_out);
 	}
-} */
+}
 
 void	print_cmd_list(t_data *data)
 {
@@ -55,7 +55,7 @@ void	print_cmd_list(t_data *data)
 		printf("--- Command = %s\n", cmd->command);
 		print_cmd_args(cmd);
 		printf("\tPipe_output = %d\n", cmd->pipe_output);
-		//print_cmd_io(cmd);
+		print_cmd_io(cmd);
 		if (cmd->prev == NULL)
 			printf("\tprev = NULL\n");
 		else

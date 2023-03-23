@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:14:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 17:28:04 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:39:31 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	parser(t_data *data)
 			cmd_lst_add_end(&data->cmd, cmd_lst_new());
 		if (temp->type == WORD)
 			parse_word(&data->cmd, &temp);
-/* 		else if (temp->type == INPUT)
+ 		else if (temp->type == INPUT)
 			parse_input(&data->cmd, &temp);
-		else if (temp->type == TRUNC)
+/*		else if (temp->type == TRUNC)
 			parse_trunc(&data->cmd, &temp);
 		else if (temp->type == HEREDOC)
 			parse_heredoc(data, &data->cmd, &temp);

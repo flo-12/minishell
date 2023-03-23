@@ -6,3 +6,5 @@
 *.out
 minishell
 
+# Text .txt files (they are just for testing)
+*.txt
