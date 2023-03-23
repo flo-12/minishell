@@ -33,6 +33,8 @@ void		parse_pipe(t_command **cmd, t_token **token_lst);
 void		parse_word_fill_args(t_token **token_node, t_command *last_cmd);
 void		parse_word(t_command **cmd, t_token **token_lst);
 void		parse_input(t_command **last_cmd, t_token **token_lst);
+void		parse_output(t_command **last_cmd, t_token **token_lst, char c);
+
 
 
 

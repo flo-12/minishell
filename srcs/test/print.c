@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:37:45 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 16:30:02 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:10:47 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	print_cmd_io(t_command *cmd)
 	if (cmd->io_fds->outfile)
 	{
 		printf("\tOutfile: %s\n", cmd->io_fds->outfile);
-		printf("\t\tfd_in: %d\n", cmd->io_fds->fd_out);
+		printf("\t\tfd_out: %d\n", cmd->io_fds->fd_out);
 	}
 }
 
