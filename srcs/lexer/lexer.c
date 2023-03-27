@@ -42,12 +42,15 @@ _Bool	lexer(t_data *data)
 	var_expansion(usr_split, data->env);
 	if (!usr_split)
 		return (false);
-	quote_removal(usr_split);
-	if (!usr_split)
-		return (false);
 	data->token = tokenization(usr_split);
+	free(usr_split);
 	if (!data->token)
 		return (false);
-	free(usr_split);
+
+
+	quote_removal(data->token);
+	/*if (!usr_split)	// do I have to check for NULL??
+		return (false);*/
+	
 	return (true);
 }
