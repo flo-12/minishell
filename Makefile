@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/03/23 19:22:15 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/03/27 18:20:44 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ SRC			=	main.c \
 				parser/parse_pipe.c \
 				parser/parse_word.c	\
 				parser/parse_input.c \
-				parser/parse_output.c
-
+				parser/parse_output.c \
+				parser/parse_heredoc.c 
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
@@ -56,7 +56,7 @@ all: $(LIBFT) $(OBJ_PATH) $(NAME)
 $(NAME): $(OBJS)
 	@echo "Compiling minishell..."
 	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -lreadline -lhistory -ltermcap 
-	@echo "\n\t\033[33;1;3mMinishell ready\033[0m\n"
+	@echo "\n\t\033[33;1;3mMinishell ready\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 #	@echo "Compiling object files"

@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:40:02 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 19:20:51 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:52:34 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token("", WORD));
 	lst_add_back_token(&data->token, lst_new_token("stop", APPEND)); */
 
+/* 	
+	// INPUT AND OUTPUT
 	data->token = lst_new_token("echo", WORD);
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("hello", WORD));
@@ -98,6 +100,20 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("", APPEND));
 	lst_add_back_token(&data->token, lst_new_token("ciao.txt", WORD));
-	lst_add_back_token(&data->token, lst_new_token("stop", HEREDOC));
+	lst_add_back_token(&data->token, lst_new_token("stop", HEREDOC)); */
+
+	// HEREDOC
+	data->token = lst_new_token("cat", WORD);
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("hello", HEREDOC));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("EOF", WORD));
+	/* lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("hello", HEREDOC));
+	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
+	lst_add_back_token(&data->token, lst_new_token("EOF2", WORD));
+	lst_add_back_token(&data->token, lst_new_token("", APPEND));
+	lst_add_back_token(&data->token, lst_new_token("ciao.txt", WORD));
+	lst_add_back_token(&data->token, lst_new_token("stop", END)); */
 
 }

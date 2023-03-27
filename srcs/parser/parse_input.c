@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:19:18 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 18:57:53 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:15:53 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static bool	clear_old_infiles(t_io_fds *io)
 /* open_infile:
 	the clear_old_infile() function first checks if there are old infiles and 
 	deletes them. the infile in the struct is set as the value of the string
-	of the token. if the strinf is empty, then is an error.
+	of the token. if the string is empty, then is an error.
 	the file is then opened and the corresponding value issaved in fd_in.
  */
 static void	open_infile(t_io_fds *io, char *file)

@@ -4,6 +4,10 @@
 
 #include "minishell.h"
 
+/* MACROS */
+
+# define HEREDOC_NAME "/tmp/.minishell_heredoc_"
+# define END 9
 /* FREE - EXIT */
 
 void	free_pointer(void *ptr);
@@ -34,6 +38,13 @@ void		parse_word_fill_args(t_token **token_node, t_command *last_cmd);
 void		parse_word(t_command **cmd, t_token **token_lst);
 void		parse_input(t_command **last_cmd, t_token **token_lst);
 void		parse_output(t_command **last_cmd, t_token **token_lst, char c);
+void		parse_heredoc(t_command **last_cmd, t_token **token_lst);
+
+bool		generate_heredoc(t_io_fds *io);
+bool		evaluate_heredoc_line(char **line,
+									t_io_fds *io, bool *ret);
+bool		fill_heredoc(t_io_fds *io, int fd);
+
 
 
 
