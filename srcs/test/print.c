@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:37:45 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/28 15:22:34 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:14:02 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	print_token_list(t_token **tokens)
 		printf("--- Token [%d] [%p]\n", i, lst);
 		printf("\tString = [%s]\n", lst->str);
 		print_token_type(lst, "\tType = ");
-		printf("\tStatus = %d\n", lst->status);
+		//printf("\tStatus = %d\n", lst->status);
 		if (lst->prev)
 			printf("\tPrev = [%p]\n", lst->prev);
 		else

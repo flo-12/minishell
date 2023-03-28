@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 16:17:39 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:24:37 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int main(int ac, char **av, char **env)
 	if (!init_data(&data, env))
 		exit_minishell(&data, EXIT_FAILURE);
 	
+	data.user_input = readline(PROMPT);
+
+	
 	ret = lexer(&data);
 	if (!ret)	// means that something went wrong and token is not initialized
 	{
@@ -56,9 +59,9 @@ int main(int ac, char **av, char **env)
 	
 	
 	
-	token_create_list(&data);
-	print_token_list(&((&data)->token));
+	//token_create_list(&data);
 	parser(&data);
+	print_token_list(&((&data)->token));
 	print_cmd_list(&data);
 
 	minishell(&data);

@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/03/28 13:18:58 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/03/28 18:13:18 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC			=	main.c \
 				initialization/init_data.c \
 				lexer/lexer.c lexer/quote_removal.c lexer/tokenization.c lexer/token_list_utils.c \
 				lexer/var_expansion.c lexer/split_usr_input.c lexer/lexer_utils.c \
-#				parser/sandbox.c \
 				parser/cmd_list_utils.c \
 				parser/parser.c \
 				parser/parse_word_fill_args.c \
@@ -46,6 +45,8 @@ SRC			=	main.c \
 				exit/error.c \
 				test/test_token_list.c \
 				test/print.c
+				
+#				parser/sandbox.c \
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
