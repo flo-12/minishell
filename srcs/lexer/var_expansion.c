@@ -15,6 +15,18 @@
 #include "../../includes/minishell_flo.h"
 
 /*
+Checks if the char c is a valid character of a variable
+Return: true, if c is valid; false, if c is not valid
+*/
+_Bool	char_is_var(char c)
+{
+	if (ft_isalnum(c) || c == '_')
+		return (true);
+	else
+		return (false);
+}
+
+/*
 Checks if the variable starting at str[start] and ending
 at str[end] is found in env
 Return:
@@ -96,8 +108,7 @@ char	*search_and_replace_var(char *str, int *i, char **env)
 	int		i_env;
 
 	j = *i + 1;
-	while (!(str[j] == ' ' || str[j] == '='
-			|| str[j] == '\'' || str[j] == '\"') && str[j])
+	while (char_is_var(str[j]))
 		j++;
 	if (!env)
 		return (replace_var(str, i, j - 1, ""));
@@ -134,7 +145,7 @@ void	var_expansion(char **usr_split, char **env)
 		i = 0;
 		while ((*usr_split)[i] && **usr_split != '\'')
 		{
-			if ((*usr_split)[i] == '$')
+			if ((*usr_split)[i] == '$' && char_is_var((*usr_split)[i + 1]))
 			{
 				tmp = search_and_replace_var(*usr_split, &i, env);
 				if (!(*usr_split))
