@@ -39,22 +39,25 @@ string in usr_split - if the string has any.
 If the string only consists of quotes ("" or ''), the
 result is an empty string (\0)
 */
-void	quote_removal(char **usr_split)
+void	quote_removal(t_token *token)
 {
 	char	*tmp;
 
-	while (*usr_split)
+	while (token)
 	{
-		if (**usr_split == '\"' || **usr_split == '\'')
+		if (token->str)
 		{
-			tmp = remove_quotes(*usr_split);
-			if (!tmp)
+			if (*(token->str) == '\"' || *(token->str) == '\'')
 			{
-				free_ptr(usr_split);
-				return ;
+				token->str = remove_quotes(token->str);
+				token->str_backup = remove_quotes(token->str_backup);
+				if (!token->str || !token->str_backup)
+				{
+					token_lstclear(&token);
+					return ;
+				}
 			}
-			*usr_split = tmp;
 		}
-		usr_split++;
+		token = token->next;
 	}
 }

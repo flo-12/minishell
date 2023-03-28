@@ -22,10 +22,11 @@
 # include "minishell_define.h"
 # include "../libft/libft.h"
 
+_Bool	lexer(t_data *data);
 char	**split_usr_input(char *usr_input);
 void	var_expansion(char **usr_split, char **env);
 t_token	*tokenization(char **usr_split);
-//void	quote_removal(char **usr_split);
+void	quote_removal(t_token *token);
 
 /* LEXER_UTILS */
 void	free_ptr(char **ptr);

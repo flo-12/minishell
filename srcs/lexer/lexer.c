@@ -10,8 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+//#include "minishell.h"
 
+#include "../../includes/minishell_flo.h"
+
+/*
+Checks if all characters of str are spaces
+*/
 _Bool	is_spaces(char *str)
 {
 	while (*str)
@@ -36,21 +41,19 @@ _Bool	lexer(t_data *data)
 		return (false);
 	if (*data->user_input == '\0' || is_spaces(data->user_input))
 		return (false);
-	usr_split = split_usr_input(data->user_input + get_nbr_spaces(data->user_input));
+	usr_split = split_usr_input(data->user_input
+			+ get_nbr_spaces(data->user_input));
 	if (!usr_split)
 		return (false);
 	var_expansion(usr_split, data->env);
 	if (!usr_split)
 		return (false);
 	data->token = tokenization(usr_split);
-	free(usr_split);
+	free_ptr(usr_split);
 	if (!data->token)
 		return (false);
-
-
 	quote_removal(data->token);
-	/*if (!usr_split)	// do I have to check for NULL??
-		return (false);*/
-	
+	if (!data->token)
+		return (false);
 	return (true);
 }

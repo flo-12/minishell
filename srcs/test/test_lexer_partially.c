@@ -2,7 +2,8 @@
 #include "../../includes/minishell_flo.h"
 #include <stdio.h>
 
-// cc TESTS.c tokenization.c token_list_utils.c var_expansion.c split_usr_input.c lexer_utils.c -L../../libft/ -lft
+// cc test_lexer_partially.c ../lexer/quote_removal.c ../lexer/tokenization.c ../lexer/token_list_utils.c ../lexer/var_expansion.c ../lexer/split_usr_input.c ../lexer/lexer_utils.c -L../../libft/ -lft -o test_lexer.out
+// valgrind: valgrind --leak-check=full ./test_lexer.out 'cd ../../../'
 
 void	printf_ptrs(char **ptr)
 {
@@ -43,9 +44,8 @@ int	main(int argc, char **argv)
 	t_token	*token;
 	_Bool	output_split = true;
 	_Bool	output_varExp = true;
-	_Bool	output_builtin = false;
 	_Bool	output_token = true;
-	_Bool	output_quote = false;
+	_Bool	output_quote = true;
 
 	if (argc == 1)
 		return (1);
@@ -77,21 +77,13 @@ int	main(int argc, char **argv)
 		env[3] = NULL;
 	}
 	var_expansion(ptr, env);
+	free(env);
 	if (output_varExp)
 	{
 		printf("------ AFTER VAR-EXPANSION ------\n");
 		printf_ptrs(ptr);
 		printf("\n\n");
 	}
-
-	/******** BUILTIN FUNCTIONS ********/
-	/*builtin(ptr);
-	if (output_builtin)
-	{
-		printf("------ AFTER BUILTIN ------\n");
-		printf_ptrs(ptr);
-		printf("\n\n");
-	}*/
 
 	/******** TOKENIZATION ********/
 	token = tokenization(ptr);
@@ -101,15 +93,17 @@ int	main(int argc, char **argv)
 		printf_token(token);
 		printf("\n\n");
 	}
+	free_ptr(ptr);
 
 	/******** QUOTE REMOVAL ********/
-	/*quote_removal(ptr);	// argument should be token (t_token*) and not ptr (char**)
+	quote_removal(token);
 	if (output_quote)
 	{
 		printf("------ AFTER QUOTE REMOVAL ------\n");
-		printf_ptrs(ptr);	// change to printf_token
+		printf_token(token);
 		printf("\n\n");
-	}*/
+	}
+	token_lstclear(&token);
 
 	return (0);
 }
