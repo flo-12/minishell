@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:45:30 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/28 11:48:53 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:28:33 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ static bool	clear_old_infiles(t_io_fds *io)
 
 /* generate_geredoc:
 	creates a file where is stored the input, thanks the fill_heredoc() function
+	
+	TO REMOVE HEREDOC: use the unlink() function -> removes a file, parameter is
+	the path of the file.
  */
 bool	generate_heredoc(t_io_fds *io)
 {
@@ -95,6 +98,7 @@ static char	*generate_heredoc_name(void)
 	The generate_heredoc() function is called to create the heredoc file and 
 	fill it with the input of the user. If the function is successful, it will
 	return true, else the fd has a problem and is set to -1.
+	
  */
 void	parse_heredoc(t_command **last_cmd, t_token **token_lst)
 {

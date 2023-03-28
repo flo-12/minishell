@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:58:41 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 19:28:01 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:01:18 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,14 @@ static bool	clear_old_outfiles(t_io_fds *io)
 static void	open_outfile(t_io_fds *io, char *file, char c)
 {
 	if (!clear_old_outfiles(io))
-	//if (!remove_old_file_ref(io, true))
 		return ;
 	io->outfile = ft_strdup(file);
-	if (io->outfile && io->outfile[0] == '\0')
-	{
-		ft_putendl_fd("minishell: : No such file or directory\n", 2);
-		return ;
-	}
 	if (c == 't')
 		io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	else if (c == 'a')
 		io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_APPEND, 0664);
 	if (io->fd_out == -1)
-		//errmsg_cmd(io->outfile, NULL, strerror(errno), false);
-		// MV : I'll have to set the errors better then ft_putendl
-		// you have to use strerror, to get for example if the file is not 
-		// existing
-		ft_putendl_fd("minishell: Error opening file descriptor\n", 2);
+		err_msg(io->outfile, strerror(errno));
 }
 
 /* 

@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:05:06 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/21 18:29:05 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:02:49 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ void	parse_pipe(t_command **cmd, t_token **token_lst)
 	last_cmd->pipe_output = true;
 	cmd_lst_add_end(&last_cmd, cmd_lst_new());
 	*token_lst = (*token_lst)->next;
-	printf("parse pipe done");
 	printf("\n%p\n", *token_lst);
 }

@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:37:45 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 19:10:47 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:22:34 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	print_token_type(t_token *token, char *prefix)
 		printf("HEREDOC\n");
 	else if (token->type == APPEND)
 		printf("APPEND\n");
+	else if (token->type == END)
+		printf("END\n");
 }
 
 void	print_token_list(t_token **tokens)
