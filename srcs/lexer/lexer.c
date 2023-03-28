@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
+#include "minishell.h"
 
-#include "../../includes/minishell_flo.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 Checks if all characters of str are spaces

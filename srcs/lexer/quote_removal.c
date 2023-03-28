@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 Copies the values of str at index 1:(end-1) - excludes
@@ -41,8 +40,6 @@ result is an empty string (\0)
 */
 void	quote_removal(t_token *token)
 {
-	char	*tmp;
-
 	while (token)
 	{
 		if (token->str)

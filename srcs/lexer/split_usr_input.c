@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 Add a new str to the ptr of str (src_ptr) and return the
@@ -133,14 +132,10 @@ Precondition:
 */
 char	**split_usr_input(char *usr_input)
 {
-	int		quote;
 	char	**usr_split;
 	int		dstsize;
-	int		spaces;
-
-	spaces = 0;
+	
 	usr_split = NULL;
-	quote = 0;
 	while (*usr_input)
 	{
 		dstsize = find_dstsize(usr_input) + 1;

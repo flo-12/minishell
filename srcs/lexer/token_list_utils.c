@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
+#include "minishell.h"
 
-#include "../../includes/minishell_flo.h"
+//#include "../../includes/minishell_flo.h"
 
 void	token_lstadd_back(t_token **start, t_token *new)
 {

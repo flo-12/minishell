@@ -61,10 +61,5 @@ enum e_token_types {
 	//END
 };
 
-/*enum e_quoting_status {
-	DEFAULT,
-	SQUOTE,
-	DQUOTE
-};*/
 
 #endif

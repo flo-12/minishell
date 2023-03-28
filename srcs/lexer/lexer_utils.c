@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
+#include "minishell.h"
 
-#include "../../includes/minishell_flo.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 Free each string of a pointer, pointing to several strings

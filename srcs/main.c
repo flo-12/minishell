@@ -38,14 +38,22 @@ static void	minishell(t_data *data)
 int main(int ac, char **av, char **env)
 {
 	t_data	data;
+	_Bool	ret;
 
 	ft_memset(&data, 0, sizeof(t_data));
 	if (ac != 1)
 		return (ft_putendl_fd("minishell doesn't accept arguments!", 2), 1);
 	if (!init_data(&data, env))
 		exit_minishell(&data, EXIT_FAILURE);
-
+	
+	ret = lexer(&data);
+	if (!ret)	// means that something went wrong and token is not initialized
+	{
+		// free data (especially env & user_input i guess)
+		return (0);
+	}
 	//test_token_list(&data);
+	
 	
 	
 	token_create_list(&data);

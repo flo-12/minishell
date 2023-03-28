@@ -14,7 +14,7 @@
 NAME	= minishell
 
 # Compiler
-CC		= gcc
+CC		= cc
 CFLAGS	= -Werror -Wextra -Wall
 
 # Libft
@@ -23,7 +23,7 @@ LIBFT_NAME	= libft.a
 LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # includes
-INC			=	-I ./includes/\
+INC			=	-I ./includes/ \
 				-I ./libft/
 
 # Sources
@@ -32,9 +32,9 @@ SRC			=	main.c \
 				exit/exit_minishell.c \
 				exit/free_data.c \
 				initialization/init_data.c \
-				test/test_token_list.c \
-				test/print.c \
-				parser/sandbox.c \
+				lexer/lexer.c lexer/quote_removal.c lexer/tokenization.c lexer/token_list_utils.c \
+				lexer/var_expansion.c lexer/split_usr_input.c lexer/lexer_utils.c \
+#				parser/sandbox.c \
 				parser/cmd_list_utils.c \
 				parser/parser.c \
 				parser/parse_word_fill_args.c \
@@ -43,7 +43,9 @@ SRC			=	main.c \
 				parser/parse_input.c \
 				parser/parse_output.c \
 				parser/parse_heredoc.c \
-				exit/error.c
+				exit/error.c \
+				test/test_token_list.c \
+				test/print.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
@@ -70,11 +72,13 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)/initialization
 	@mkdir $(OBJ_PATH)/test
 	@mkdir $(OBJ_PATH)/parser
+	@mkdir $(OBJ_PATH)/lexer
 
 
 $(LIBFT):
 	@echo "Making libft..."
 	@make -sC $(LIBFT_PATH)
+	@make clean -sC $(LIBFT_PATH)
 
 clean:
 	@echo "Removing .o object files..."
@@ -84,6 +88,7 @@ clean:
 fclean: clean
 	@echo "Removing minishell..."
 	@rm -f $(NAME)
+	@make fclean -sC $(LIBFT_PATH)
 #	@rm -f $(LIBFT_PATH)$(LIBFT_NAME)
 
 re: fclean all

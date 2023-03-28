@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 Checks if the char c is a valid character of a variable
@@ -105,7 +104,6 @@ Precondition: str[i]=='$' -> i marks the start of
 char	*search_and_replace_var(char *str, int *i, char **env)
 {
 	int		j;
-	int		i_env;
 
 	j = *i + 1;
 	while (char_is_var(str[j]))

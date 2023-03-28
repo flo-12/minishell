@@ -29,10 +29,10 @@ typedef struct s_token
 {	
 	char			*str;
 	char			*str_backup;
-	bool			var_exists;
+	//bool			var_exists;
 	int				type;
-	int				status;
-	bool			join;
+	//int				status;
+	//bool			join;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -73,5 +73,14 @@ typedef struct s_data
 }	t_data;
 
 /* ENUMS */
+enum e_token_types {
+	SPACES = 1,
+	WORD,
+	PIPE,
+	INPUT,
+	TRUNC,
+	HEREDOC,
+	APPEND
+};
 
 # endif

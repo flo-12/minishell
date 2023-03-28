@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
+#include "minishell.h"
 
-#include "../../includes/minishell_flo.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 Add a new node at the back of the list "token" of the type

@@ -38,7 +38,7 @@
 
 // unify the headers before heading in the project
 # include "minishell_marco.h"
-# include "minishell_flo.h"
+//# include "minishell_flo.h"
 
 
 /************* FUNCTIONS *************/
@@ -48,6 +48,22 @@
 bool	init_data(t_data *data, char **env);
 
 /* LEXER */
+_Bool	lexer(t_data *data);
+char	**split_usr_input(char *usr_input);
+void	var_expansion(char **usr_split, char **env);
+t_token	*tokenization(char **usr_split);
+void	quote_removal(t_token *token);
+/* LEXER_UTILS */
+void	free_ptr(char **ptr);
+int		get_size_ptr(char **ptr);
+void	cpy_ptrs(char **dst, char **src);
+int		get_nbr_spaces(char *str);
+/* TOKEN_LIST_UTILS */
+t_token	*token_lstnew(char *str, int type);
+void	token_lstdelone(t_token *lst);
+void	token_lstclear(t_token **lst);
+void	token_lstadd_back(t_token **start, t_token *new);
+t_token	*token_lstlast(t_token *lst);
 
 /* EXPANSION */
 
