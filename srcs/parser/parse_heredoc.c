@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:45:30 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/28 15:28:33 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/03/28 16:12:00 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static bool	clear_old_infiles(t_io_fds *io)
 bool	generate_heredoc(t_io_fds *io)
 {
 	int		tmp_fd;
-	bool	ret;
+	bool	res;
 
-	ret = true;
+	res = true;
 	tmp_fd = open(io->infile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ret = fill_heredoc(io, tmp_fd);
+	res = fill_heredoc(io, tmp_fd);
 	close(tmp_fd);
-	return (ret);
+	return (res);
 }
 
 /* fill_heredoc:
