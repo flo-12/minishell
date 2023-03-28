@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/03/27 18:20:44 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/03/28 13:18:58 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRC			=	main.c \
 				parser/parse_word.c	\
 				parser/parse_input.c \
 				parser/parse_output.c \
-				parser/parse_heredoc.c 
+				parser/parse_heredoc.c \
+				exit/error.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 

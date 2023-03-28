@@ -12,6 +12,9 @@
 
 void	free_pointer(void *ptr);
 
+void	err_msg(char *s1, char *s2);
+
+
 
 /* INITIALIZATION */
 
