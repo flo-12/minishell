@@ -19,6 +19,7 @@
 
 # define PROMPT "Hello world!"
 # define PROMPT_HEREDOC ">"
+# define BUILTIN_ERR_IDENT "not a valid identifier"
 
 /* GLOBAL VARIABLE */
 
