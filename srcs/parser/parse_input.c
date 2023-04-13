@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:19:18 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/28 13:25:50 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:06:46 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	open_infile(t_io_fds *io, char *file)
 	io->infile = ft_strdup(file);
 	io->fd_in = open(io->infile, O_RDONLY);
 	if (io->fd_in == -1)
-		err_msg(io->infile, strerror(errno));
+		err_msg(io->infile, strerror(errno), NULL);
 }
 
 /* parse_input:
