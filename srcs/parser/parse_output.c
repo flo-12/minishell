@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:58:41 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/28 15:01:18 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:07:00 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	open_outfile(t_io_fds *io, char *file, char c)
 	else if (c == 'a')
 		io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_APPEND, 0664);
 	if (io->fd_out == -1)
-		err_msg(io->outfile, strerror(errno));
+		err_msg(io->outfile, strerror(errno), NULL);
 }
 
 /* 
