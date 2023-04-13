@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+//#include "minishell.h"
+#include "../../includes/minishell_flo.h"
 
 /*
 * Trigger printing of error message for function check_env_var
@@ -36,9 +37,7 @@ _Bool	check_env_var(char **vars)
 {
 	int	i;
 
-	if (!vars)
-		return (false);
-	while (vars)
+	while (*vars)
 	{
 		i = 0;
 		if (!ft_isalpha((*vars)[i]))

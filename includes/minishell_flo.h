@@ -22,44 +22,19 @@
 # include "minishell_define.h"
 # include "../libft/libft.h"
 
-_Bool	lexer(t_data *data);
-char	**split_usr_input(char *usr_input);
-void	var_expansion(char **usr_split, char **env);
-t_token	*tokenization(char **usr_split);
-void	quote_removal(t_token *token);
+int		builtin_env(t_data *data, char **args);
+_Bool	check_env_var(char **vars);
+int		builtin_export(t_data *data, char **args);
 
-/* LEXER_UTILS */
-void	free_ptr(char **ptr);
 int		get_size_ptr(char **ptr);
 void	cpy_ptrs(char **dst, char **src);
-int		get_nbr_spaces(char *str);
 
-/* TOKEN_LIST_UTILS */
-t_token	*token_lstnew(char *str, int type);
-void	token_lstdelone(t_token *lst);
-void	token_lstclear(t_token **lst);
-void	token_lstadd_back(t_token **start, t_token *new);
-t_token	*token_lstlast(t_token *lst);
-
-/* TESTING FUNCTIONS */
-void	printf_ptrs(char **ptr);
-void	printf_token(t_token *token);
+void	err_msg(char *s1, char *s2, char *s3);
 
 /******************************************************************************
 *								ENUMS									      *
 ******************************************************************************/
 
-enum e_token_types {
-	SPACES = 1,
-	WORD,
-	//VAR,
-	PIPE,
-	INPUT,
-	TRUNC,
-	HEREDOC,
-	APPEND,
-	//END
-};
 
 
 #endif

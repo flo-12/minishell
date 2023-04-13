@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+//#include "minishell.h"
+#include "../../includes/minishell_flo.h"
 
 /*
 Imitates the builtin function "export" of bash
@@ -28,6 +29,7 @@ int	builtin_export(t_data *data, char **args)
 		return (builtin_env(data, NULL));
 	if (!check_env_var(args))
 		return (EXIT_FAILURE);
+printf("ALL CHECKS PASSED, *args=%s\n", *args);
 	dup = (char **)malloc(sizeof(char *) * (get_size_ptr(data->env)
 				+ get_size_ptr(args) + 1));
 	if (!dup)
@@ -36,7 +38,7 @@ int	builtin_export(t_data *data, char **args)
 	i = 0;
 	while (args[i])
 	{
-		(dup + get_size_ptr(data->env) + 1 + i) = ft_strdup(args[i]);
+		*(dup + get_size_ptr(data->env) + i) = ft_strdup(args[i]);
 		i++;
 	}
 	free(data->env);
