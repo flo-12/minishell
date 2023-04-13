@@ -12,7 +12,7 @@
 
 void	free_pointer(void *ptr);
 
-void	err_msg(char *s1, char *s2);
+void	err_msg(char *s1, char *s2, char *s3);
 
 void	free_cmd_list(t_command **lst, void (*del)(void *));
 
