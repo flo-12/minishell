@@ -13,20 +13,27 @@
 #include "minishell.h"
 
 /*
-Imitates the builtin function "env" of bash
-Prints the current environment variables
+* Imitates the builtin function "env" of bash
+*	prints the current environment variables
+*	additionally add new variables in args
+*		error if at least one args doesn't
+*		follow the rules for new env-variables
 */
-int	env(t_data *data)
+int	builtin_env(t_data *data, char **args)
 {
-	char	**tmp;
+	char	i;
 
-	if (!data->env)
+	if (check_env_var(args))
+		builtin_export(data, args);
+	else
 		return (EXIT_FAILURE);
-	tmp = data->env;
-	while (*tmp)
+	if (!data->env)
+		return (EXIT_SUCCESS);
+	i = 0;
+	while (data->env[i])
 	{
-		printf("%s", *tmp);	// QUESTION: does env have the \n at the end of each string or do we have to add it in printf?
-		tmp++;
+		printf("%s\n", data->env[i]);
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

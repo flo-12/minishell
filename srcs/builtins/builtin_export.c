@@ -17,13 +17,29 @@ Imitates the builtin function "export" of bash
 Adds a new variable to env. Variable value starts after the
 (first) =-sign
 */
-int	builtin_export(t_data *data, cahr *var)
+int	builtin_export(t_data *data, char **args)
 {
-	// check if var != NULL
-	// check if var has =-sign
-	// check if var consists of characters that are not allowed in a variable (e.g. ?, /, ...)
-	//	=> ERROR and return(EXIT_FAILURE)
+	int		i;
+	char	**dup;
 
-	// If all checks passed, doublicate string and add at the end of data->env
-	// return(EXIT_SUCCESS)
+	if (!args)
+		return (builtin_env(data, NULL));
+	if (!(*args))
+		return (builtin_env(data, NULL));
+	if (!check_env_var(args))
+		return (EXIT_FAILURE);
+	dup = (char **)malloc(sizeof(char *) * (get_size_ptr(data->env)
+				+ get_size_ptr(args) + 1));
+	if (!dup)
+		return (EXIT_FAILURE);
+	cpy_ptrs(dup, data->env);
+	i = 0;
+	while (args[i])
+	{
+		(dup + get_size_ptr(data->env) + 1 + i) = ft_strdup(args[i]);
+		i++;
+	}
+	free(data->env);
+	data->env = dup;
+	return (EXIT_SUCCESS);
 }
