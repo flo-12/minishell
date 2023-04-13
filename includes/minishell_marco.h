@@ -14,6 +14,9 @@ void	free_pointer(void *ptr);
 
 void	err_msg(char *s1, char *s2);
 
+void	free_cmd_list(t_command **lst, void (*del)(void *));
+
+
 
 
 /* INITIALIZATION */

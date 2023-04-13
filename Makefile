@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/03/28 18:13:18 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/04/13 14:13:32 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC_PATH	=	srcs/
 SRC			=	main.c \
 				exit/exit_minishell.c \
 				exit/free_data.c \
+				exit/free_cmd_list.c \
 				initialization/init_data.c \
 				lexer/lexer.c lexer/quote_removal.c lexer/tokenization.c lexer/token_list_utils.c \
 				lexer/var_expansion.c lexer/split_usr_input.c lexer/lexer_utils.c \

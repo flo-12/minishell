@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 17:03:48 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 13:23:00 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:59:06 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ t_command	*cmd_lst_get_end(t_command *cmd)
 		cmd = cmd->next;
 	return (cmd);
 }
+
+
 

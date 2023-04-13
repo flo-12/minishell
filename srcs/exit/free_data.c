@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:43:40 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 16:31:53 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:25:03 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,20 @@ void	free_array_str(char **array)
 	}
 }
 
+void	free_tkn_list(t_token **lst)
+{
+	t_token	*tmp;
+
+	tmp = NULL;
+	while (*lst != NULL)
+	{
+		tmp = (*lst)->next;
+		free_pointer(*lst);
+		*lst = tmp;
+	}
+	free_pointer(*lst);
+}
+
 void	free_data(t_data *data, bool clear_history)
 {
 	if (data && data->user_input)
@@ -49,10 +63,10 @@ void	free_data(t_data *data, bool clear_history)
 		free_pointer(data->user_input);
 		data->user_input = NULL;
 	}
-/* 	if (data && data->token)
-		lstclear_token(&data->token, &free_pointer);
+ 	if (data && data->token)
+		free_tkn_list(&data->token);
 	if (data && data->cmd)
-		lst_clear_cmd(&data->cmd, &free_pointer); */
+		free_cmd_list(&data->cmd, &free_pointer);
 	if (clear_history == true)
 	{
 		if (data && data->working_dir)
