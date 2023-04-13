@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:45:30 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/28 15:28:33 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:42:13 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	fill_heredoc(t_io_fds *io, int fd)
 	line = NULL;
 	while (1)
 	{
-		line = readline(">");
+		line = readline(PROMPT_HEREDOC);
 		if (ft_strncmp(line, io->heredoc_delimiter, 
 										ft_strlen(io->heredoc_delimiter)) == 0)
 			break ;

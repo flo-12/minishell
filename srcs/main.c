@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/13 13:50:48 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:40:28 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,36 @@ static void	minishell(t_data *data)
 	while (1)
 	{
 		_Bool	ret;
-		//set_signals_interactive();
+
+		/* READ USER INPUT IN PROMPT (line by line) */
 		data->user_input = readline(PROMPT);
+		/* LEXER (for each line of user input) */
 		ret = lexer(data);
 		if (!ret)	// means that something went wrong and token is not initialized
 		{
 			// free data (especially env & user_input i guess)
-			//return (0);
+			// print error
+			// skip parser and executer, but stay in while-loop
 		}
+		/* PARSER (for Lexer list) */
 		parser(data);
+		
+		/* TEST PRINT token list and command list */
 		print_token_list(&data->token);
 		print_cmd_list(data);
 		
-		/* if (lexer(data) && parser(data))
+		/*
+		SET-SIGNALS FROM mcombeau:
+		set_signals_noninteractive();
+		*/
+		/*
+		EXECUTION FROM mcombeau:
+		if (lexer(data) && parser(data))
 			last_exit_code = execute(data);
 		else
-			g_last_exit_code = 1; */
-			
-		//set_signals_noninteractive();
-		/* if (parse_user_input(data) == true)
-			g_last_exit_code = execute(data);
-		else
-			g_last_exit_code = 1; */
+			g_last_exit_code = 1;
+		*/
+		
 		printf("geschafft!\n");
 		free_data(data, false);
 	}
@@ -49,7 +57,6 @@ static void	minishell(t_data *data)
 int main(int ac, char **av, char **env)
 {
 	t_data	data;
-	_Bool	ret;
 
 	ft_memset(&data, 0, sizeof(t_data));
 	if (ac != 1)
@@ -57,23 +64,6 @@ int main(int ac, char **av, char **env)
 	if (!init_data(&data, env))
 		exit_minishell(&data, EXIT_FAILURE);
 	
-	data.user_input = readline(PROMPT);
-
-	
-	ret = lexer(&data);
-	if (!ret)	// means that something went wrong and token is not initialized
-	{
-		// free data (especially env & user_input i guess)
-		return (0);
-	}
-	//test_token_list(&data);
-	
-	
-	
-	//token_create_list(&data);
-	parser(&data);
-	print_token_list(&((&data)->token));
-	print_cmd_list(&data);
 
 	minishell(&data);
 	
