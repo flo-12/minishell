@@ -16,21 +16,12 @@
 /*
 * Imitates the builtin function "env" of bash
 *	prints the current environment variables
-*	additionally add new variables in args
-*		error if at least one args doesn't
-*		follow the rules for new env-variables
+*	no arguments (adding new variables) allowed
 */
-int	builtin_env(t_data *data, char **args)
+int	builtin_env(t_data *data)
 {
 	char	i;
 
-	if (args)
-	{
-		if (check_env_var(args))
-			builtin_export(data, args);
-		else
-			return (EXIT_FAILURE);
-	}
 	if (!data->env)
 		return (EXIT_SUCCESS);
 	i = 0;

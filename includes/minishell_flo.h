@@ -22,12 +22,13 @@
 # include "minishell_define.h"
 # include "../libft/libft.h"
 
-int		builtin_env(t_data *data, char **args);
-_Bool	check_env_var(char **vars);
+int		builtin_env(t_data *data);
+//_Bool	check_env_var(char **vars);
 int		builtin_export(t_data *data, char **args);
 
 int		get_size_ptr(char **ptr);
 void	cpy_ptrs(char **dst, char **src);
+void	free_ptr(char **ptr);
 
 void	err_msg(char *s1, char *s2, char *s3);
 
