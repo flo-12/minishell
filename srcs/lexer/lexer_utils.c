@@ -15,25 +15,6 @@
 //#include "../../includes/minishell_flo.h"
 
 /*
-Free each string of a pointer, pointing to several strings
-At the end, free the pointer
-*/
-void	free_ptr(char **ptr)
-{
-	char	**tmp;
-
-	tmp = ptr;
-	if (!ptr)
-		return ;
-	while (*ptr)
-	{
-		free(*ptr);
-		ptr++;
-	}
-	free(tmp);
-}
-
-/*
 Finds and returns the consecutive number of spaces
 at the beginning of the string
 */

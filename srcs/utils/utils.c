@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+//#include "minishell.h"
+#include "../../includes/minishell_flo.h"
 
 /*
 get the number of strings in a ptr to strings
@@ -40,4 +41,23 @@ void	cpy_ptrs(char **dst, char **src)
 		dst++;
 		src++;
 	}
+}
+
+/*
+Free each string of a pointer, pointing to several strings
+At the end, free the pointer
+*/
+void	free_ptr(char **ptr)
+{
+	char	**tmp;
+
+	tmp = ptr;
+	if (!ptr)
+		return ;
+	while (*ptr)
+	{
+		free(*ptr);
+		ptr++;
+	}
+	free(tmp);
 }
