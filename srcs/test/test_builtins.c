@@ -61,6 +61,8 @@ int	main(int argc, char **argv)
 	int		i;
 	int		t_export = 1;
 	int		t_env = 1;
+	int		t_pwd = 0;	// tests not yet included
+	int		t_echo = 0;	// tests not yet included
 
 	data.env = (char **)malloc(sizeof(char *) * 5);
 	data.env[0] = ft_strdup("A=me\0");

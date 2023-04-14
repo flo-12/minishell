@@ -106,9 +106,9 @@ void	set_env_var(t_data *data, char *env)
 }
 
 /*
-Imitates the builtin function "export" of bash
-Adds a new variable to env. Variable value starts after the
-(first) =-sign
+* Imitates the builtin function "export" of bash
+* Adds a new variable to env. Variable value starts after the
+* (first) =-sign
 */
 int	builtin_export(t_data *data, char **args)
 {
