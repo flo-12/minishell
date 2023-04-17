@@ -56,24 +56,6 @@ _Bool	check_env_var(char *str)
 }
 
 /*
-* Find and return index of matching variables
-*	return -1 if index is not found
-*/
-int	get_env_var_i(char **env, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], str, strrchr(str, '=') - str))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-/*
 * Set an environment variable
 *	Replace existing variable if the variable in env is equal
 *	Add new variable env to data->env if it doesn't exist

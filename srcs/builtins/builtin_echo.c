@@ -42,11 +42,11 @@ void	echo_print(char **args, _Bool n_flag)
 	{
 		printf("%s", *args);
 		if (*(args + 1))
-			printf(' ');
+			printf(" ");
 		args++;
 	}
 	if (!n_flag)
-		printf('\n');
+		printf("\n");
 }
 
 /*
@@ -73,5 +73,5 @@ int	builtin_echo(t_data *data, char **args)
 		i++;
 	}
 	echo_print(args + i, n_flag);
-	return (EXIT_SUCCESS)
+	return (EXIT_SUCCESS);
 }
