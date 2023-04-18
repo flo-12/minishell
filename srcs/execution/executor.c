@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/18 19:24:03 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/18 19:26:06 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	create_children(t_data *data)
 	return (0);
 }
 
-int	execute(t_data *data)
+int	executor(t_data *data)
 {
 	int	ret;
 	
