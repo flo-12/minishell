@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/04/19 11:10:12 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/04/19 13:16:19 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,9 @@ SRC			=	main.c \
 				exit/error.c \
 				test/test_token_list.c \
 				test/print.c \
-				execution/executor.c \
-				utils/utils.c
+				execution/executor.c execution/utils_pipe.c execution/execute_cmd.c\
+				utils/utils.c \
+				
 				
 #				parser/sandbox.c \
 
