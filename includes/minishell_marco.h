@@ -56,8 +56,11 @@ bool		fill_heredoc(t_io_fds *io, int fd);
 /* EXECUTOR */
 
 
-bool	create_pipes(t_data *data);
 int		execute_command(t_data *data, t_command *cmd);
+// utils_pipe.c
+bool	create_pipes(t_data *data);
+void	set_pipe_fds(t_command *c);
+
 
 
 

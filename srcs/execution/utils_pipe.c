@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:42:55 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/19 13:04:43 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/19 20:10:01 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,24 @@ bool	create_pipes(t_data *data)
 		tmp = tmp->next;
 	}
 	return (true);
+}
+
+/* set_pipe_fds:
+	- sets the input pipe pipe_fd[0] of the previous command as STDIN 0,
+		then the fd is closed;
+	- sets the output pipe pipe_fd[1] of the previous command as STDOUT 1,
+		then the fd is closed;
+ */
+void	set_pipe_fds(t_command *c)
+{
+	if (c->prev && c->prev->pipe_output)
+	{
+		dup2(c->prev->pipe_fd[0], STDIN_FILENO);
+		close(c->prev->pipe_fd[0]);
+	}
+	if (c->pipe_output)
+	{
+		dup2(c->pipe_fd[1], STDOUT_FILENO);
+		close(c->pipe_fd[1]);
+	}
 }
