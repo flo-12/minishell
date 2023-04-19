@@ -30,3 +30,35 @@ int	get_env_var_i(char **env, char *str)
 	}
 	return (-1);
 }
+
+/*
+* Set an environment variable
+*	Replace existing variable if the variable in env is equal
+*	Add new variable env to data->env if it doesn't exist
+*/
+void	set_env_var(t_data *data, char *env)
+{
+	int		i;
+	char	**tmp;
+
+	i = get_env_var_i(data->env, env);
+	if (i != -1)
+	{
+		free(data->env[i]);
+		data->env[i] = ft_strdup(env);
+	}
+	else
+	{
+		tmp = data->env;
+		data->env = (char **)malloc(sizeof(char *) * (get_size_ptr(tmp) + 2));
+		if (!data->env)
+		{
+			data->env = tmp;
+			return ;
+		}
+		cpy_ptrs(data->env, tmp);
+		data->env[get_size_ptr(tmp)] = ft_strdup(env);
+		data->env[get_size_ptr(tmp) + 1] = NULL;
+		free(tmp);
+	}
+}

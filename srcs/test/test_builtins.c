@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// cc test_builtins.c ../builtins/builtin_cd.c ../builtins/builtin_pwd.c ../builtins/builtin_echo.c ../builtins/builtin_utils.c ../builtins/builtin_export.c ../builtins/builtin_env.c ../utils/utils.c -L../../libft/ -lft -o test_builtins.out
+// cc test_builtins.c ../builtins/builtin_unset.c ../builtins/builtin_cd.c ../builtins/builtin_pwd.c ../builtins/builtin_echo.c ../builtins/builtin_utils.c ../builtins/builtin_export.c ../builtins/builtin_env.c ../utils/utils.c -L../../libft/ -lft -o test_builtins.out
 // valgrind --leak-check=full ./test_builtins.out E=sdjkfwe A=jkwefwe
 
 #include "../../includes/minishell_flo.h"
@@ -38,6 +38,7 @@ void	err_msg(char *s1, char *s2, char *s3)
 void	test_export(t_data *data, char **args)
 {
 	printf("\n\n------ TEST_EXPORT ------\n");
+
 	if (builtin_export(data, args) == EXIT_FAILURE)
 		printf("\nEXIT_FAILURE\n");
 	else
@@ -74,10 +75,9 @@ void	test_echo(t_data *data, char **args)
 
 void	test_cd(t_data *data, char **args)
 {
-	char	*path;
+	char	cwd[PATH_MAX];
 
-	printf("\n\n------ TEST_ECHO ------\n");
-	printf("1st test: with argv");
+	printf("\n\n------ TEST_CD ------\n");
 	if (builtin_cd(data, args) == EXIT_FAILURE)
 		printf("\nEXIT_FAILURE\n");
 	else
@@ -86,72 +86,34 @@ void	test_cd(t_data *data, char **args)
 	printf("data->env[OLDPWD]=%s\n", data->env[get_env_var_i(data->env, "OLDPWD=")]);
 	printf("data->working_dir=%s\n", data->working_dir);
 	printf("data->old_working_dir=%s\n", data->old_working_dir);
-	printf("getcwd=%s\n", getcwd(path, 0));
-	free(path);
-/*	printf("2nd test: without args (go back to HOME)");
-	if (builtin_cd(data, NULL) == EXIT_FAILURE)
+	printf("getcwd=%s\n", getcwd(cwd, PATH_MAX));
+}
+
+void	test_unset(t_data *data, char **args)
+{
+	_Bool	removed;
+	char	*tmp;
+
+	printf("\n\n------ TEST_UNSET ------\n");
+	if (builtin_unset(data, args) == EXIT_FAILURE)
 		printf("\nEXIT_FAILURE\n");
 	else
 		printf("\nEXIT_SUCCESS\n");
-	printf("3rd test: with non-existant path /nfs/homes42/fbecht/42_Projects/Level_3/minishell_project/ (error)");
-	free(args[1]);
-	args[1] = ft_strdup("/nfs/homes42/fbecht/42_Projects/Level_3/minishell_project/");
-	if (builtin_cd(data, NULL) == EXIT_FAILURE)
-		printf("\nEXIT_FAILURE\n");
-	else
-		printf("\nEXIT_SUCCESS\n");
-	printf("4th test: with regular absolute path /nfs/homes/fbecht/42_Projects/");
-	free(args[1]);
-	args[1] = ft_strdup("/nfs/homes/fbecht/42_Projects/");
-	if (builtin_cd(data, NULL) == EXIT_FAILURE)
-		printf("\nEXIT_FAILURE\n");
-	else
-		printf("\nEXIT_SUCCESS\n");
-	printf("data->env[PWD]=%s\n", data->env[get_env_var_i(data->env, "PWD=")]);
-	printf("data->env[OLDPWD]=%s\n", data->env[get_env_var_i(data->env, "OLDPWD=")]);
-	printf("data->working_dir=%s\n", data->working_dir);
-	printf("data->old_working_dir=%s\n", data->old_working_dir);
-	printf("getcwd=%s\n", getcwd(path, 0));
-	free(path);
-	printf("5th test: with regular relative path ../../include/");
-	free(args[1]);
-	args[1] = ft_strdup("../../include/");
-	if (builtin_cd(data, NULL) == EXIT_FAILURE)
-		printf("\nEXIT_FAILURE\n");
-	else
-		printf("\nEXIT_SUCCESS\n");
-	printf("data->env[PWD]=%s\n", data->env[get_env_var_i(data->env, "PWD=")]);
-	printf("data->env[OLDPWD]=%s\n", data->env[get_env_var_i(data->env, "OLDPWD=")]);
-	printf("data->working_dir=%s\n", data->working_dir);
-	printf("data->old_working_dir=%s\n", data->old_working_dir);
-	printf("getcwd=%s\n", getcwd(path, 0));
-	free(path);
-	printf("6th test: with \"-\" as change to previous dir");
-	free(args[1]);
-	args[1] = ft_strdup("-");
-	if (builtin_cd(data, NULL) == EXIT_FAILURE)
-		printf("\nEXIT_FAILURE\n");
-	else
-		printf("\nEXIT_SUCCESS\n");
-	printf("data->env[PWD]=%s\n", data->env[get_env_var_i(data->env, "PWD=")]);
-	printf("data->env[OLDPWD]=%s\n", data->env[get_env_var_i(data->env, "OLDPWD=")]);
-	printf("data->working_dir=%s\n", data->working_dir);
-	printf("data->old_working_dir=%s\n", data->old_working_dir);
-	printf("getcwd=%s\n", getcwd(path, 0));
-	free(path);
-	printf("7th test: with \"--\" as change to HOME");
-	free(args[1]);
-	args[1] = ft_strdup("--");
-	if (builtin_cd(data, NULL) == EXIT_FAILURE)
-		printf("\nEXIT_FAILURE\n");
-	else
-		printf("\nEXIT_SUCCESS\n");
-	printf("data->env[PWD]=%s\n", data->env[get_env_var_i(data->env, "PWD=")]);
-	printf("data->env[OLDPWD]=%s\n", data->env[get_env_var_i(data->env, "OLDPWD=")]);
-	printf("data->working_dir=%s\n", data->working_dir);
-	printf("data->old_working_dir=%s\n", data->old_working_dir);
-	printf("getcwd=%s\n", getcwd(path, 0));
-	free(path);*/
+	removed = true;
+	while (*args)
+	{
+		tmp = ft_strjoin(*args, "=");
+		if (get_env_var_i(data->env, tmp) != -1)
+		{
+			printf("variable \"%s\" not removed\n", *args);
+			removed = false;
+		}
+		free(tmp);
+		args++;
+	}
+	if (removed)
+		printf("no inserted variables in data->env left\n");
+	printf("\n");
 }
 
 int	main(int argc, char **argv)
@@ -163,17 +125,18 @@ int	main(int argc, char **argv)
 	int		t_env = 0;
 	int		t_pwd = 0;
 	int		t_echo = 0;	// be careful: argv is used for export AND echo
-	int		t_cd = 1;	// be careful: argv is used for export AND echo
+	int		t_cd = 0;	// be careful: argv is used for export AND echo
+	int		t_unset = 1;	// be careful: argv is used for export AND echo
 
 	/*********** INITIALIZE DATA ***********/
-	data.env = (char **)malloc(sizeof(char *) * 7);
-	data.env[0] = ft_strdup("A=me\0");
-	data.env[1] = ft_strdup("B=you\0");
-	data.env[2] = ft_strdup("C=sjkfa\0");
-	data.env[3] = ft_strdup("D=sdfgwef=fsa!/fsd3\0");
-	data.env[4] = ft_strdup("HOME=/nfs/homes/fbecht\0");
-	data.env[5] = ft_strdup("PWD=/nfs/homes/fbecht/42_Projects/Level_3/minishell_project/our_minishell/srcs/test\0");
-	data.env[6] = ft_strdup("OLDPWD=/nfs/homes/fbecht/42_Projects/Level_3/minishell_project/our_minishell\0");
+	data.env = (char **)malloc(sizeof(char *) * 8);
+	data.env[0] = ft_strdup("A=me");
+	data.env[1] = ft_strdup("B=you");
+	data.env[2] = ft_strdup("C=sjkfa");
+	data.env[3] = ft_strdup("D=sdfgwef=fsa!/fsd3");
+	data.env[4] = ft_strdup("HOME=/nfs/homes/fbecht");
+	data.env[5] = ft_strdup("PWD=/nfs/homes/fbecht/42_Projects/Level_3/minishell_project/our_minishell/srcs/test");
+	data.env[6] = ft_strdup("OLDPWD=/nfs/homes/fbecht/42_Projects/Level_3/minishell_project/our_minishell");
 	data.env[7] = NULL;
 	if (argc != 1)
 		args = (char **)malloc(sizeof(char *) * argc);
@@ -192,28 +155,25 @@ int	main(int argc, char **argv)
 	/*********** START TESTS ***********/
 	if (t_export)
 	{
+
 		if (argc == 1)
 			test_export(&data, NULL);
 		else
 			test_export(&data, args);
 	}
 	if (t_env)
-	{
 		test_env(&data);
-	}
 	if (t_pwd)
-	{
 		test_pwd(&data);
-	}
 	if (t_echo)
-	{
-			test_echo(&data, args);
-	}
+		test_echo(&data, args);
 	if (t_cd)
-	{
 		test_cd(&data, args);
-	}
-	free_ptr(data.env);
+	if(t_unset)
+		test_unset(&data, args);
 	free_ptr(args);
+	free(data.working_dir);
+	free(data.old_working_dir);
+	free_ptr(data.env);
 	return (0);
 }

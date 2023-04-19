@@ -21,7 +21,6 @@ void	update_wds(t_data *data, char *cwd)
 {
 	char	*tmp;
 
-printf("[update_wds] START\n");
 	if (get_env_var_i(data->env, "OLDPWD=") >= 0)
 	{
 		if (get_env_var_i(data->env, "PWD=") >= 0)
@@ -31,7 +30,6 @@ printf("[update_wds] START\n");
 			tmp = ft_strjoin("OLDPWD=", "");
 		if (!tmp)
 			return ;
-printf("[update_wds] for new OLDPWD: tmp=%s\n", tmp);
 		set_env_var(data, tmp);
 		free(tmp);
 	}
@@ -40,14 +38,12 @@ printf("[update_wds] for new OLDPWD: tmp=%s\n", tmp);
 		tmp = ft_strjoin("PWD=", cwd);
 		if (!tmp)
 			return ;
-printf("[update_wds] for new PWD: tmp=%s\n", tmp);
 		set_env_var(data, tmp);
 		free(tmp);
 	}
-	free_ptr(&data->old_working_dir);
+	free(data->old_working_dir);
 	data->old_working_dir = data->working_dir;
 	data->working_dir = ft_strdup(cwd);
-printf("[update_wds] END\n");
 }
 
 /*
@@ -60,16 +56,13 @@ int	change_dir(t_data *data, char *path)
 	char	cwd[PATH_MAX];
 	char	*tmp;
 
-	//cwd = NULL;
 	if (chdir(path) != 0)
 	{
 		err_msg("cd", path, strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	tmp = getcwd(cwd, PATH_MAX);
-printf("[change_dir] cwd=%s\n", cwd);
 	update_wds(data, cwd);
-	//free(cwd);
 	return (EXIT_SUCCESS);
 }
 
@@ -98,7 +91,7 @@ char	*check_dir_to_home(char **env, char **args)
 		err_msg("cd", "HOME not set", NULL);
 		return (NULL);
 	}
-	return (env[i]);
+	return (ft_strchr(env[i], '=') + 1);
 }
 
 /*
