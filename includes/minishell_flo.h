@@ -30,6 +30,7 @@ int		builtin_export(t_data *data, char **args);
 int		builtin_pwd(t_data *data);
 int		builtin_echo(t_data *data, char **args);
 int		builtin_cd(t_data *data, char **args);
+int		builtin_unset(t_data *data, char **args);
 int		get_env_var_i(char **env, char *str);
 void	set_env_var(t_data *data, char *env);
 
