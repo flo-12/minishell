@@ -8,6 +8,11 @@
 
 # define HEREDOC_NAME "/tmp/.minishell_heredoc_"
 # define END 9
+// MV: error 127 (command not found) is defined in errno.h but as EKEYEXPIRED, 
+// so it's of course valid for other errors as well. That's why this macro here,
+// for better understanding in code.
+# define CMD_NOT_FOUND 127
+
 /* FREE - EXIT */
 
 void	free_pointer(void *ptr);
@@ -15,9 +20,6 @@ void	free_pointer(void *ptr);
 void	err_msg(char *s1, char *s2, char *s3);
 
 void	free_cmd_list(t_command **lst, void (*del)(void *));
-
-
-
 
 /* INITIALIZATION */
 
@@ -51,7 +53,11 @@ bool		evaluate_heredoc_line(char **line,
 									t_io_fds *io, bool *ret);
 bool		fill_heredoc(t_io_fds *io, int fd);
 
+/* EXECUTOR */
 
+
+bool	create_pipes(t_data *data);
+int		execute_command(t_data *data, t_command *cmd);
 
 
 
