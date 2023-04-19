@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/04/18 18:22:29 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/04/19 11:10:12 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRC			=	main.c \
 				exit/error.c \
 				test/test_token_list.c \
 				test/print.c \
-				execution/executor.c
+				execution/executor.c \
+				utils/utils.c
 				
 #				parser/sandbox.c \
 
@@ -77,6 +78,7 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)/parser
 	@mkdir $(OBJ_PATH)/lexer
 	@mkdir $(OBJ_PATH)/execution
+	@mkdir $(OBJ_PATH)/utils
 
 
 $(LIBFT):
