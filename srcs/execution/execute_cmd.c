@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:15:23 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/20 17:58:53 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:41:15 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@
 	return (ret);
 } */
 
-static int	execute_sys_bin(t_data *data, t_command *cmd)
+static int	execute_sys_cmd(t_data *data, t_command *cmd)
 {
 	if (!cmd->command || cmd->command[0] == '\0')
 		return (CMD_NOT_FOUND);
 	if (cmd_is_dir(cmd->command))
 		return (CMD_NOT_FOUND);
 	cmd->path = find_path(cmd->command, data->env);
-	//cmd->path = get_cmd_path(data, cmd->command);
 	if (!cmd->path)
 		return (CMD_NOT_FOUND);
 	if (execve(cmd->path, cmd->args, data->env) == -1)
@@ -49,7 +48,7 @@ static int	execute_sys_bin(t_data *data, t_command *cmd)
 	return (EXIT_FAILURE);
 }
 
-static int	execute_local_bin(t_data *data, t_command *cmd)
+static int	execute_local_cmd(t_data *data, t_command *cmd)
 {
 	int	ret;
 
@@ -77,7 +76,7 @@ int	execute_command(t_data *data, t_command *cmd)
 	// Executing the path if '/' is found, if not looks for builtins and sys cmds
 	if (ft_strchr(cmd->command, '/'))
 	{
-		ret = execute_local_bin(data, cmd);
+		ret = execute_local_cmd(data, cmd);
 		exit_minishell(data, ret);
 	}
 	else
@@ -85,7 +84,7 @@ int	execute_command(t_data *data, t_command *cmd)
 		//ret = execute_builtin(data, cmd);
 		//if (ret != CMD_NOT_FOUND)
 		//	exit_minishell(data, ret);
-		ret = execute_sys_bin(data, cmd);
+		ret = execute_sys_cmd(data, cmd);
 		if (ret != CMD_NOT_FOUND)
 			exit_minishell(data, ret);
 	}
