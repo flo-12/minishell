@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 12:42:55 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/19 20:10:01 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:47:46 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,25 @@ bool	create_pipes(t_data *data)
 
 /* set_pipe_fds:
 	- sets the input pipe pipe_fd[0] of the previous command as STDIN 0,
-		then the fd is closed;
-	- sets the output pipe pipe_fd[1] of the previous command as STDOUT 1,
-		then the fd is closed;
+	- sets the output pipe pipe_fd[1] of the previous command as STDOUT 1.
  */
-void	set_pipe_fds(t_command *c)
+void	set_pipes(t_command *cmd)
 {
-	if (c->prev && c->prev->pipe_output)
+	if (cmd->prev && cmd->prev->pipe_output)
+		dup2(cmd->prev->pipe_fd[0], STDIN_FILENO);
+	if (cmd->pipe_output)
+		dup2(cmd->pipe_fd[1], STDOUT_FILENO);
+}
+
+void	close_pipes(t_command *cmds)
+{
+	while (cmds)
 	{
-		dup2(c->prev->pipe_fd[0], STDIN_FILENO);
-		close(c->prev->pipe_fd[0]);
-	}
-	if (c->pipe_output)
-	{
-		dup2(c->pipe_fd[1], STDOUT_FILENO);
-		close(c->pipe_fd[1]);
+		if (cmds->pipe_fd)
+		{
+			close(cmds->pipe_fd[0]);
+			close(cmds->pipe_fd[1]);
+		}
+		cmds = cmds->next;
 	}
 }

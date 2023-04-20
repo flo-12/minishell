@@ -12,6 +12,7 @@
 // so it's of course valid for other errors as well. That's why this macro here,
 // for better understanding in code.
 # define CMD_NOT_FOUND 127
+# define CMD_NOT_EXEC 126
 
 /* FREE - EXIT */
 
@@ -55,11 +56,26 @@ bool		fill_heredoc(t_io_fds *io, int fd);
 
 /* EXECUTOR */
 
+int		executor(t_data *data);
 
 int		execute_command(t_data *data, t_command *cmd);
+
 // utils_pipe.c
 bool	create_pipes(t_data *data);
-void	set_pipe_fds(t_command *c);
+void	set_pipes(t_command *c);
+void	close_pipes(t_command *cmds);
+
+// utils_io.c
+bool	check_infile_outfile(t_io_fds *io);
+void	redirect_io(t_io_fds *io);
+
+// utils_path.c
+bool	cmd_is_dir(char *cmd);
+int		check_command_not_found(t_command *cmd);
+char	*find_path(char *cmd, char **envp);
+
+
+
 
 
 

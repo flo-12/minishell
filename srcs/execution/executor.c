@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/19 12:45:10 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:38:35 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,10 @@ static int	create_children(t_data *data)
 		if (data->pid == -1)
 			return (err_msg("fork error", strerror(errno), NULL), EXIT_FAILURE);
 		else if (data->pid == 0)
-			;
-			//execute_command(data, cmd);
+			execute_command(data, cmd);
 		cmd = cmd->next;
 	}
-	return (0);
+	return wait_children(data);
 }
 
 /* executor:
@@ -99,14 +98,7 @@ static int	create_children(t_data *data)
  */
 int	executor(t_data *data)
 {
-	int	ret;
-	
 	if (!create_pipes(data))
 		return (EXIT_FAILURE);
-	if (!create_children(data))
-		return (EXIT_FAILURE);
-	// to delete
-	//close_fds(data->cmd, false);
-	ret = wait_children(data);
-	return (ret);
+	return (create_children(data));
 }

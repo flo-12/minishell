@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/13 15:40:28 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:23:59 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static void	minishell(t_data *data)
 		SET-SIGNALS FROM mcombeau:
 		set_signals_noninteractive();
 		*/
+		
+		last_exit_code = executor(data);
+		printf("exit code: %d\n", last_exit_code);
 		/*
 		EXECUTION FROM mcombeau:
 		if (lexer(data) && parser(data))
@@ -49,8 +52,9 @@ static void	minishell(t_data *data)
 			g_last_exit_code = 1;
 		*/
 		
-		printf("geschafft!\n");
+		//printf("\ngeschafft!\n");
 		free_data(data, false);
+		printf("data freed\n");
 	}
 }
 
