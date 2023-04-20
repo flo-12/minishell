@@ -40,7 +40,10 @@ void	echo_print(char **args, _Bool n_flag)
 {
 	while (*args)
 	{
-		printf("%s", *args);
+		if (!ft_strncmp(*args, "$?", 3))
+			printf("%d", (unsigned char)last_exit_code);
+		else
+			printf("%s", *args);
 		if (*(args + 1))
 			printf(" ");
 		args++;

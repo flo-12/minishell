@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// cc test_builtins.c ../builtins/builtin_unset.c ../builtins/builtin_cd.c ../builtins/builtin_pwd.c ../builtins/builtin_echo.c ../builtins/builtin_utils.c ../builtins/builtin_export.c ../builtins/builtin_env.c ../utils/utils.c -L../../libft/ -lft -o test_builtins.out
+// cc test_builtins.c ../builtins/builtin_exit.c ../builtins/builtin_unset.c ../builtins/builtin_cd.c ../builtins/builtin_pwd.c ../builtins/builtin_echo.c ../builtins/builtin_utils.c ../builtins/builtin_export.c ../builtins/builtin_env.c ../utils/utils.c -L../../libft/ -lft -o test_builtins.out
 // valgrind --leak-check=full ./test_builtins.out E=sdjkfwe A=jkwefwe
 
 #include "../../includes/minishell_flo.h"
-
+int	last_exit_code;
 /*
 COPIED FROM error.c
 */
@@ -33,6 +33,31 @@ void	err_msg(char *s1, char *s2, char *s3)
 		}
 	}
 	ft_putstr_fd("\n", STDERR_FILENO);	
+}
+
+/*
+Partly COPIED FROM free_data.c
+*/
+void	free_data(t_data *data, bool clear_history)
+{
+	(void)clear_history;
+	free(data->working_dir);
+	free(data->old_working_dir);
+	free_ptr(data->env);
+}
+
+/*
+COPIED FROM exit_minishell.c
+*/
+void	exit_minishell(t_data *data, int exno)
+{
+	if (data)
+	{
+/* 		if (data->cmd && data->cmd->io_fds)
+			close_fds(data->cmd, true); */
+		free_data(data, true);
+	}
+	exit(exno);
 }
 
 void	test_export(t_data *data, char **args)
@@ -116,6 +141,16 @@ void	test_unset(t_data *data, char **args)
 	printf("\n");
 }
 
+void	test_exit(t_data *data, char **args)
+{
+	last_exit_code = 5;
+	printf("\n\n------ TEST_EXIT ------\n");
+	if (builtin_exit(data, args) == EXIT_FAILURE)
+		printf("\nEXIT_FAILURE\n");
+	else
+		printf("\nEXIT_SUCCESS\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -124,9 +159,10 @@ int	main(int argc, char **argv)
 	int		t_export = 0;
 	int		t_env = 0;
 	int		t_pwd = 0;
-	int		t_echo = 0;	// be careful: argv is used for export AND echo
-	int		t_cd = 0;	// be careful: argv is used for export AND echo
-	int		t_unset = 1;	// be careful: argv is used for export AND echo
+	int		t_echo = 1;		// be careful: argv is used for export AND echo
+	int		t_cd = 0;		// be careful: argv is used for export AND echo
+	int		t_unset = 0;	// be careful: argv is used for export AND echo
+	int		t_exit = 0;		// be careful: argv is used for export AND echo
 
 	/*********** INITIALIZE DATA ***********/
 	data.env = (char **)malloc(sizeof(char *) * 8);
@@ -169,11 +205,14 @@ int	main(int argc, char **argv)
 		test_echo(&data, args);
 	if (t_cd)
 		test_cd(&data, args);
-	if(t_unset)
+	if (t_unset)
 		test_unset(&data, args);
+	if (t_exit)
+		test_exit(&data, args);
 	free_ptr(args);
-	free(data.working_dir);
+	free_data(&data, true);
+	/*free(data.working_dir);
 	free(data.old_working_dir);
-	free_ptr(data.env);
+	free_ptr(data.env);*/
 	return (0);
 }
