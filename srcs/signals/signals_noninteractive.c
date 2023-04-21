@@ -14,19 +14,29 @@
 //#include "../../includes/minishell_flo.h"
 
 /*
+* Print a new line
 */
-void	ignore_sigquit()
+void	print_newline(int sig)
 {
-
+	(void)sig;
+	rl_on_new_line();
 }
 
 /*
-*/
-void	signal_interactive()
-{
-	//ignore_sigquit();
-}
-
-/*
+* Define the behaviour for CTRL+C (SIGINT) and CTR+/ (SIGQUIT)
+* in non-interactive mode, meaning minishell is executing the
+* commands the user entered.
+*	CTRL+C (SIGINT) -> quit process and print "^C" with a \n
+*	CTR+/ (SIGQUIT) -> quit process and print "^\Quit (core dumped)"
+*						with a \n
+* In both cases minishell doesn't have to react to the signals
+* (because processes will) and just has to print a newline.
 */
 void	signal_non_interactive()
+{
+	struct sigaction	s_sigact;
+
+	s_sigact.sa_handler = print_newline;
+	sigaction(SIGINT, &s_sigact, 0);
+	sigaction(SIGQUIT, &s_sigact, 0);
+}
