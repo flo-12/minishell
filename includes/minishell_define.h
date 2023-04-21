@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:29:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/13 15:43:40 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:55:09 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 /* MACROS */
 
-# define PROMPT "Hello world!"
+# define PROMPT "Minishell>>>"
 # define PROMPT_HEREDOC ">"
 # define BUILTIN_ERR_IDENT "not a valid identifier"
 

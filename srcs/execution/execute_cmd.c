@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:15:23 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/20 18:41:15 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/21 13:34:28 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 
 static int	execute_sys_cmd(t_data *data, t_command *cmd)
 {
+		printf("execute SYS cmd entered\n");
+
 	if (!cmd->command || cmd->command[0] == '\0')
 		return (CMD_NOT_FOUND);
 	if (cmd_is_dir(cmd->command))
@@ -48,6 +50,12 @@ static int	execute_sys_cmd(t_data *data, t_command *cmd)
 	return (EXIT_FAILURE);
 }
 
+/* execute_local_cmd:
+	checks if the command is not found, non executable or a directory.
+	It is needed to do this check before if not the error will be counted as an
+	execve error.
+	After the check, execve is launched with the given path.
+ */
 static int	execute_local_cmd(t_data *data, t_command *cmd)
 {
 	int	ret;
@@ -60,21 +68,46 @@ static int	execute_local_cmd(t_data *data, t_command *cmd)
 	return (EXIT_FAILURE);
 }
 
+/* execute_command:
+	Since when this function is executed we are in a child process (it is calld
+	when pid == 0), every time we want to terminate the process we will have to
+	use the exit_minishell() function and not the free_data() one.
+
+	- checks if the infile and outfiles are correct or not set (no redirection)
+		or if they have problems (fd == -1): in this case minishell is exited.
+	- sets the pipes for pipe redirection
+	- closes all the pipes, that were created in the main process and inherited
+		from the chil process
+	- redirects the io whith external files and then closes them.
+		// ?? MV : should I actually close all the files, or do that in the main
+		process at the end.. still have to look at that
+	- if '/' is found, the function will just try to execute the given path
+	- else, if the command if found among the builtins, the builtin will be 
+		executed. In the case the command is not a builtin, the execute_sys_cmd
+		function is called.
+ */
 int	execute_command(t_data *data, t_command *cmd)
 {
+	printf("execute cmd entered\n");
 	int	ret;
 
 	if (!check_infile_outfile(cmd->io_fds))
 		exit_minishell(data, EXIT_FAILURE);
-	// setting the necessary pipes redirections to IN and OUT
 	set_pipes(cmd);
-	// all the pipes are closed! remember, we are in a chil process so it means
-	// in all the others they will still be opened
 	close_pipes(data->cmd);
-	// io redirection and direct closing of the fd
 	redirect_io(cmd->io_fds);
-	// Executing the path if '/' is found, if not looks for builtins and sys cmds
-	if (ft_strchr(cmd->command, '/'))
+	if (ft_strchr(cmd->command, '/') == NULL)
+	{
+		//ret = execute_builtin(data, cmd);
+		//if (ret != CMD_NOT_FOUND)
+		//	exit_minishell(data, ret);
+		ret = execute_sys_cmd(data, cmd);
+		if (ret != CMD_NOT_FOUND)
+			exit_minishell(data, ret);
+	}
+	ret = execute_local_cmd(data, cmd);
+	exit_minishell(data, ret);
+/* 	if (ft_strchr(cmd->command, '/'))
 	{
 		ret = execute_local_cmd(data, cmd);
 		exit_minishell(data, ret);
@@ -87,7 +120,11 @@ int	execute_command(t_data *data, t_command *cmd)
 		ret = execute_sys_cmd(data, cmd);
 		if (ret != CMD_NOT_FOUND)
 			exit_minishell(data, ret);
-	}
+		ret = check_command_not_found(cmd);
+		if (ret != 0)
+			return (ret);
+		
+	} */
 	return (ret);
 }
 

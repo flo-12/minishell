@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:43:40 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/13 14:25:03 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/20 19:12:33 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	free_data(t_data *data, bool clear_history)
 		free_pointer(data->user_input);
 		data->user_input = NULL;
 	}
- 	if (data && data->token)
+	if (data && data->token)
 		free_tkn_list(&data->token);
 	if (data && data->cmd)
 		free_cmd_list(&data->cmd, &free_pointer);
