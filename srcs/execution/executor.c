@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/21 13:03:59 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/21 17:05:44 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 		chil process. It can be inspected with macros in order to get the exit 
 		status of ended process, which will be stored in endstatus.
 	
+	The function first has to close the pipes opened in the main process.
 	In the first part of the function, an infinite loop calls wait until the
 	value resulting form wait is equal to the result of the first forking call,
 	so until the pid of the process waited for does correspond to the first 
@@ -41,6 +42,7 @@ static int	wait_children(t_data *data)
 
 	wstatus = 0;
 	wpid = 0;
+	close_pipes(data->cmd);
 	while (1)
 	{
 		wpid = wait(&wstatus);

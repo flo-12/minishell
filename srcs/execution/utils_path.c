@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 17:45:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/20 17:58:04 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/21 15:25:58 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,15 @@ bool	cmd_is_dir(char *cmd)
 	return (S_ISDIR(cmd_stat.st_mode));
 }
 
-/* check_command_not_found:
-*	Searches for the reason a command was not found in the system binaries.
-*	Returns an error message and status if the command is invalid,
-*	returns EXIT_SUCCESS if the command is valid and should be executed
-*	as a local executable.
-*/
+
 int	check_command_not_found(t_command *cmd)
 {
 	if (access(cmd->command, F_OK) != 0)
-		return (err_msg(cmd->command, NULL, strerror(errno)), CMD_NOT_FOUND);
+		return (err_msg(cmd->command, strerror(errno), NULL), CMD_NOT_FOUND);
 	else if (cmd_is_dir(cmd->command))
-		return (err_msg(cmd->command, NULL, "Is a directory"), CMD_NOT_EXEC);
+		return (err_msg(cmd->command, "Is a directory", NULL), CMD_NOT_EXEC);
 	else if (access(cmd->command, F_OK | X_OK) != 0)
-		return (err_msg(cmd->command, NULL, strerror(errno)), CMD_NOT_EXEC);
+		return (err_msg(cmd->command, strerror(errno), NULL), CMD_NOT_EXEC);
 	return (EXIT_SUCCESS);
 }
 
