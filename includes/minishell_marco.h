@@ -74,6 +74,9 @@ bool	cmd_is_dir(char *cmd);
 int		check_command_not_found(t_command *cmd);
 char	*find_path(char *cmd, char **envp);
 
+// utils_expand.c
+void	expand_exit_code(char **args);
+
 
 
 

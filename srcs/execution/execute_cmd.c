@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:15:23 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/21 13:34:28 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/21 17:39:13 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@
 
 static int	execute_sys_cmd(t_data *data, t_command *cmd)
 {
-		printf("execute SYS cmd entered\n");
-
 	if (!cmd->command || cmd->command[0] == '\0')
 		return (CMD_NOT_FOUND);
 	if (cmd_is_dir(cmd->command))
@@ -58,6 +56,8 @@ static int	execute_sys_cmd(t_data *data, t_command *cmd)
  */
 static int	execute_local_cmd(t_data *data, t_command *cmd)
 {
+	printf("execute SYS cmd entered\n");
+
 	int	ret;
 
 	ret = check_command_not_found(cmd);
@@ -88,26 +88,15 @@ static int	execute_local_cmd(t_data *data, t_command *cmd)
  */
 int	execute_command(t_data *data, t_command *cmd)
 {
-	printf("execute cmd entered\n");
 	int	ret;
 
+	expand_exit_code(cmd->args);
 	if (!check_infile_outfile(cmd->io_fds))
 		exit_minishell(data, EXIT_FAILURE);
 	set_pipes(cmd);
 	close_pipes(data->cmd);
 	redirect_io(cmd->io_fds);
-	if (ft_strchr(cmd->command, '/') == NULL)
-	{
-		//ret = execute_builtin(data, cmd);
-		//if (ret != CMD_NOT_FOUND)
-		//	exit_minishell(data, ret);
-		ret = execute_sys_cmd(data, cmd);
-		if (ret != CMD_NOT_FOUND)
-			exit_minishell(data, ret);
-	}
-	ret = execute_local_cmd(data, cmd);
-	exit_minishell(data, ret);
-/* 	if (ft_strchr(cmd->command, '/'))
+	if (ft_strchr(cmd->command, '/'))
 	{
 		ret = execute_local_cmd(data, cmd);
 		exit_minishell(data, ret);
@@ -122,9 +111,8 @@ int	execute_command(t_data *data, t_command *cmd)
 			exit_minishell(data, ret);
 		ret = check_command_not_found(cmd);
 		if (ret != 0)
-			return (ret);
-		
-	} */
+				exit_minishell(data, ret);
+	}
 	return (ret);
 }
 
