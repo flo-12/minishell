@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/04/21 17:18:40 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/04/24 13:23:11 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # includes
 INC			=	-I ./includes/ \
-				-I ./libft/
+				-I ./libft/ \
+				-I /opt/homebrew/ \
+				-I/opt/homebrew/opt/readline/include
 
 # Sources
 SRC_PATH	=	srcs/
@@ -105,4 +107,10 @@ norminette_check:
 	norminette ./src
 	norminette -R CheckForbiddenSourceHeader ./includes
 
-.PHONY: all re clean fclean
+compile_mac: $(OBJS)
+	@echo "Compiling minishell in mac..."
+	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -L/opt/homebrew/opt/readline/lib \
+ -lreadline -ltermcap 
+	@echo "\n\t\033[33;1;3mMinishell ready (MAC)\n"
+
+.PHONY: all re clean fclean norminette_check compile_mac
