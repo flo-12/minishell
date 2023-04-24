@@ -57,10 +57,7 @@ int	change_dir(t_data *data, char *path)
 	char	*tmp;
 
 	if (chdir(path) != 0)
-	{
-		err_msg("cd", path, strerror(errno));
-		return (EXIT_FAILURE);
-	}
+		return (err_msg("cd", path, strerror(errno)), EXIT_FAILURE);
 	tmp = getcwd(cwd, PATH_MAX);
 	update_wds(data, cwd);
 	return (EXIT_SUCCESS);
@@ -77,9 +74,7 @@ char	*check_dir_to_home(char **env, char **args)
 	_Bool	home;
 
 	home = false;
-	if (!args)
-		home = true;
-	else if (!args[0])
+	if (!args || !args[0])
 		home = true;
 	else if (args[0][0] == '\0' || ft_strncmp(args[0], "--", 3) == 0)
 		home = true;
@@ -87,10 +82,7 @@ char	*check_dir_to_home(char **env, char **args)
 		return (NULL);
 	i = get_env_var_i(env, "HOME=");
 	if (i < 0)
-	{
-		err_msg("cd", "HOME not set", NULL);
-		return (NULL);
-	}
+		return (err_msg("cd", "HOME not set", NULL), NULL);
 	return (ft_strchr(env[i], '=') + 1);
 }
 

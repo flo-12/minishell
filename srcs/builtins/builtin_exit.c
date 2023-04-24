@@ -64,20 +64,15 @@ int	get_exit_code(char *str)
 int	builtin_exit(t_data *data, char **args)
 {
 	int	exit_code;
-	
+
 	if (print_exit(data))
 		printf("exit\n");
-	if (!args)
-		exit_code = (unsigned char)last_exit_code;
-	else if (!args[0])
+	if (!args || !args[0])
 		exit_code = (unsigned char)last_exit_code;
 	else
 	{
 		if (args[1])
-		{
-			err_msg("exit", "too many arguments", NULL);
-			return (2);
-		}
+			return (err_msg("exit", "too many arguments", NULL), 2);
 		exit_code = get_exit_code(args[0]);
 		if (exit_code < 0)
 		{

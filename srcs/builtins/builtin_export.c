@@ -14,15 +14,6 @@
 #include "../../includes/minishell_flo.h"
 
 /*
-* Trigger printing of error message for function check_env_var
-*/
-_Bool	check_env_var_err(char *s1, char *s2, char *s3)
-{
-	err_msg(s1, s2, s3);
-	return (false);
-}
-
-/*
 * Check if str follows the rules of env-variables
 *	Return:	true -> all strs follow rules
 *			false -> at least one str doesn't follow rules
@@ -39,17 +30,17 @@ _Bool	check_env_var(char *str)
 
 	i = 0;
 	if (!ft_isalpha(str[i]))
-		return (check_env_var_err("export", str, BUILTIN_ERR_IDENT));
+		return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
 	while (str[i] != '=')
 	{
 		if (!ft_isalnum(str[i]))
-			return (check_env_var_err("export", str, BUILTIN_ERR_IDENT));
+			return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
 		i++;
 	}
 	while (str[i])
 	{
 		if (str[i] == '(' || str[i] == ')')
-			return (check_env_var_err("export", str, BUILTIN_ERR_IDENT));
+			return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
 		i++;
 	}
 	return (true);
@@ -64,9 +55,7 @@ int	builtin_export(t_data *data, char **args)
 {
 	int		i;
 
-	if (!args)
-		return (builtin_env(data));
-	if (!(*args))
+	if (!args || !(*args))
 		return (builtin_env(data));
 	i = 0;
 	while (args[i])
