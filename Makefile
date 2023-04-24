@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/04/24 13:23:11 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/04/24 17:17:24 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC			=	main.c \
 				parser/parse_input.c \
 				parser/parse_output.c \
 				parser/parse_heredoc.c \
+				parser/syntax_check.c \
 				exit/error.c \
 				test/test_token_list.c \
 				test/print.c \
@@ -109,7 +110,7 @@ norminette_check:
 
 compile_mac: $(OBJS)
 	@echo "Compiling minishell in mac..."
-	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -L/opt/homebrew/opt/readline/lib \
+	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -L/opt/homebrew/opt/readline/lib\
  -lreadline -ltermcap 
 	@echo "\n\t\033[33;1;3mMinishell ready (MAC)\n"
 

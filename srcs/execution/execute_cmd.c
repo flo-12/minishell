@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:15:23 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/21 17:39:13 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:17:05 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static int	execute_sys_cmd(t_data *data, t_command *cmd)
  */
 static int	execute_local_cmd(t_data *data, t_command *cmd)
 {
-	printf("execute SYS cmd entered\n");
-
 	int	ret;
 
 	ret = check_command_not_found(cmd);
@@ -111,7 +109,7 @@ int	execute_command(t_data *data, t_command *cmd)
 			exit_minishell(data, ret);
 		ret = check_command_not_found(cmd);
 		if (ret != 0)
-				exit_minishell(data, ret);
+			exit_minishell(data, ret);
 	}
 	return (ret);
 }

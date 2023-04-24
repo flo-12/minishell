@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/21 17:05:44 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:08:37 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	wait_children(t_data *data)
 		wpid = wait(&wstatus);
 		if (wpid == -1)
 			return (err_msg("wait error", strerror(errno), NULL), EXIT_FAILURE);
-		printf("^---pid wait %d -- status %d-- %d\n", data->pid, wstatus, wpid);
+		//printf("^---pid wait %d -- status %d-- %d\n", data->pid, wstatus, wpid);
 		if (wpid == data->pid)
 			break ;
 		continue ;
@@ -100,6 +100,8 @@ static int	create_children(t_data *data)
  */
 int	executor(t_data *data)
 {
+	if (!data || !data->cmd)
+		return (EXIT_FAILURE);
 	if (!create_pipes(data))
 		return (EXIT_FAILURE);
 	return (create_children(data));

@@ -19,6 +19,8 @@
 void	free_pointer(void *ptr);
 
 void	err_msg(char *s1, char *s2, char *s3);
+void	err_msg_syntax(char *s1, int type);
+
 
 void	free_cmd_list(t_command **lst, void (*del)(void *));
 
@@ -38,6 +40,8 @@ void		print_token_list(t_token **tokens);
 /* PARSER */
 
 void		parser(t_data *data);
+
+bool		syntax_check(t_token **token_lst);
 
 t_command	*cmd_lst_new(void);
 void		cmd_lst_add_end(t_command **lst, t_command *new_node);
