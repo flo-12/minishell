@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 //#include "../../includes/minishell_flo.h"
 
 /*
@@ -85,19 +84,13 @@ int	token_add_sepcial_node(t_token **token, char *str)
 	else if (*str == '<')
 	{
 		if (*(str + 1) == '<')
-		{
-			token_lstadd_back(token, token_lstnew(NULL, HEREDOC));
-			return (2);
-		}
+			return (token_lstadd_back(token, token_lstnew(NULL, HEREDOC)), 2);
 		token_lstadd_back(token, token_lstnew(NULL, INPUT));
 	}
 	else if (*str == '>')
 	{
 		if (*(str + 1) == '>')
-		{
-			token_lstadd_back(token, token_lstnew(NULL, APPEND));
-			return (2);
-		}
+			return (token_lstadd_back(token, token_lstnew(NULL, APPEND)), 2);
 		token_lstadd_back(token, token_lstnew(NULL, TRUNC));
 	}
 	return (1);
@@ -113,11 +106,8 @@ Precondition: str must start with a space
 */
 int	token_add_space(t_token **token, char *str)
 {
-	if (*token)
-	{
-		if ((token_lstlast(*token))->type != SPACES)
-			token_lstadd_back(token, token_lstnew(NULL, SPACES));
-	}
+	if (*token && (token_lstlast(*token))->type != SPACES)
+		token_lstadd_back(token, token_lstnew(NULL, SPACES));
 	else
 		token_lstadd_back(token, token_lstnew(NULL, SPACES));
 	return (get_nbr_spaces(str));

@@ -42,18 +42,12 @@ void	quote_removal(t_token *token)
 {
 	while (token)
 	{
-		if (token->str)
+		if (token->str && (*(token->str) == '\"' || *(token->str) == '\''))
 		{
-			if (*(token->str) == '\"' || *(token->str) == '\'')
-			{
-				token->str = remove_quotes(token->str);
-				token->str_backup = remove_quotes(token->str_backup);
-				if (!token->str || !token->str_backup)
-				{
-					token_lstclear(&token);
-					return ;
-				}
-			}
+			token->str = remove_quotes(token->str);
+			token->str_backup = remove_quotes(token->str_backup);
+			if (!token->str || !token->str_backup)
+				return (token_lstclear(&token));
 		}
 		token = token->next;
 	}

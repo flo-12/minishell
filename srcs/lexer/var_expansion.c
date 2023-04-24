@@ -72,17 +72,13 @@ char	*replace_var(char *str, int *start, int end, char *env)
 	tmp = (char *)ft_calloc(sizeof(char), (*start + ft_strlen(env)
 				+ ft_strlen(str + end + 1) + 1));
 	if (!tmp)
-	{
-		free(str);
-		return (NULL);
-	}
+		return (free(str), NULL);
 	ft_strlcat(tmp, str, *start + 1);
 	ft_strlcat(tmp, env, *start + ft_strlen(env) + 1);
 	ft_strlcat(tmp, str + end + 1, *start + ft_strlen(env)
 		+ ft_strlen(str + end + 1) + 1);
-	free(str);
 	*start += ft_strlen(env);
-	return (tmp);
+	return (free(str), tmp);
 }
 
 /*
@@ -113,9 +109,7 @@ char	*search_and_replace_var(char *str, int *i, char **env)
 	while (*env)
 	{
 		if (var_is_equal(str, *env, *i + 1, j - 1))
-		{
 			return (replace_var(str, i, j - 1, *env));
-		}
 		env++;
 	}
 	return (replace_var(str, i, j - 1, ""));
@@ -147,10 +141,7 @@ void	var_expansion(char **usr_split, char **env)
 			{
 				tmp = search_and_replace_var(*usr_split, &i, env);
 				if (!(*usr_split))
-				{
-					free_ptr(usr_split);
-					return ;
-				}
+					return (free_ptr(usr_split));
 				*usr_split = tmp;
 				tmp = NULL;
 			}

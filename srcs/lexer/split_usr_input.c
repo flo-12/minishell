@@ -134,17 +134,14 @@ char	**split_usr_input(char *usr_input)
 {
 	char	**usr_split;
 	int		dstsize;
-	
+
 	usr_split = NULL;
 	while (*usr_input)
 	{
 		dstsize = find_dstsize(usr_input) + 1;
 		if ((*usr_input == '\'' || *usr_input == '\"')
 			&& dstsize == -1)
-		{
-			free_ptr(usr_split);
-			return (NULL);
-		}
+			return (free_ptr(usr_split), NULL);
 		usr_split = add_str(usr_split, usr_input, dstsize);
 		if (!usr_split)
 			return (NULL);

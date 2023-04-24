@@ -72,10 +72,7 @@ t_token	*token_lstnew(char *str, int type)
 	{
 		str_backup = ft_strdup(str);
 		if (!str_backup)
-		{
-			token_lstdelone(new_node);
-			return (NULL);
-		}
+			return (token_lstdelone(new_node), NULL);
 	}
 	else
 		str_backup = NULL;
