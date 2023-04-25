@@ -40,14 +40,28 @@ static bool	init_env(t_data *data, char **env)
 	return (true);
 }
 
+static bool	init_wds(t_data *data, char **env)
+{
+	while (*env)
+	{
+		if (ft_strncmp(*env, "PWD=", ft_strlen("PWD=")) == 0)
+			data->working_dir = ft_strdup(ft_strchr(*env, '=') + 1);
+		else if (ft_strncmp(*env, "OLDPWD=", ft_strlen("OLDPWD=")) == 0)
+			data->old_working_dir = ft_strdup(ft_strchr(*env, '=') + 1);
+		env++;
+	}
+	if (!data->working_dir || !data->old_working_dir)
+		return (false);
+	return (true);
+}
+
 bool	init_data(t_data *data, char **env)
 {
 	if (!init_env(data, env))
-		return (ft_putendl_fd("Could not initalize environment!", 2),false);
-/* 	// for the cd buil-in, to develop
-	if (!init_wds(data))
-		return (ft_putendl_fd("Could not initalize working directories!", 2), \
-							false); */
+		return (ft_putendl_fd("Could not initalize environment!", 2), false);
+	if (!init_wds(data, env))
+		return (ft_putendl_fd("Could not initalize working directories!", 2),
+			false);
 	data->token = NULL;
 	data->user_input = NULL;
 	data->cmd = NULL;
