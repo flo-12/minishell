@@ -47,6 +47,14 @@ SRC			=	main.c \
 				parser/parse_heredoc.c \
 				parser/syntax_check.c \
 				exit/error.c \
+				builtins/builtin_cd.c \
+				builtins/builtin_echo.c \
+				builtins/builtin_env.c \
+				builtins/builtin_exit.c \
+				builtins/builtin_export.c \
+				builtins/builtin_pwd.c \
+				builtins/builtin_unset.c \
+				builtins/builtin_utils.c \
 				test/test_token_list.c \
 				test/print.c \
 				execution/executor.c execution/utils_pipe.c execution/execute_cmd.c \
@@ -84,6 +92,7 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)/lexer
 	@mkdir $(OBJ_PATH)/execution
 	@mkdir $(OBJ_PATH)/utils
+	@mkdir $(OBJ_PATH)/builtins
 
 
 $(LIBFT):
