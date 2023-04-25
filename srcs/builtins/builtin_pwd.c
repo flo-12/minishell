@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 int	builtin_pwd(t_data *data)
 {

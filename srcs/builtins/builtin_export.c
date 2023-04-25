@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 * Check if str follows the rules of env-variables

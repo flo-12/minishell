@@ -12,27 +12,27 @@
 
 #include "minishell.h"
 
-/* static int	execute_builtin(t_data *data, t_command *cmd)
+static int	execute_builtin(t_data *data, t_command *cmd)
 {
 	int	ret;
 
 	ret = CMD_NOT_FOUND;
 	if (ft_strncmp(cmd->command, "cd", 3) == 0)
-		ret = builtin_cd(data, cmd->args);
+		ret = builtin_cd(data, cmd->args + 1);
 	else if (ft_strncmp(cmd->command, "echo", 5) == 0)
-		ret = builtin_echo(data, cmd->args);
+		ret = builtin_echo(data, cmd->args + 1);
 	else if (ft_strncmp(cmd->command, "env", 4) == 0)
-		ret = builtin_env(data, cmd->args);
+		ret = builtin_env(data);
 	else if (ft_strncmp(cmd->command, "export", 7) == 0)
-		ret = builtin_export(data, cmd->args);
+		ret = builtin_export(data, cmd->args + 1);
 	else if (ft_strncmp(cmd->command, "pwd", 4) == 0)
-		ret = builtin_pwd(data, cmd->args);
+		ret = builtin_pwd(data);
 	else if (ft_strncmp(cmd->command, "unset", 6) == 0)
-		ret = builtin_unset(data, cmd->args);
+		ret = builtin_unset(data, cmd->args + 1);
 	else if (ft_strncmp(cmd->command, "exit", 5) == 0)
-		ret = builtin_exit(data, cmd->args);
+		ret = builtin_exit(data, cmd->args + 1);
 	return (ret);
-} */
+}
 
 static int	execute_sys_cmd(t_data *data, t_command *cmd)
 {
@@ -101,9 +101,9 @@ int	execute_command(t_data *data, t_command *cmd)
 	}
 	else
 	{
-		//ret = execute_builtin(data, cmd);
-		//if (ret != CMD_NOT_FOUND)
-		//	exit_minishell(data, ret);
+		ret = execute_builtin(data, cmd);
+		if (ret != CMD_NOT_FOUND)
+			exit_minishell(data, ret);
 		ret = execute_sys_cmd(data, cmd);
 		if (ret != CMD_NOT_FOUND)
 			exit_minishell(data, ret);

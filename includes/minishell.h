@@ -54,9 +54,6 @@ void	var_expansion(char **usr_split, char **env);
 t_token	*tokenization(char **usr_split);
 void	quote_removal(t_token *token);
 /* LEXER_UTILS */
-void	free_ptr(char **ptr);
-int		get_size_ptr(char **ptr);
-void	cpy_ptrs(char **dst, char **src);
 int		get_nbr_spaces(char *str);
 /* TOKEN_LIST_UTILS */
 t_token	*token_lstnew(char *str, int type);
@@ -71,7 +68,22 @@ t_token	*token_lstlast(t_token *lst);
 
 /* EXECUTION */
 
+/* BUILTINS */
+int		builtin_env(t_data *data);
+int		builtin_export(t_data *data, char **args);
+int		builtin_pwd(t_data *data);
+int		builtin_echo(t_data *data, char **args);
+int		builtin_cd(t_data *data, char **args);
+int		builtin_unset(t_data *data, char **args);
+int		builtin_exit(t_data *data, char **args);
+int		builtin_exit(t_data *data, char **args);
+int		get_env_var_i(char **env, char *str);
+void	set_env_var(t_data *data, char *env);
+
 /* UTILS */
+void	free_ptr(char **ptr);
+int		get_size_ptr(char **ptr);
+void	cpy_ptrs(char **dst, char **src);
 
 /* EXIT */
 

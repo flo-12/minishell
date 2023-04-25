@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 * Check if str is a valid n-flag
@@ -68,6 +68,7 @@ int	builtin_echo(t_data *data, char **args)
 	_Bool	n_flag;
 	int		i;
 
+	(void)data;
 	n_flag = false;
 	i = 0;
 	while (args[i] && is_n_flag(args[i]))

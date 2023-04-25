@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 * Update working directory and old working directory in env-variables
@@ -59,6 +59,7 @@ int	change_dir(t_data *data, char *path)
 	if (chdir(path) != 0)
 		return (err_msg("cd", path, strerror(errno)), EXIT_FAILURE);
 	tmp = getcwd(cwd, PATH_MAX);
+	(void)tmp;
 	update_wds(data, cwd);
 	return (EXIT_SUCCESS);
 }
@@ -113,18 +114,12 @@ int	builtin_cd(t_data *data, char **args)
 	if (path)
 		return (change_dir(data, path));
 	else if (get_size_ptr(args) > 1)
-	{
-		err_msg("cd", "too many arguments", NULL);
-		return (EXIT_FAILURE);
-	}
+		return (err_msg("cd", "too many arguments", NULL), EXIT_FAILURE);
 	if (!strncmp(args[0], "-", 2))
 	{
 		i = get_env_var_i(data->env, "OLDPWD=");
 		if (i < 0)
-		{
-			err_msg("cd", "OLDPWD not set", NULL);
-			return (EXIT_FAILURE);
-		}
+			return (err_msg("cd", "OLDPWD not set", NULL), EXIT_FAILURE);
 		else
 			return (change_dir(data, ft_strchr(data->env[i], '=') + 1));
 	}

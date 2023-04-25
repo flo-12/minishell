@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 * Remove (and free) the environment variable var of
@@ -55,7 +55,7 @@ int	builtin_unset(t_data *data, char **args)
 		if (i != -1)
 		{
 			if ((data->env[i] - ft_strchr(data->env[i], '=')) * (-1)
-				== ft_strlen(*args))
+				== (long int)ft_strlen(*args))
 				unset_env_var(data, tmp);
 		}
 		free(tmp);

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h"
-#include "../../includes/minishell_flo.h"
+#include "minishell.h"
+//#include "../../includes/minishell_flo.h"
 
 /*
 * Imitates the builtin function "env" of bash
@@ -23,12 +23,9 @@ int	builtin_env(t_data *data)
 	char	i;
 
 	if (!data->env)
-		return (EXIT_SUCCESS);
+		return (EXIT_FAILURE);
 	i = 0;
-	while (data->env[i])
-	{
-		printf("%s\n", data->env[i]);
-		i++;
-	}
+	while (*(data->env + i))
+		printf("%s\n", *(data->env + (i++)));
 	return (EXIT_SUCCESS);
 }
