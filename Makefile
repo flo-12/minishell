@@ -61,6 +61,8 @@ SRC			=	main.c \
 				execution/executor.c execution/utils_pipe.c execution/execute_cmd.c \
 				execution/utils_io.c execution/utils_path.c execution/utils_expand.c\
 				utils/utils.c \
+				signals/signals_interactive.c \
+				signals/signals_noninteractive.c
 				
 				
 #				parser/sandbox.c \
@@ -94,6 +96,7 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)/execution
 	@mkdir $(OBJ_PATH)/utils
 	@mkdir $(OBJ_PATH)/builtins
+	@mkdir $(OBJ_PATH)/signals
 
 
 $(LIBFT):

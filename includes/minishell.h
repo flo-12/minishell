@@ -66,6 +66,10 @@ t_token	*token_lstlast(t_token *lst);
 
 /* PARSER */
 
+/* SIGNALS */
+void	signal_non_interactive();
+void	signal_interactive();
+
 /* EXECUTION */
 
 /* BUILTINS */

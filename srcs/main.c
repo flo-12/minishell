@@ -59,7 +59,9 @@ static void	minishell(t_data *data)
 	
 	while (1)
 	{
+		signal_interactive();
 		data->user_input = readline(PROMPT);
+		signal_non_interactive();
 		// It is to update the history of commands going with arrow up
 		add_history(data->user_input);
 		// since the ret from lexer is a bool and minishell is a void function,
