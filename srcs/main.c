@@ -62,7 +62,10 @@ static void	minishell(t_data *data)
 		signal_interactive();
 		data->user_input = readline(PROMPT);
 		if (!data->user_input)
+		{
+			printf("exit\n");
 			return (exit_minishell(data, 0));
+		}
 		signal_non_interactive();
 		// It is to update the history of commands going with arrow up
 		add_history(data->user_input);
