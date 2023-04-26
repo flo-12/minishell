@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/24 19:08:37 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:07:27 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,39 @@ static int	create_children(t_data *data)
  */
 int	executor(t_data *data)
 {
+	int	ret;
+
 	if (!data || !data->cmd)
 		return (EXIT_FAILURE);
+	if (!data->cmd->pipe_output && !data->cmd->prev
+		&& check_infile_outfile(data->cmd->io_fds))
+	{
+		redirect_io(data->cmd->io_fds);
+		ret = execute_builtin(data, data->cmd);
+		restore_io(data->cmd->io_fds);
+		if (ret != CMD_NOT_FOUND)
+			return (ret);
+	}
 	if (!create_pipes(data))
 		return (EXIT_FAILURE);
 	return (create_children(data));
 }
+
+/* int	execute(t_data *data)
+{
+	int	ret;
+
+	ret = prep_for_exec(data);
+	if (ret != CMD_NOT_FOUND)
+		return (ret);
+	if (!data->cmd->pipe_output && !data->cmd->prev
+		&& check_infile_outfile(data->cmd->io_fds))
+	{
+		redirect_io(data->cmd->io_fds);
+		ret = execute_builtin(data, data->cmd);
+		restore_io(data->cmd->io_fds);
+	}
+	if (ret != CMD_NOT_FOUND)
+		return (ret);
+	return (create_children(data));
+} */

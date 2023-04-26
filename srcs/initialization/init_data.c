@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:20:26 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 17:06:31 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:06:57 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	init_io(t_command *cmd)
 		//cmd->io_fds->heredoc_quotes = false;
 		cmd->io_fds->fd_in = -1;
 		cmd->io_fds->fd_out = -1;
-		//cmd->io_fds->stdin_backup = -1;
-		//cmd->io_fds->stdout_backup = -1;
+		cmd->io_fds->stdin_backup = -1;
+		cmd->io_fds->stdout_backup = -1;
 	}
 }

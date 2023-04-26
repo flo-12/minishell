@@ -11,3 +11,6 @@ minishell
 
 #libft
 ./libft/libft.a
+
+#tester folder
+minitester/

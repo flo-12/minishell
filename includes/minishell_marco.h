@@ -30,6 +30,9 @@ void	init_io(t_command *cmd);
 
 /* TEST */
 
+void	minishell_testing(t_data *data, char *arg);
+
+
 void	test_token_list(t_data *data);
 
 /* TEST - print */
@@ -63,6 +66,8 @@ bool		fill_heredoc(t_io_fds *io, int fd);
 int		executor(t_data *data);
 
 int		execute_command(t_data *data, t_command *cmd);
+int		execute_builtin(t_data *data, t_command *cmd);
+
 
 // utils_pipe.c
 bool	create_pipes(t_data *data);
@@ -72,6 +77,7 @@ void	close_pipes(t_command *cmds);
 // utils_io.c
 bool	check_infile_outfile(t_io_fds *io);
 void	redirect_io(t_io_fds *io);
+bool	restore_io(t_io_fds *io);
 
 // utils_path.c
 bool	cmd_is_dir(char *cmd);

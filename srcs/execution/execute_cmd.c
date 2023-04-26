@@ -6,13 +6,13 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:15:23 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/24 15:17:05 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:38:45 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	execute_builtin(t_data *data, t_command *cmd)
+int	execute_builtin(t_data *data, t_command *cmd)
 {
 	int	ret;
 
@@ -36,15 +36,22 @@ static int	execute_builtin(t_data *data, t_command *cmd)
 
 static int	execute_sys_cmd(t_data *data, t_command *cmd)
 {
-	if (!cmd->command || cmd->command[0] == '\0')
-		return (CMD_NOT_FOUND);
-	if (cmd_is_dir(cmd->command))
-		return (CMD_NOT_FOUND);
+	if (!cmd->command || cmd->command[0] == '\0' || !ft_strncmp(cmd->command, "..", 3))
+		return (err_msg(cmd->command, "command not found", NULL), CMD_NOT_FOUND);
+	else if (!ft_strncmp(cmd->command, ".", 2))
+		return (err_msg(cmd->command, "filename argument required", NULL), 2);
+	//if (!cmd->command)
+	//if (!cmd->command || cmd->command[0] == '\0')
+	//	return (EXIT_FAILURE);
+	//if (cmd_is_dir(cmd->command))
+	//	return (CMD_NOT_FOUND);
 	cmd->path = find_path(cmd->command, data->env);
 	if (!cmd->path)
-		return (CMD_NOT_FOUND);
+		return (err_msg(cmd->command, "command not found", NULL), CMD_NOT_FOUND);
+		//return (CMD_NOT_FOUND);
+	printf("%s\n", cmd->path);
 	if (execve(cmd->path, cmd->args, data->env) == -1)
-		return (err_msg("execve error", strerror(errno), NULL), errno);
+		return (err_msg("SYSexecve error", strerror(errno), NULL), errno);
 	return (EXIT_FAILURE);
 }
 
@@ -94,6 +101,7 @@ int	execute_command(t_data *data, t_command *cmd)
 	set_pipes(cmd);
 	close_pipes(data->cmd);
 	redirect_io(cmd->io_fds);
+	restore_io(cmd->io_fds);
 	if (ft_strchr(cmd->command, '/'))
 	{
 		ret = execute_local_cmd(data, cmd);
@@ -105,11 +113,10 @@ int	execute_command(t_data *data, t_command *cmd)
 		if (ret != CMD_NOT_FOUND)
 			exit_minishell(data, ret);
 		ret = execute_sys_cmd(data, cmd);
-		if (ret != CMD_NOT_FOUND)
 			exit_minishell(data, ret);
-		ret = check_command_not_found(cmd);
+		/* ret = check_command_not_found(cmd);
 		if (ret != 0)
-			exit_minishell(data, ret);
+			exit_minishell(data, ret); */
 	}
 	return (ret);
 }

@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/04/24 17:17:24 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/04/26 12:19:01 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC			=	main.c \
 				builtins/builtin_utils.c \
 				test/test_token_list.c \
 				test/print.c \
+				test/minishell_testing.c \
 				execution/executor.c execution/utils_pipe.c execution/execute_cmd.c \
 				execution/utils_io.c execution/utils_path.c execution/utils_expand.c\
 				utils/utils.c \
