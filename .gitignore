@@ -10,10 +10,8 @@ minishell
 *.txt
 
 #libft
-./libft/libft.a
 libft/libft.a
-.*a
-./*/*.a
+*.a
 
 #tester folder
 minitester/
