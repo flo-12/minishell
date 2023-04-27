@@ -14,4 +14,5 @@ libft/libft.a
 *.a
 
 #tester folder
-minitester/
+minitester/*file*
+minitester/*.txt
