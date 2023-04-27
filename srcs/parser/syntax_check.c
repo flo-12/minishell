@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:16:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/24 20:46:38 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:05:52 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ bool	syntax_check(t_token **token_lst)
 
 		if (prev)
 		{
-			
 		if (temp->type >= PIPE && prev->type >= PIPE)
 		{
 			if (temp->type == END && prev->type > PIPE)
@@ -50,6 +49,11 @@ bool	syntax_check(t_token **token_lst)
 				err_msg_syntax("syntax error near unexpected token", temp->type);
 			return (EXIT_FAILURE);
 		}
+		}
+		if (temp->type == PIPE && !prev)
+		{
+			err_msg_syntax("syntax error near unexpected token", temp->type);
+			return (EXIT_FAILURE);
 		}
 		temp = temp->next;
 	}
