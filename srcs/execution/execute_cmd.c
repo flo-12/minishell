@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:15:23 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/26 16:38:45 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:22:06 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static int	execute_sys_cmd(t_data *data, t_command *cmd)
 	if (!cmd->path)
 		return (err_msg(cmd->command, "command not found", NULL), CMD_NOT_FOUND);
 		//return (CMD_NOT_FOUND);
-	printf("%s\n", cmd->path);
+	//printf("%s\n", cmd->path);
 	if (execve(cmd->path, cmd->args, data->env) == -1)
-		return (err_msg("SYSexecve error", strerror(errno), NULL), errno);
+		return (err_msg("execve error", strerror(errno), NULL), errno);
 	return (EXIT_FAILURE);
 }
 
@@ -101,7 +101,7 @@ int	execute_command(t_data *data, t_command *cmd)
 	set_pipes(cmd);
 	close_pipes(data->cmd);
 	redirect_io(cmd->io_fds);
-	restore_io(cmd->io_fds);
+	//restore_io(cmd->io_fds);
 	if (ft_strchr(cmd->command, '/'))
 	{
 		ret = execute_local_cmd(data, cmd);
