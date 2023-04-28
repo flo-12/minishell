@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:18:11 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/26 12:34:14 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 19:03:53 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	minishell_testing(t_data *data, char *arg)
 		data->user_input = ft_strdup(user_inputs[i]);
 		if (lexer(data))
 		{
+			token_lstadd_back(&data->token, token_lstnew(NULL, END));
 			if (syntax_check(&data->token))
-				last_exit_code = 258;
+				last_exit_code = 2;
 			else
 			{
 				
@@ -35,7 +36,6 @@ void	minishell_testing(t_data *data, char *arg)
 				//print_cmd_list(data);
 				last_exit_code = executor(data);
 			}
-			//print_token_list(&data->token);
 		}
 		i++;
 		free_data(data, false);
