@@ -21,7 +21,7 @@ _Bool	is_spaces(char *str)
 {
 	while (*str)
 	{
-		if (*str != ' ')
+		if (!ft_isspace(*str))
 			return (false);
 		str++;
 	}

@@ -88,6 +88,7 @@ void	set_env_var(t_data *data, char *env);
 void	free_ptr(char **ptr);
 int		get_size_ptr(char **ptr);
 void	cpy_ptrs(char **dst, char **src);
+int 	ft_isspace(int c);
 
 /* EXIT */
 

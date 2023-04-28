@@ -61,3 +61,16 @@ void	free_ptr(char **ptr)
 	}
 	free(tmp);
 }
+
+/*
+* checks for white-space characters
+* Return 1 if true and 0 if false
+* 	imitates behaviour of isspace (ctype.h)
+*/
+int ft_isspace(int c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	else
+		return (0);
+}

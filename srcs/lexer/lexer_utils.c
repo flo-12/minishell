@@ -23,7 +23,7 @@ int	get_nbr_spaces(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] == ' ')
+	while (str[i] && ft_isspace(str[i]))
 		i++;
 	return (i);
 }
