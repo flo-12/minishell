@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:14:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/24 20:59:53 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:01:50 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	parser(t_data *data)
 	temp = data->token;
 	token_lstadd_back(&temp, token_lstnew(NULL, END));
 	// how is the token list in case of no input or input is empty string?
+	//if (syntax_check(&data->token))
+	//	return (2);
 	while (temp->next != NULL)
 	{
 		if (temp == data->token)
