@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:40:02 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/28 15:09:25 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:27:22 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	lst_add_back_token(t_token **alst, t_token *new_node)
 	}
 }
 
-void	token_create_list(t_data *data)
+/* void	token_create_list(t_data *data)
 {
 	// To test multiple commands, pipes, empty strings
 
@@ -86,7 +86,7 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token("stop", END));
 
 	
-/* 	// INPUT AND OUTPUT
+	// INPUT AND OUTPUT
 	data->token = lst_new_token("echo", WORD);
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("hello", WORD));
@@ -98,9 +98,9 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token("", TRUNC));
 	lst_add_back_token(&data->token, lst_new_token("", WORD));
 
-	lst_add_back_token(&data->token, lst_new_token("stop", END)); */
+	lst_add_back_token(&data->token, lst_new_token("stop", END));
 
-	/* // HEREDOC
+	// HEREDOC
 	data->token = lst_new_token("cat", WORD);
 	lst_add_back_token(&data->token, lst_new_token(" ", SPACES));
 	lst_add_back_token(&data->token, lst_new_token("hello", HEREDOC));
@@ -112,6 +112,6 @@ void	token_create_list(t_data *data)
 	lst_add_back_token(&data->token, lst_new_token("EOF2", WORD));
 	lst_add_back_token(&data->token, lst_new_token("", APPEND));
 	lst_add_back_token(&data->token, lst_new_token("ciao.txt", WORD));
-	lst_add_back_token(&data->token, lst_new_token("stop", END)); */
+	lst_add_back_token(&data->token, lst_new_token("stop", END));
 
-}
+} */

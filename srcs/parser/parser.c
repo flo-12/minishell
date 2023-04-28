@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:14:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 16:01:50 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:29:00 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,17 @@
  */
 void	parser(t_data *data)
 {
-	t_token *temp;
-	
+	t_token	*temp;
+
 	temp = data->token;
 	token_lstadd_back(&temp, token_lstnew(NULL, END));
-	// how is the token list in case of no input or input is empty string?
-	//if (syntax_check(&data->token))
-	//	return (2);
 	while (temp->next != NULL)
 	{
 		if (temp == data->token)
 			cmd_lst_add_end(&data->cmd, cmd_lst_new());
 		if (temp->type == WORD)
 			parse_word(&data->cmd, &temp);
- 		else if (temp->type == INPUT)
+		else if (temp->type == INPUT)
 			parse_input(&data->cmd, &temp);
 		else if (temp->type == TRUNC)
 			parse_output(&data->cmd, &temp, 't');
@@ -47,7 +44,6 @@ void	parser(t_data *data)
 			parse_heredoc(&data->cmd, &temp);
 		else if (temp->type == PIPE)
 			parse_pipe(&data->cmd, &temp);
-		// case for the spaces
 		else if (temp->type == SPACES)
 			temp = temp->next;
 		else if (temp->type == END)

@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:45:30 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/13 15:42:13 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:26:30 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ bool	fill_heredoc(t_io_fds *io, int fd)
 	while (1)
 	{
 		line = readline(PROMPT_HEREDOC);
-		if (ft_strncmp(line, io->heredoc_delimiter, 
-										ft_strlen(io->heredoc_delimiter)) == 0)
+		if (ft_strncmp(line, io->heredoc_delimiter,
+				ft_strlen(io->heredoc_delimiter)) == 0)
 			break ;
 		ft_putendl_fd(line, fd);
 		free_pointer(line);
@@ -122,6 +122,5 @@ void	parse_heredoc(t_command **last_cmd, t_token **token_lst)
 	if (generate_heredoc(io))
 		io->fd_in = open(io->infile, O_RDONLY);
 	else
-		io->fd_in = -1; 
+		io->fd_in = -1;
 }
-

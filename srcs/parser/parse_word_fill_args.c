@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:37:55 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 12:40:17 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:31:22 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 	are no spaces between tokens with type WORD, they will be joined in a single
 	string. If the type is WORD, a new string is created.
 	Else, so the type is a SPACE, just skips the node.
+	line 37 was before like that, but it had a memory leak 
+	//args[*i] = ft_strdup((*temp)->str);
  */
 static void	fill_args_array(t_token **temp, char **args, int *i)
 {
 	char	*str_join;
-	
+
 	while (*temp && ((*temp)->type == WORD || (*temp)->type == SPACES))
 	{
 		while ((*temp)->type == WORD && (*temp)->next->type == WORD)
@@ -29,14 +31,12 @@ static void	fill_args_array(t_token **temp, char **args, int *i)
 			str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
 			free((*temp)->str);
 			free((*temp)->next->str);
-			// is it here mallocated? if not control for the frees
 			(*temp)->next->str = str_join;
 			(*temp) = (*temp)->next;
 		}
 		if ((*temp)->type == WORD)
 		{
 			args[*i] = (*temp)->str;
-			//args[*i] = ft_strdup((*temp)->str);
 			*i += 1;
 		}
 		(*temp) = (*temp)->next;
@@ -87,7 +87,7 @@ void	parse_word_fill_args(t_token **token_node, t_command *last_cmd)
 	temp = *token_node;
 	while (temp->type == WORD || temp->type == SPACES)
 	{
-		if(temp->type == WORD)
+		if (temp->type == WORD)
 			i++;
 		temp = temp->next;
 	}

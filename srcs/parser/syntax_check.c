@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 17:16:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 16:04:08 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:24:41 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_token	*skip_spaces(t_token *lst)
 {
 	t_token	*prev;
+
 	if (lst->prev)
 	{
 		prev = lst->prev;
@@ -23,7 +24,7 @@ t_token	*skip_spaces(t_token *lst)
 	}
 	else
 		prev = NULL;
-	return (prev) ;
+	return (prev);
 }
 
 bool	syntax_check(t_token **token_lst)
@@ -32,29 +33,24 @@ bool	syntax_check(t_token **token_lst)
 	t_token	*prev;
 
 	temp = *token_lst;
-	token_lstadd_back(&temp, token_lstnew(NULL, END));
 	while (temp)
 	{
 		prev = skip_spaces(temp);
-
 		if (prev)
 		{
-		if (temp->type >= PIPE && prev->type >= PIPE)
-		{
-			if (temp->type == END && prev->type > PIPE)
-				err_msg_syntax("syntax error near unexpected token", 0);
-			else if (temp->type == END && prev)
-				err_msg_syntax("syntax error near unexpected token", prev->type);
-			else
-				err_msg_syntax("syntax error near unexpected token", temp->type);
-			return (EXIT_FAILURE);
-		}
+			if (temp->type >= PIPE && prev->type >= PIPE)
+			{
+				if (temp->type == END && prev->type > PIPE)
+					err_msg_syntax(0);
+				else if (temp->type == END && prev)
+					err_msg_syntax(prev->type);
+				else
+					err_msg_syntax(temp->type);
+				return (EXIT_FAILURE);
+			}
 		}
 		if (temp->type == PIPE && !prev)
-		{
-			err_msg_syntax("syntax error near unexpected token", temp->type);
-			return (EXIT_FAILURE);
-		}
+			return (err_msg_syntax(temp->type), EXIT_FAILURE);
 		temp = temp->next;
 	}
 	return (EXIT_SUCCESS);

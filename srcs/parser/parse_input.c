@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:19:18 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/13 18:06:46 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:25:26 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 static bool	clear_old_infiles(t_io_fds *io)
 {
 	if (io->infile)
-	// enters just if infile is already set (if not is initialized == NULL)
 	{
 		if (io->fd_in == -1 || (io->outfile && io->fd_out == -1))
 			return (false);

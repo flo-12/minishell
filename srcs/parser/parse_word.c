@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:54:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 12:42:43 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:52:37 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@
 static char	*get_cmd_str(t_token **temp)
 {
 	char	*str_join;
-	
-		while ((*temp)->type == WORD && (*temp)->next->type == WORD)
-		{
-			str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
-			free((*temp)->str);
-			free((*temp)->next->str);
-			// is it here mallocated? if not control for the frees
-			(*temp)->next->str = str_join;
-			(*temp) = (*temp)->next;
-		}
-		if ((*temp)->type == WORD)
-			return (*temp)->str;
+
+	while ((*temp)->type == WORD && (*temp)->next->type == WORD)
+	{
+		str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
+		free((*temp)->str);
+		free((*temp)->next->str);
+		(*temp)->next->str = str_join;
+		(*temp) = (*temp)->next;
+	}
+	if ((*temp)->type == WORD)
+		return ((*temp)->str);
 	return (str_join);
 }
 
@@ -56,8 +55,8 @@ void	parse_word(t_command **cmd, t_token **token_lst)
 	while (tkn_temp && (tkn_temp->type == WORD || tkn_temp->type == SPACES))
 	{
 		cmd_temp = cmd_lst_get_end(*cmd);
-		if (tkn_temp->prev == NULL || cmd_temp->command == NULL ||
-			(tkn_temp->prev && tkn_temp->prev->type == PIPE))
+		if (tkn_temp->prev == NULL || cmd_temp->command == NULL
+			|| (tkn_temp->prev && tkn_temp->prev->type == PIPE))
 		{
 			cmd_temp->command = get_cmd_str(&tkn_temp);
 			if (!cmd_temp->args)

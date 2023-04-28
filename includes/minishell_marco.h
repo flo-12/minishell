@@ -19,7 +19,7 @@
 void	free_pointer(void *ptr);
 
 void	err_msg(char *s1, char *s2, char *s3);
-void	err_msg_syntax(char *s1, int type);
+void	err_msg_syntax(int type);
 
 
 void	free_cmd_list(t_command **lst, void (*del)(void *));

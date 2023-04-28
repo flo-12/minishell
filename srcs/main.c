@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 16:03:43 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:24:12 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void	minishell(t_data *data)
 		// we don't need a ret variable.
 		if (lexer(data))
 		{
+			token_lstadd_back(&data->token, token_lstnew(NULL, END));
 			if (syntax_check(&data->token))
 				last_exit_code = 2;
 			else
