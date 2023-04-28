@@ -102,7 +102,7 @@ char	*search_and_replace_var(char *str, int *i, char **env)
 	int		j;
 
 	j = *i + 1;
-	if (!(ft_isalpha(str[j]) || ft_isspace(str[j])))
+	if (!(ft_isalpha(str[j]) || str[j] == '_' || ft_isspace(str[j])))
 		return (replace_var(str, i, j, ""));
 	while (char_is_var(str[j]))
 		j++;
