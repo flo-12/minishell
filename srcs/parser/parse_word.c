@@ -6,11 +6,34 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:54:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/22 17:13:19 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 12:42:43 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/* get_cmd_str:
+	gets the first command string, iterates through the token lists and joins
+	WORD tokens that are not separated by a SPACES token. (the case is for
+	empty strings "").
+ */
+static char	*get_cmd_str(t_token **temp)
+{
+	char	*str_join;
+	
+		while ((*temp)->type == WORD && (*temp)->next->type == WORD)
+		{
+			str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
+			free((*temp)->str);
+			free((*temp)->next->str);
+			// is it here mallocated? if not control for the frees
+			(*temp)->next->str = str_join;
+			(*temp) = (*temp)->next;
+		}
+		if ((*temp)->type == WORD)
+			return (*temp)->str;
+	return (str_join);
+}
 
 /* parse_word:
 	parses the tokens with type WORD.
@@ -36,7 +59,7 @@ void	parse_word(t_command **cmd, t_token **token_lst)
 		if (tkn_temp->prev == NULL || cmd_temp->command == NULL ||
 			(tkn_temp->prev && tkn_temp->prev->type == PIPE))
 		{
-			cmd_temp->command = ft_strdup(tkn_temp->str);
+			cmd_temp->command = get_cmd_str(&tkn_temp);
 			if (!cmd_temp->args)
 			{
 				cmd_temp->args = malloc(sizeof * cmd_temp->args * 2);

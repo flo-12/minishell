@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:37:55 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/28 15:09:21 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 12:40:17 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ static void	fill_args_array(t_token **temp, char **args, int *i)
 		while ((*temp)->type == WORD && (*temp)->next->type == WORD)
 		{
 			str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
+			free((*temp)->str);
+			free((*temp)->next->str);
 			// is it here mallocated? if not control for the frees
 			(*temp)->next->str = str_join;
 			(*temp) = (*temp)->next;
 		}
 		if ((*temp)->type == WORD)
 		{
-			args[*i] = ft_strdup((*temp)->str);
+			args[*i] = (*temp)->str;
+			//args[*i] = ft_strdup((*temp)->str);
 			*i += 1;
 		}
 		(*temp) = (*temp)->next;
