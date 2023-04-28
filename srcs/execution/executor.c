@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 11:34:30 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:11:15 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,16 @@ int	executor(t_data *data)
 	if (!data || !data->cmd)
 		return (EXIT_FAILURE);
 	if (!data->cmd->command)
-		return (EXIT_SUCCESS);
+	{
+		if (check_infile_outfile(data->cmd->io_fds))
+			return (EXIT_SUCCESS);
+		return (EXIT_FAILURE);
+	}
 	if (!data->cmd->pipe_output && !data->cmd->prev
 		&& check_infile_outfile(data->cmd->io_fds))
 	{
 		redirect_io(data->cmd->io_fds);
+		//expand_exit_code(data->cmd->args);
 		ret = execute_builtin(data, data->cmd);
 		restore_io(data->cmd->io_fds);
 		if (ret != CMD_NOT_FOUND)

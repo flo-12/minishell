@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:33:57 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/03/23 18:54:26 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:08:31 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,22 @@ static void	open_infile(t_io_fds *io, char *infile, int fd, char *file, char c)
 	//if (!remove_old_file_ref(io, true))
 		return ;
 	io->infile = ft_strdup(file);
+/* 	// should be safe to remove this condition, handled in the next one
 	if (io->infile && io->infile[0] == '\0')
 	{
 		ft_putendl_fd("minishell: : No such file or directory\n", 2);
 		return ;
-	}
+	} */
 	if (c == 'i')
 		io->fd_in = open(io->infile, O_RDONLY);
 	if (io->fd_in == -1)
+		err_msg(io->infile, strerror(errno), NULL);
+
 		//errmsg_cmd(io->infile, NULL, strerror(errno), false);
 		// MV : I'll have to set the errors better then ft_putendl
 		// you have to use strerror, to get for example if the file is not 
 		// existing
-		ft_putendl_fd("minishell: Error opening file descriptor\n", 2);
+		//ft_putendl_fd("minishell: Error opening file descriptor\n", 2);
 }
 
 /* parse_input:

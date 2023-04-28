@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/26 16:50:53 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:03:43 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	minishell(t_data *data)
 		if (lexer(data))
 		{
 			if (syntax_check(&data->token))
-				last_exit_code = 258;
+				last_exit_code = 2;
 			else
 			{
 				
@@ -84,9 +84,8 @@ static void	minishell(t_data *data)
 			}
 			//print_token_list(&data->token);
 		}
-		//printf("exit code: %d\n", last_exit_code);
 		free_data(data, false);
-		//printf("data freed\n");
+
 	}
 }
 
