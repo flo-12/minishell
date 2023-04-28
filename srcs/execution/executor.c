@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 16:11:15 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:42:11 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int	wait_children(t_data *data)
 		wpid = wait(&wstatus);
 		if (wpid == -1)
 			return (err_msg("wait error", strerror(errno), NULL), EXIT_FAILURE);
-		//printf("^---pid wait %d -- status %d-- %d\n", data->pid, wstatus, wpid);
 		if (wpid == data->pid)
 			break ;
 		continue ;
@@ -59,7 +58,6 @@ static int	wait_children(t_data *data)
 		endstatus = WEXITSTATUS(wstatus);
 	else
 		endstatus = wstatus;
-	//printf("final status is %d\n", endstatus);
 	return (endstatus);
 }
 
@@ -85,7 +83,7 @@ static int	create_children(t_data *data)
 			execute_command(data, cmd);
 		cmd = cmd->next;
 	}
-	return wait_children(data);
+	return (wait_children(data));
 }
 
 /* executor:
@@ -117,7 +115,6 @@ int	executor(t_data *data)
 		&& check_infile_outfile(data->cmd->io_fds))
 	{
 		redirect_io(data->cmd->io_fds);
-		//expand_exit_code(data->cmd->args);
 		ret = execute_builtin(data, data->cmd);
 		restore_io(data->cmd->io_fds);
 		if (ret != CMD_NOT_FOUND)

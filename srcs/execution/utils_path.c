@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 17:45:05 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/24 15:16:58 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:47:37 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ bool	cmd_is_dir(char *cmd)
 	stat(cmd, &cmd_stat);
 	return (S_ISDIR(cmd_stat.st_mode));
 }
-
 
 int	check_command_not_found(t_command *cmd)
 {
