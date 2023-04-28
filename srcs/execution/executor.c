@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/26 16:07:27 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 11:34:30 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ static int	create_children(t_data *data)
 }
 
 /* executor:
+	first two if conditions to check if the command list is not created and if 
+	there is not not the command (second condition), it's for the case where a 
+	redirection is set but no command is given as input.
 	general distributor function:
 	- the pipes are created;
 	- children processes are created, and the execute_command function is called
@@ -104,6 +107,8 @@ int	executor(t_data *data)
 
 	if (!data || !data->cmd)
 		return (EXIT_FAILURE);
+	if (!data->cmd->command)
+		return (EXIT_SUCCESS);
 	if (!data->cmd->pipe_output && !data->cmd->prev
 		&& check_infile_outfile(data->cmd->io_fds))
 	{
