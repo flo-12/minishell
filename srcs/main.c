@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 18:05:40 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:48:40 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static void	minishell(t_data *data)
 		if (!data->user_input)
 		{
 			printf("exit\n");
-			printf("CAT PROBLEM\n");
 			return (exit_minishell(data, 0));
 		}
 		signal_non_interactive();
@@ -81,10 +80,10 @@ static void	minishell(t_data *data)
 			{
 				
 				parser(data);
-				print_cmd_list(data);
+				//print_cmd_list(data);
 				last_exit_code = executor(data);
 			}
-			print_token_list(&data->token);
+			//print_token_list(&data->token);
 		}
 		free_data(data, false);
 	}
