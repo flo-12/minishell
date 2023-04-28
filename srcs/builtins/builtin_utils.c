@@ -62,3 +62,23 @@ void	set_env_var(t_data *data, char *env)
 		free(tmp);
 	}
 }
+
+/*
+* checks if the variable name (env_name) is a valid name for
+* environmental names
+* 	- variable has to start with alphabetic character or '_'
+*	- variable can only contain alphanumeric characters and '_'
+*/
+_Bool	valid_env_var_name(char *env_name)
+{
+	if (!(ft_isalpha(*env_name) || *env_name == '_'))
+		return (false);
+	env_name++;
+	while (*env_name)
+	{
+		if (!(ft_isalnum(*env_name) || *env_name == '_'))
+			return (false);
+		env_name++;
+	}
+	return (true);
+}

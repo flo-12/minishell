@@ -116,6 +116,38 @@ int	find_dstsize(char *str)
 }
 
 /*
+* Removes all $"" and $'' in user_input and returns the new string
+*/
+char	*remove_dollar_quote(char *user_input)
+{
+	int		i;
+	char	*tmp;
+
+	if (!user_input)
+		return (NULL);
+	i = 0;
+	while (ft_strchr(user_input + i, '$'))
+	{
+		i = ft_strchr(user_input + i, '$') - user_input;
+		if (!ft_strncmp(user_input + i, "$\"\"", 3)
+			|| !ft_strncmp(user_input + i, "$\'\'", 3))
+		{
+			tmp = (char *)calloc(sizeof(char), ft_strlen(user_input) - 2);
+			if (!tmp)
+				return (NULL);
+			ft_strlcat(tmp, user_input, i + 1);
+			ft_strlcat(tmp + i, user_input + i + 3,
+				ft_strlen(user_input + i + 3) + 1);
+			free(user_input);
+			user_input = tmp;
+		}
+		else
+			i++;
+	}
+	return (user_input);
+}
+
+/*
 Gets the user input from the prompt as input and splits
 it as followed in several strings:
 	1) if single quotes ('')
@@ -124,6 +156,7 @@ it as followed in several strings:
 		-> string at start and end of quotes
 	3) if spaces (exception spaces between quotes)
 		-> space as seperator of single strings
+	- also $'' and $"" will be removed
 Return: pointer to the split strings
 Errors: memory allocation fails or quotes are not closed
 	-> function returns NULL in this case
@@ -133,19 +166,27 @@ Precondition:
 char	**split_usr_input(char *usr_input)
 {
 	char	**usr_split;
+	char	*tmp;
 	int		dstsize;
 
+	usr_input = ft_strdup(usr_input);
+	if (!usr_input)
+		return (NULL);
+	usr_input = remove_dollar_quote(usr_input);
+	tmp = usr_input;
+	if (!usr_input)
+		return (NULL);
 	usr_split = NULL;
 	while (*usr_input)
 	{
 		dstsize = find_dstsize(usr_input) + 1;
 		if ((*usr_input == '\'' || *usr_input == '\"')
 			&& dstsize == -1)
-			return (free_ptr(usr_split), NULL);
+			return (free_ptr(usr_split), free(tmp), NULL);
 		usr_split = add_str(usr_split, usr_input, dstsize);
 		if (!usr_split)
-			return (NULL);
+			return (free(tmp), NULL);
 		usr_input += dstsize;
 	}
-	return (usr_split);
+	return (free(tmp), usr_split);
 }

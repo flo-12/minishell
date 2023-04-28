@@ -83,6 +83,7 @@ int		builtin_exit(t_data *data, char **args);
 int		builtin_exit(t_data *data, char **args);
 int		get_env_var_i(char **env, char *str);
 void	set_env_var(t_data *data, char *env);
+_Bool	valid_env_var_name(char *env_name);
 
 /* UTILS */
 void	free_ptr(char **ptr);
