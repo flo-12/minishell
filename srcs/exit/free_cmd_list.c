@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:09:53 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/13 14:14:04 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:07:55 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	free_io(t_io_fds *io)
 {
 	if (!io)
 		return ;
-	//restore_io(io);
+	restore_io(io);
 	if (io->heredoc_delimiter)
 	{
 		unlink(io->infile);
