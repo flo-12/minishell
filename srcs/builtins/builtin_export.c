@@ -26,9 +26,22 @@
 */
 _Bool	check_env_var(char *str)
 {
-	int	i;
+	int		len;
+	char	*env_name;
 
-	i = 0;
+	if (ft_strchr(str, '='))
+		len = ft_strchr(str, '=') - str;
+	else
+		len = ft_strlen(str);
+	env_name = (char *)malloc(sizeof(char) * (len + 1));
+	if (!env_name)
+		return (err_msg("export", "malloc error", NULL), false);
+	ft_strlcpy(env_name, str, len + 1);
+	if (valid_env_var_name(env_name))
+		return (true);
+	else
+		return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
+	/*i = 0;
 	if (!ft_isalpha(str[i]))
 		return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
 	while (str[i] != '=')
@@ -42,8 +55,8 @@ _Bool	check_env_var(char *str)
 		if (str[i] == '(' || str[i] == ')')
 			return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
 		i++;
-	}
-	return (true);
+	}*/
+	//return (true);
 }
 
 /*
@@ -54,17 +67,19 @@ _Bool	check_env_var(char *str)
 int	builtin_export(t_data *data, char **args)
 {
 	int		i;
+	int		exit_code;
 
 	if (!args || !(*args))
 		return (builtin_env(data));
+	exit_code = EXIT_SUCCESS;
 	i = 0;
 	while (args[i])
 	{
 		if (!check_env_var(args[i]))
-			return (EXIT_FAILURE);
+			exit_code = EXIT_FAILURE;
 		else
 			set_env_var(data, args[i]);
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (exit_code);
 }
