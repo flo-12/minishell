@@ -38,9 +38,9 @@ _Bool	check_env_var(char *str)
 		return (err_msg("export", "malloc error", NULL), false);
 	ft_strlcpy(env_name, str, len + 1);
 	if (valid_env_var_name(env_name))
-		return (true);
+		return (free(env_name), true);
 	else
-		return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
+		return (free(env_name), err_msg("export", str, BUILTIN_ERR_IDENT), false);
 	/*i = 0;
 	if (!ft_isalpha(str[i]))
 		return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
