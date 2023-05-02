@@ -41,7 +41,7 @@ int	get_exit_code(char *str)
 	int	exit_code;
 
 	if (!ft_strncmp(str, "+", 2) || !ft_strncmp(str, "-", 2))
-	return (-1);
+		return (-1);
 	exit_code = ft_atoi(str);
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;

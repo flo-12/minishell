@@ -40,23 +40,8 @@ _Bool	check_env_var(char *str)
 	if (valid_env_var_name(env_name))
 		return (free(env_name), true);
 	else
-		return (free(env_name), err_msg("export", str, BUILTIN_ERR_IDENT), false);
-	/*i = 0;
-	if (!ft_isalpha(str[i]))
-		return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
-	while (str[i] != '=')
-	{
-		if (!ft_isalnum(str[i]))
-			return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
-		i++;
-	}
-	while (str[i])
-	{
-		if (str[i] == '(' || str[i] == ')')
-			return (err_msg("export", str, BUILTIN_ERR_IDENT), false);
-		i++;
-	}*/
-	//return (true);
+		return (free(env_name), err_msg("export", str, BUILTIN_ERR_IDENT),
+			false);
 }
 
 /*
