@@ -141,7 +141,6 @@ t_token	*tokenization(char **usr_split)
 		i = 0;
 		while ((*usr_split)[i])
 		{
-			//if ((*usr_split)[i] == ' ')
 			if (ft_isspace((*usr_split)[i]))
 				i += token_add_space(&token, (*usr_split) + i);
 			else if ((*usr_split)[i] == '|' || (*usr_split)[i] == '<'

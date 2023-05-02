@@ -59,7 +59,6 @@ _Bool	del_found(char cmp, char del)
 	}
 	else
 	{
-		//if (cmp == ' ' || cmp == '\"' || cmp == '\'')
 		if (ft_isspace(cmp) || cmp == '\"' || cmp == '\'')
 			return (true);
 	}
