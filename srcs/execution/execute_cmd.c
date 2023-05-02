@@ -43,7 +43,10 @@ static int	execute_sys_cmd(t_data *data, t_command *cmd)
 	else if (!ft_strncmp(cmd->command, ".", 2))
 		return (err_msg(cmd->command, "filename argument required", NULL), 2);
 	cmd->path = find_path(cmd->command, data->env);
-	if (!cmd->path)
+	if (!cmd->path && get_env_var_i(data->env, "PATH=") == -1)
+		return (err_msg(cmd->command, "No such file or directory", NULL),
+			CMD_NOT_FOUND);
+	else if (!cmd->path)
 		return (err_msg(cmd->command, "command not found", NULL),
 			CMD_NOT_FOUND);
 	if (execve(cmd->path, cmd->args, data->env) == -1)
