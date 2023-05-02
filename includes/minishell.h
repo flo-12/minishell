@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:13:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/05/02 12:02:22 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:23:38 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		parse_word(t_command **cmd, t_token **token_lst);
 void		parse_input(t_command **last_cmd, t_token **token_lst);
 void		parse_output(t_command **last_cmd, t_token **token_lst, char c);
 void		parse_heredoc(t_command **last_cmd, t_token **token_lst);
+bool		clear_old_infiles_heredoc(t_io_fds *io);
 bool		generate_heredoc(t_io_fds *io);
 bool		evaluate_heredoc_line(char **line, t_io_fds *io, bool *ret);
 bool		fill_heredoc(t_io_fds *io, int fd);

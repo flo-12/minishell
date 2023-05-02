@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/05/02 12:49:07 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/05/02 17:23:55 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC			=	main.c \
 				parser/parse_input.c \
 				parser/parse_output.c \
 				parser/parse_heredoc.c \
+				parser/parse_heredoc_utils.c \
 				parser/syntax_check.c \
 				exit/error.c \
 				builtins/builtin_cd.c \

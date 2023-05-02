@@ -6,45 +6,11 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:45:30 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/05/02 15:23:41 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:25:41 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/* 
-	clears old infiles if there are some
- */
-
-static bool	clear_old_infiles(t_io_fds *io)
-{
-	if (io->infile)
-	{
-		if (io->fd_in == -1 || (io->outfile && io->fd_out == -1))
-			return (false);
-		if (io->heredoc_delimiter != NULL)
-		{
-			free_pointer(io->heredoc_delimiter);
-			io->heredoc_delimiter = NULL;
-			unlink(io->infile);
-		}
-		free_pointer(io->infile);
-		close(io->fd_in);
-	}
-	return (true);
-}
-
-/* static bool	clear_old_infiles(t_io_fds *io)
-{
-	if (io->infile)
-	{
-		if (io->fd_in == -1 || (io->outfile && io->fd_out == -1))
-			return (false);
-		free_pointer(io->infile);
-		close(io->fd_in);
-	}
-	return (true);
-} */
 
 /* generate_geredoc:
 	creates a file where is stored the input, thanks the fill_heredoc() function
@@ -64,6 +30,24 @@ bool	generate_heredoc(t_io_fds *io)
 	return (ret);
 }
 
+static bool	heredoc_line_check(char **line, t_io_fds *io, int *nb, bool *ret)
+{
+	if (*line == NULL)
+	{
+		printf("minishell: warning: here-document at line %d delimited by \
+end-of-file (wanted `%s')\n", *nb, io->heredoc_delimiter);
+		*ret = false;
+		return (false);
+	}
+	if (ft_strncmp(*line, io->heredoc_delimiter,
+			ft_strlen(io->heredoc_delimiter)) == 0)
+	{
+		*ret = true;
+		return (false);
+	}
+	return (true);
+}
+
 /* fill_heredoc:
 	reads the input thanks the redline() function until the line is equal to the
 	delimiter.
@@ -71,22 +55,25 @@ bool	generate_heredoc(t_io_fds *io)
 bool	fill_heredoc(t_io_fds *io, int fd)
 {
 	char	*line;
-	//bool	ret;
+	bool	ret;
+	int		nb_line;
 
-	//ret = false;
+	nb_line = 0;
+	ret = false;
 	line = NULL;
 	while (1)
 	{
+		signal_interactive();
 		line = readline(PROMPT_HEREDOC);
-		if (ft_strncmp(line, io->heredoc_delimiter,
-				ft_strlen(io->heredoc_delimiter)) == 0)
+		signal_non_interactive();
+		if (!heredoc_line_check(&line, io, &nb_line, &ret))
 			break ;
 		ft_putendl_fd(line, fd);
 		free_pointer(line);
+		nb_line++;
 	}
 	free_pointer(line);
-	//printf("ret, fill %d\n", ret);
-	return (true);
+	return (ret);
 }
 
 /* 
@@ -130,7 +117,7 @@ void	parse_heredoc(t_command **last_cmd, t_token **token_lst)
 	cmd = cmd_lst_get_end(*last_cmd);
 	init_io(cmd);
 	io = cmd->io_fds;
-	if (!clear_old_infiles(io))
+	if (!clear_old_infiles_heredoc(io))
 		return ;
 	if (temp->next->type == SPACES)
 		temp = temp->next->next;

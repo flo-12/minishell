@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:18:11 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/05/02 12:02:47 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:22:58 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	minishell_testing(t_data *data, char *arg)
 			{
 				
 				parser(data);
+				//print_token_list(&data->token);
+				//printf("fd out %d", data->cmd->io_fds->fd_out);
 				//print_cmd_list(data);
 				g_last_exit_code = executor(data);
+				//printf("fd out %d", data->cmd->io_fds->fd_out);
 			}
 		}
 		i++;
