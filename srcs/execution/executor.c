@@ -46,8 +46,6 @@ static int	wait_children(t_data *data)
 	while (1)
 	{
 		wpid = wait(&wstatus);
-		if (wpid == -1)
-			return (err_msg("wait error", strerror(errno), NULL), EXIT_FAILURE);
 		if (wpid == data->pid)
 			break ;
 		continue ;
