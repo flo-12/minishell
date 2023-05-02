@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:29:46 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/26 16:06:40 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:03:58 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@
 # define PROMPT "Minishell>>>"
 # define PROMPT_HEREDOC ">"
 # define BUILTIN_ERR_IDENT "not a valid identifier"
+# define HEREDOC_NAME "/tmp/.minishell_heredoc_"
+// MV: error 127 (command not found) is defined in errno.h but as EKEYEXPIRED, 
+// so it's of course valid for other errors as well. That's why this macro here,
+// for better understanding in code.
+# define CMD_NOT_FOUND 127
+# define CMD_NOT_EXEC 126
 
 /* GLOBAL VARIABLE */
 
-extern int	last_exit_code;
+extern int	g_last_exit_code;
 
 /* STRUCTS */
 
@@ -78,7 +84,8 @@ enum e_token_types {
 	INPUT,
 	TRUNC,
 	HEREDOC,
-	APPEND
+	APPEND,
+	END
 };
 
-# endif
+#endif

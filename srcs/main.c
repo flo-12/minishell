@@ -6,13 +6,13 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 18:48:40 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:02:47 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	last_exit_code;
+int	g_last_exit_code;
 
 static void	minishell(t_data *data)
 {
@@ -75,13 +75,13 @@ static void	minishell(t_data *data)
 		{
 			token_lstadd_back(&data->token, token_lstnew(NULL, END));
 			if (syntax_check(&data->token))
-				last_exit_code = 2;
+				g_last_exit_code = 2;
 			else
 			{
 				
 				parser(data);
 				//print_cmd_list(data);
-				last_exit_code = executor(data);
+				g_last_exit_code = executor(data);
 			}
 			//print_token_list(&data->token);
 		}
@@ -106,6 +106,6 @@ int main(int ac, char **av, char **env)
 		minishell(&data);
 	
 	(void)av;
-	exit_minishell(&data, last_exit_code);
+	exit_minishell(&data, g_last_exit_code);
 	return (0);
 }

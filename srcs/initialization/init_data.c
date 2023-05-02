@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:20:26 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/05/02 11:34:09 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:02:47 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	init_data(t_data *data, char **env)
 	data->user_input = NULL;
 	data->cmd = NULL;
 	data->pid = -1;
-	last_exit_code = 0;
+	g_last_exit_code = 0;
 	return (true);
 }
 

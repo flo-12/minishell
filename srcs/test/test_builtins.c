@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbecht <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:21:43 by fbecht            #+#    #+#             */
-/*   Updated: 2023/04/13 19:21:45 by fbecht           ###   ########.fr       */
+/*   Updated: 2023/05/02 12:02:47 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // valgrind --leak-check=full ./test_builtins.out E=sdjkfwe A=jkwefwe
 
 #include "../../includes/minishell_flo.h"
-int	last_exit_code;
+int	g_last_exit_code;
 /*
 COPIED FROM error.c
 */
@@ -143,7 +143,7 @@ void	test_unset(t_data *data, char **args)
 
 void	test_exit(t_data *data, char **args)
 {
-	last_exit_code = 5;
+	g_last_exit_code = 5;
 	printf("\n\n------ TEST_EXIT ------\n");
 	if (builtin_exit(data, args) == EXIT_FAILURE)
 		printf("\nEXIT_FAILURE\n");

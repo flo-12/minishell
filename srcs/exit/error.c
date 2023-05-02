@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:13:50 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 17:18:45 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 11:37:20 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	err_msg(char *s1, char *s2, char *s3)
 			ft_putstr_fd(s3, STDERR_FILENO);
 		}
 	}
-	ft_putstr_fd("\n", STDERR_FILENO);	
+	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
 void	err_msg_syntax(int type)
 {
-	char *str;
+	char	*str;
 
 	str = NULL;
 	if (type == PIPE)
@@ -52,5 +52,5 @@ void	err_msg_syntax(int type)
 	ft_putstr_fd("`", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd("'", STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);	
+	ft_putstr_fd("\n", STDERR_FILENO);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbecht <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 18:20:15 by fbecht            #+#    #+#             */
-/*   Updated: 2023/04/19 18:20:17 by fbecht           ###   ########.fr       */
+/*   Updated: 2023/05/02 12:31:38 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	builtin_exit(t_data *data, char **args)
 	if (print_exit(data))
 		printf("exit\n");
 	if (!args || !args[0])
-		exit_code = (unsigned char)last_exit_code;
+		exit_code = (unsigned char)g_last_exit_code;
 	else
 	{
 		if (args[1])

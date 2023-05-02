@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 17:18:01 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 17:47:22 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:31:56 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	expand_exit_code(char **args)
 
 	if (!args)
 		return ;
-	exit_code = ft_itoa((unsigned char)last_exit_code);
+	exit_code = ft_itoa((unsigned char)g_last_exit_code);
 	if (!exit_code)
 		return ;
 	while (*args)

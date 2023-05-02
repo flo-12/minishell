@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbecht <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:36:32 by fbecht            #+#    #+#             */
-/*   Updated: 2023/04/14 18:36:34 by fbecht           ###   ########.fr       */
+/*   Updated: 2023/05/02 12:31:21 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	echo_print(char **args, _Bool n_flag)
 	while (*args)
 	{
 		if (!ft_strncmp(*args, "$?", 3))
-			printf("%d", (unsigned char)last_exit_code);
+			printf("%d", (unsigned char)g_last_exit_code);
 		else
 			printf("%s", *args);
 		if (*(args + 1))
