@@ -55,9 +55,17 @@ int	change_dir(t_data *data, char *path)
 {
 	char	cwd[PATH_MAX];
 	char	*tmp;
+	int		ret;
 
-	if (chdir(path) != 0)
+	ret = chdir(path);
+//printf("[change_dir] err=%d\n", err);
+	//if (chdir(path) != 0)
+	if (ret != 0)
+	{
+		if (errno == ESTALE)
+			errno = ENOENT;
 		return (err_msg("cd", path, strerror(errno)), EXIT_FAILURE);
+	}
 	tmp = getcwd(cwd, PATH_MAX);
 	(void)tmp;
 	update_wds(data, cwd);
