@@ -40,6 +40,8 @@ int	get_exit_code(char *str)
 {
 	int	exit_code;
 
+	if (!ft_strncmp(str, "+", 2) || !ft_strncmp(str, "-", 2))
+	return (-1);
 	exit_code = ft_atoi(str);
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
@@ -71,10 +73,10 @@ int	builtin_exit(t_data *data, char **args)
 		exit_code = (unsigned char)g_last_exit_code;
 	else
 	{
-		if (args[1])
-			return (err_msg("exit", "too many arguments", NULL), 2);
 		exit_code = get_exit_code(args[0]);
-		if (exit_code < 0)
+		if (args[1] && exit_code >= 0)
+			return (err_msg("exit", "too many arguments", NULL), 1);
+		else if (exit_code < 0)
 		{
 			err_msg("exit", args[0], "numeric argument required");
 			exit_code = 2;
