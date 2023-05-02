@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 12:45:30 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 17:26:30 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:23:41 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,26 @@
 /* 
 	clears old infiles if there are some
  */
+
 static bool	clear_old_infiles(t_io_fds *io)
+{
+	if (io->infile)
+	{
+		if (io->fd_in == -1 || (io->outfile && io->fd_out == -1))
+			return (false);
+		if (io->heredoc_delimiter != NULL)
+		{
+			free_pointer(io->heredoc_delimiter);
+			io->heredoc_delimiter = NULL;
+			unlink(io->infile);
+		}
+		free_pointer(io->infile);
+		close(io->fd_in);
+	}
+	return (true);
+}
+
+/* static bool	clear_old_infiles(t_io_fds *io)
 {
 	if (io->infile)
 	{
@@ -25,7 +44,7 @@ static bool	clear_old_infiles(t_io_fds *io)
 		close(io->fd_in);
 	}
 	return (true);
-}
+} */
 
 /* generate_geredoc:
 	creates a file where is stored the input, thanks the fill_heredoc() function
@@ -52,9 +71,9 @@ bool	generate_heredoc(t_io_fds *io)
 bool	fill_heredoc(t_io_fds *io, int fd)
 {
 	char	*line;
-	bool	ret;
+	//bool	ret;
 
-	ret = false;
+	//ret = false;
 	line = NULL;
 	while (1)
 	{
@@ -66,7 +85,8 @@ bool	fill_heredoc(t_io_fds *io, int fd)
 		free_pointer(line);
 	}
 	free_pointer(line);
-	return (ret);
+	//printf("ret, fill %d\n", ret);
+	return (true);
 }
 
 /* 
@@ -120,7 +140,11 @@ void	parse_heredoc(t_command **last_cmd, t_token **token_lst)
 	io->heredoc_delimiter = temp->str;
 	io->infile = generate_heredoc_name();
 	if (generate_heredoc(io))
+	{
 		io->fd_in = open(io->infile, O_RDONLY);
+	}
 	else
 		io->fd_in = -1;
+	temp = temp->next;
+	*token_lst = temp;
 }

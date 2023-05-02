@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:42:35 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/05/02 11:38:10 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:10:59 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 void	exit_minishell(t_data *data, int exno)
 {
 	if (data)
-	{
-		//if (data->cmd && data->cmd->io_fds)
-		//	close_fds(data->cmd, true);
 		free_data(data, true);
-	}
 	exit(exno);
 }

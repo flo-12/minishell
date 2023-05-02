@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/04/26 12:19:01 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/05/02 12:49:07 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,5 +126,8 @@ compile_mac: $(OBJS)
 	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -L/opt/homebrew/opt/readline/lib\
  -lreadline -ltermcap 
 	@echo "\n\t\033[33;1;3mMinishell ready (MAC)\n"
+
+valgrind_fds:
+	valgrind --track-fds=yes ./minishell
 
 .PHONY: all re clean fclean norminette_check compile_mac
