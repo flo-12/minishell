@@ -6,11 +6,19 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 14:09:53 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/05/02 11:38:29 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:34:13 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	close_fds(t_io_fds *io)
+{
+	if (io->fd_in != -1)
+		close(io->fd_in);
+	if (io->fd_out != -1)
+		close(io->fd_out);
+}
 
 static void	free_io(t_io_fds *io)
 {
@@ -20,8 +28,9 @@ static void	free_io(t_io_fds *io)
 	if (io->heredoc_delimiter)
 	{
 		unlink(io->infile);
-		free_pointer(io->heredoc_delimiter);
+		//free_pointer(io->heredoc_delimiter);
 	}
+	close_fds(io);
 	if (io->infile)
 		free_pointer(io->infile);
 	if (io->outfile)
