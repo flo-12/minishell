@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:47:51 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/05/02 12:02:47 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/02 18:34:07 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,47 +16,6 @@ int	g_last_exit_code;
 
 static void	minishell(t_data *data)
 {
-	// while (1)
-	// {
-	// 	_Bool	ret;
-
-	// 	/* READ USER INPUT IN PROMPT (line by line) */
-	// 	data->user_input = readline(PROMPT);
-	// 	/* LEXER (for each line of user input) */
-	// 	ret = lexer(data);
-	// 	if (!ret)	// means that something went wrong and token is not initialized
-	// 	{
-	// 		// free data (especially env & user_input i guess)
-	// 		// print error
-	// 		// skip parser and executer, but stay in while-loop
-	// 	}
-	// 	/* PARSER (for Lexer list) */
-	// 	parser(data);
-		
-	// 	/* TEST PRINT token list and command list */
-	// 	print_token_list(&data->token);
-	// 	print_cmd_list(data);
-		
-	// 	/*
-	// 	SET-SIGNALS FROM mcombeau:
-	// 	set_signals_noninteractive();
-	// 	*/
-		
-	// 	last_exit_code = executor(data);
-	// 	printf("exit code: %d\n", last_exit_code);
-	// 	/*
-	// 	EXECUTION FROM mcombeau:
-	// 	if (lexer(data) && parser(data))
-	// 		last_exit_code = execute(data);
-	// 	else
-	// 		g_last_exit_code = 1;
-	// 	*/
-		
-	// 	//printf("\ngeschafft!\n");
-	// 	free_data(data, false);
-	// 	printf("data freed\n");
-	// }
-	
 	while (1)
 	{
 		signal_interactive();
