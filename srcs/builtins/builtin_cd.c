@@ -69,22 +69,15 @@ int	change_dir(t_data *data, char *path)
 *	yes -> return path to home
 *	no  -> return NULL
 */
-char	*check_dir_to_home(char **env, char **args)
+int	check_dir_to_home(char **args)
 {
-	int		i;
-	_Bool	home;
-
-	home = false;
 	if (!args || !args[0])
-		home = true;
+		return (-1);
+	else if (get_size_ptr(args) >= 2 && ft_strncmp(args[0], "--", 3) == 0)
+		return (1);
 	else if (args[0][0] == '\0' || ft_strncmp(args[0], "--", 3) == 0)
-		home = true;
-	if (!home)
-		return (NULL);
-	i = get_env_var_i(env, "HOME=");
-	if (i < 0)
-		return (err_msg("cd", "HOME not set", NULL), NULL);
-	return (ft_strchr(env[i], '=') + 1);
+		return (-1);
+	return (0);
 }
 
 /*
@@ -107,14 +100,20 @@ char	*check_dir_to_home(char **env, char **args)
 */
 int	builtin_cd(t_data *data, char **args)
 {
-	char	*path;
+	int		i_arg;
 	int		i;
 
-	path = check_dir_to_home(data->env, args);
-	if (path)
-		return (change_dir(data, path));
-	else if (get_size_ptr(args) > 1)
+	i_arg = check_dir_to_home(args);
+	if ((i_arg == 1 && get_size_ptr(args) > 2)
+		|| (i_arg == 0 && get_size_ptr(args) > 1))
 		return (err_msg("cd", "too many arguments", NULL), EXIT_FAILURE);
+	else if (i_arg < 0)
+	{
+		i = get_env_var_i(data->env, "HOME=");
+		if (i < 0)
+			return (err_msg("cd", "HOME not set", NULL), EXIT_FAILURE);
+		return (change_dir(data, ft_strchr(data->env[i], '=') + 1));
+	}
 	if (!strncmp(args[0], "-", 2))
 	{
 		i = get_env_var_i(data->env, "OLDPWD=");
@@ -123,5 +122,5 @@ int	builtin_cd(t_data *data, char **args)
 		else
 			return (change_dir(data, ft_strchr(data->env[i], '=') + 1));
 	}
-	return (change_dir(data, args[0]));
+	return (change_dir(data, args[i_arg]));
 }
