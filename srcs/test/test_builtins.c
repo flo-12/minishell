@@ -49,7 +49,7 @@ void	free_data(t_data *data, bool clear_history)
 /*
 COPIED FROM exit_minishell.c
 */
-void	exit_minishell(t_data *data, int exno)
+static void	exit_minishell(t_data *data, int exno)
 {
 	if (data)
 	{
