@@ -47,10 +47,11 @@ void	token_lstdelone(t_token *lst)
 	if (!lst)
 		return ;
 	if (lst->str)
-	{
 		free(lst->str);
+	if (lst->str_backup)
 		free(lst->str_backup);
-	}
+	lst->str = NULL;
+	lst->str_backup = NULL;
 	free(lst);
 }
 
