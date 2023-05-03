@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 18:57:11 by fbecht            #+#    #+#             */
-/*   Updated: 2023/05/02 17:22:24 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:46:39 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,25 @@ int	ft_isspace(int c)
 		return (1);
 	else
 		return (0);
+}
+
+void	remove_token_spaces(t_token **token)
+{
+	t_token	*tmp;
+	t_token	*del;
+
+	tmp = *token;
+	while (tmp->next->type != END)
+	{
+		if (tmp->type == SPACES && tmp->next->type == SPACES)
+		{
+			del = tmp->next;
+			tmp->next = del->next;
+			del->next->prev = tmp;
+			token_lstdelone(del);
+			tmp = *token;
+		}
+		else
+			tmp = tmp->next;
+	}
 }

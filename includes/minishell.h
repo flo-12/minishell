@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:13:39 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/05/02 17:23:38 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:47:18 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int			get_size_ptr(char **ptr);
 void		cpy_ptrs(char **dst, char **src);
 int			ft_isspace(int c);
 void		free_array_str(char **array);
+void		remove_token_spaces(t_token **token);
+
 
 /* EXIT */
 
