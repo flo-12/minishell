@@ -62,7 +62,7 @@ int	builtin_export(t_data *data, char **args)
 	{
 		if (!check_env_var(args[i]))
 			exit_code = EXIT_FAILURE;
-		else
+		else if (ft_strchr(args[i], '='))
 			set_env_var(data, args[i]);
 		i++;
 	}
