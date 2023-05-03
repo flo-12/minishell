@@ -28,7 +28,7 @@ static void	fill_args_array(t_token **temp, char **args, int *i)
 	while (*temp && ((*temp)->type == WORD || (*temp)->type == SPACES))
 	{
 		str_join = NULL;
-		while ((*temp)->type == WORD)// && (*temp)->next->type == WORD)
+		while ((*temp)->type == WORD)
 		{
 			tmp = str_join;
 			if (tmp)
@@ -39,19 +39,9 @@ static void	fill_args_array(t_token **temp, char **args, int *i)
 			else
 				str_join = ft_strdup((*temp)->str);
 			*temp = (*temp)->next;
-			/*str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
-			free((*temp)->str);
-			free((*temp)->next->str);
-			(*temp)->next->str = str_join;
-			(*temp) = (*temp)->next;*/
 		}
 		args[*i] = str_join;
 		*i += 1;
-		/*if ((*temp)->type == WORD)
-		{
-			//args[*i] = (*temp)->str;
-			*i += 1;
-		}*/
 		(*temp) = (*temp)->next;
 	}
 }

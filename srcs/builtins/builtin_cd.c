@@ -58,8 +58,6 @@ int	change_dir(t_data *data, char *path)
 	int		ret;
 
 	ret = chdir(path);
-//printf("[change_dir] err=%d\n", err);
-	//if (chdir(path) != 0)
 	if (ret != 0)
 	{
 		if (errno == ESTALE)

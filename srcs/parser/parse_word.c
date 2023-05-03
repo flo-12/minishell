@@ -23,10 +23,7 @@ static char	*get_cmd_str(t_token **temp)
 	char	*tmp;
 
 	str_join = NULL;
-	/*if ((*temp)->type == WORD)
-		str_join = ft_strdup((*temp)->str);
-	*temp = (*temp)->next;*/
-	while ((*temp)->type == WORD)// && (*temp)->next->type == WORD)
+	while ((*temp)->type == WORD)
 	{
 		tmp = str_join;
 		if (tmp)
@@ -36,15 +33,7 @@ static char	*get_cmd_str(t_token **temp)
 		if (tmp)
 			free(tmp);
 		*temp = (*temp)->next;
-		/*str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
-		free((*temp)->str);
-		free((*temp)->next->str);
-		(*temp)->next->str = str_join;
-		(*temp) = (*temp)->next;*/
 	}
-	/*if ((*temp)->type == WORD)
-		return ((*temp)->str);*/
-		//return (ft_strdup((*temp)->str));
 	return (str_join);
 }
 

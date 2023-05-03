@@ -33,7 +33,7 @@ void	print_newline(int sig)
 * In both cases minishell doesn't have to react to the signals
 * (because processes will) and just has to print a newline.
 */
-void	signal_non_interactive()
+void	signal_non_interactive(void)
 {
 	struct sigaction	s_sigact;
 

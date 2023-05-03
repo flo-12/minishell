@@ -39,8 +39,6 @@ static int	execute_sys_cmd(t_data *data, t_command *cmd)
 	if (cmd->command[0] == '\0' && get_env_var_i(data->env, "PATH=") == -1)
 		return (err_msg(cmd->command, "No such file or directory", NULL),
 			CMD_NOT_FOUND);
-
-	
 	if (!cmd->command || cmd->command[0] == '\0'
 		|| !ft_strncmp(cmd->command, "..", 3))
 		return (err_msg(cmd->command, "command not found", NULL),

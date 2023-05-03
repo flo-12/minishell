@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 //#include "../../includes/minishell_flo.h"
 
 /*
 * Ignore the SIGQUIT signal.
 */
-void	ignore_sigquit()
+void	ignore_sigquit(void)
 {
 	struct sigaction	s_sigact;
 
@@ -46,7 +45,7 @@ void	reset_prompt(int sig)
 						line - with a \n) to a new blank line
 *	CTR+/ (SIGQUIT) -> do nothing / ignore signal
 */
-void	signal_interactive()
+void	signal_interactive(void)
 {
 	struct sigaction	s_sigact;
 
