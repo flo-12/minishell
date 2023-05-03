@@ -23,22 +23,35 @@
 static void	fill_args_array(t_token **temp, char **args, int *i)
 {
 	char	*str_join;
+	char	*tmp;
 
 	while (*temp && ((*temp)->type == WORD || (*temp)->type == SPACES))
 	{
-		while ((*temp)->type == WORD && (*temp)->next->type == WORD)
+		str_join = NULL;
+		while ((*temp)->type == WORD)// && (*temp)->next->type == WORD)
 		{
-			str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
+			tmp = str_join;
+			if (tmp)
+			{
+				str_join = ft_strjoin(tmp, (*temp)->str);
+				free(tmp);
+			}
+			else
+				str_join = ft_strdup((*temp)->str);
+			*temp = (*temp)->next;
+			/*str_join = ft_strjoin((*temp)->str, (*temp)->next->str);
 			free((*temp)->str);
 			free((*temp)->next->str);
 			(*temp)->next->str = str_join;
-			(*temp) = (*temp)->next;
+			(*temp) = (*temp)->next;*/
 		}
-		if ((*temp)->type == WORD)
+		args[*i] = str_join;
+		*i += 1;
+		/*if ((*temp)->type == WORD)
 		{
-			args[*i] = (*temp)->str;
+			//args[*i] = (*temp)->str;
 			*i += 1;
-		}
+		}*/
 		(*temp) = (*temp)->next;
 	}
 }
