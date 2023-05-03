@@ -42,7 +42,8 @@ static void	fill_args_array(t_token **temp, char **args, int *i)
 		}
 		args[*i] = str_join;
 		*i += 1;
-		(*temp) = (*temp)->next;
+		if ((*temp)->type == SPACES)
+			(*temp) = (*temp)->next;
 	}
 }
 
