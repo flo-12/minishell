@@ -19,6 +19,8 @@
 void	print_newline(int sig)
 {
 	(void)sig;
+	if (sig == SIGQUIT)
+		write(1, "Quit (core dumped)", ft_strlen("Quit (core dumped)"));
 	write(1, "\n", 1);
 	rl_on_new_line();
 }
