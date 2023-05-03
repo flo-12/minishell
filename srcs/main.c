@@ -14,6 +14,27 @@
 
 int	g_last_exit_code;
 
+static void	remove_token_spaces(t_token **token)
+{
+	t_token	*tmp;
+	t_token	*del;
+
+	tmp = *token;
+	while (tmp->next->type != END)
+	{
+		if (tmp->type == SPACES && tmp->next->type == SPACES)
+		{
+			del = tmp->next;
+			tmp->next = del->next;
+			del->next->prev = tmp;
+			token_lstdelone(del);
+			tmp = *token;
+		}
+		else
+			tmp = tmp->next;
+	}
+}
+
 static void	minishell(t_data *data)
 {
 	while (1)
@@ -33,6 +54,9 @@ static void	minishell(t_data *data)
 		if (lexer(data))
 		{
 			token_lstadd_back(&data->token, token_lstnew(NULL, END));
+			remove_token_spaces(&data->token);
+			//print_token_list(&data->token);
+
 			if (syntax_check(&data->token))
 				g_last_exit_code = 2;
 			else
@@ -42,7 +66,7 @@ static void	minishell(t_data *data)
 				//print_cmd_list(data);
 				g_last_exit_code = executor(data);
 			}
-			//print_token_list(&data->token);
+			
 		}
 		free_data(data, false);
 	}
