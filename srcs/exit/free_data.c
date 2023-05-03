@@ -42,18 +42,31 @@ void	free_array_str(char **array)
 	}
 }
 
-void	free_tkn_list(t_token **lst)
+void	token_lstdelone(t_token *lst)
+{
+	if (!lst)
+		return ;
+	if (lst->str)
+	{
+		free(lst->str);
+		free(lst->str_backup);
+	}
+	free(lst);
+}
+
+void	token_lstclear(t_token **lst)
 {
 	t_token	*tmp;
 
-	tmp = NULL;
-	while (*lst != NULL)
+	if (!lst)
+		return ;
+	while (*lst)
 	{
 		tmp = (*lst)->next;
-		free_pointer(*lst);
+		token_lstdelone(*lst);
+		*lst = NULL;
 		*lst = tmp;
 	}
-	free_pointer(*lst);
 }
 
 void	free_data(t_data *data, bool clear_history)
@@ -64,7 +77,7 @@ void	free_data(t_data *data, bool clear_history)
 		data->user_input = NULL;
 	}
 	if (data && data->token)
-		free_tkn_list(&data->token);
+		token_lstclear(&data->token);
 	if (data && data->cmd)
 		free_cmd_list(&data->cmd, &free_pointer);
 	if (clear_history == true)

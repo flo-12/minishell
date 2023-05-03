@@ -32,33 +32,6 @@ void	token_lstadd_back(t_token **start, t_token *new)
 	new->prev = tmp;
 }
 
-void	token_lstclear(t_token **lst)
-{
-	t_token	*tmp;
-
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		token_lstdelone(*lst);
-		*lst = NULL;
-		*lst = tmp;
-	}
-}
-
-void	token_lstdelone(t_token *lst)
-{
-	if (!lst)
-		return ;
-	if (lst->str)
-	{
-		free(lst->str);
-		free(lst->str_backup);
-	}
-	free(lst);
-}
-
 t_token	*token_lstnew(char *str, int type)
 {
 	t_token	*new_node;
