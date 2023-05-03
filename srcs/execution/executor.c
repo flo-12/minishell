@@ -6,7 +6,7 @@
 /*   By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:11:25 by mvomiero          #+#    #+#             */
-/*   Updated: 2023/04/28 17:42:11 by mvomiero         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:33:27 by mvomiero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,26 @@
 static int	wait_children(t_data *data)
 {
 	pid_t	wpid;
-	int		wstatus;
-	int		endstatus;
+	int		status;
+	int		save_status;
 
-	wstatus = 0;
-	wpid = 0;
 	close_pipes(data->cmd);
-	while (1)
+	save_status = 0;
+	wpid = 0;
+	while (wpid != -1)
 	{
-		wpid = wait(&wstatus);
+		wpid = waitpid(-1, &status, 0);
 		if (wpid == data->pid)
-			break ;
+			save_status = status;
 		continue ;
 	}
-	if (WIFSIGNALED(wstatus))
-		endstatus = 128 + WTERMSIG(wstatus);
-	else if (WIFEXITED(wstatus))
-		endstatus = WEXITSTATUS(wstatus);
+	if (WIFSIGNALED(save_status))
+		status = 128 + WTERMSIG(save_status);
+	else if (WIFEXITED(save_status))
+		status = WEXITSTATUS(save_status);
 	else
-		endstatus = wstatus;
-	return (endstatus);
+		status = save_status;
+	return (status);
 }
 
 /* create_children:
