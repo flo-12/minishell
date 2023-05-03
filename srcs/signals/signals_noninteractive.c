@@ -37,6 +37,7 @@ void	signal_non_interactive()
 {
 	struct sigaction	s_sigact;
 
+	ft_memset(&s_sigact, 0, sizeof(s_sigact));
 	s_sigact.sa_handler = print_newline;
 	sigaction(SIGINT, &s_sigact, 0);
 	sigaction(SIGQUIT, &s_sigact, 0);

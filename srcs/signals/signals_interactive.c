@@ -21,6 +21,7 @@ void	ignore_sigquit()
 {
 	struct sigaction	s_sigact;
 
+	ft_memset(&s_sigact, 0, sizeof(s_sigact));
 	s_sigact.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &s_sigact, 0);
 }
@@ -50,6 +51,7 @@ void	signal_interactive()
 	struct sigaction	s_sigact;
 
 	ignore_sigquit();
+	ft_memset(&s_sigact, 0, sizeof(s_sigact));
 	s_sigact.sa_handler = reset_prompt;
 	sigaction(SIGINT, &s_sigact, 0);
 }
