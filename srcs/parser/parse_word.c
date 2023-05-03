@@ -37,6 +37,20 @@ static char	*get_cmd_str(t_token **temp)
 	return (str_join);
 }
 
+/* create_first_cmd:
+	allocate memory for the arguments of the command and copies
+	the command as a first argument
+*/
+static bool	create_first_cmd(t_command **cmd_temp)
+{
+	(*cmd_temp)->args = malloc(sizeof * (*cmd_temp)->args * 2);
+	if (!(*cmd_temp)->args)
+		return (false);
+	(*cmd_temp)->args[0] = ft_strdup((*cmd_temp)->command);
+	(*cmd_temp)->args[1] = NULL;
+	return (true);
+}
+
 /* parse_word:
 	parses the tokens with type WORD.
 	First always goes to the last command.
@@ -64,13 +78,16 @@ void	parse_word(t_command **cmd, t_token **token_lst)
 			cmd_temp->command = get_cmd_str(&tkn_temp);
 			if (!cmd_temp->args)
 			{
-				cmd_temp->args = malloc(sizeof * cmd_temp->args * 2);
+				if (!create_first_cmd(&cmd_temp))
+					return ;
+				/*cmd_temp->args = malloc(sizeof * cmd_temp->args * 2);
 				if (!cmd_temp->args)
 					return ;
 				cmd_temp->args[0] = ft_strdup(cmd_temp->command);
-				cmd_temp->args[1] = NULL;
+				cmd_temp->args[1] = NULL;*/
 			}
-			tkn_temp = tkn_temp->next;
+			if (tkn_temp->type == SPACES)
+				tkn_temp = tkn_temp->next;
 		}
 		else
 			parse_word_fill_args(&tkn_temp, cmd_temp);
