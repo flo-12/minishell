@@ -6,7 +6,7 @@
 #    By: mvomiero <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 14:35:24 by mvomiero          #+#    #+#              #
-#    Updated: 2023/05/02 17:23:55 by mvomiero         ###   ########.fr        #
+#    Updated: 2023/05/03 19:54:45 by mvomiero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ all: $(LIBFT) $(OBJ_PATH) $(NAME)
 $(NAME): $(OBJS)
 	@echo "Compiling minishell..."
 	@-$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) -lreadline -lhistory -ltermcap 
-	@echo "\n\t\033[33;1;3mMinishell ready\n"
+	@echo "\n\t\033[33;1;3mMinishell ready\033[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 #	@echo "Compiling object files"
