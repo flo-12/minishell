@@ -2,6 +2,7 @@
 
 Thanks [mvomiero](https://github.com/mvomiero) for the collaboration on this project!
 
+[Screencast from 09-05-2023 12:40:53 PM.webm](https://github.com/flo-12/minishell/assets/119588327/59e5489c-9a3c-47ae-a1b3-5745d6375108)
 
 
 
