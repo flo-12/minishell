@@ -1,6 +1,9 @@
 # minishell
 
+> Thanks to Minishell, we were able to travel through time and come back to problems people faced when Windows didn’t exist.
+
 Thanks [mvomiero](https://github.com/mvomiero) for the collaboration on this project!
+
 
 [Screencast Demo minishell](https://github.com/flo-12/minishell/assets/119588327/59e5489c-9a3c-47ae-a1b3-5745d6375108)
 
@@ -13,15 +16,21 @@ Thanks [mvomiero](https://github.com/mvomiero) for the collaboration on this pro
 - exit status and different concepts put to action
 - And of course **how to collaborate** on a project and split workload in an efficient way!
 
-Core features of this raytracer are:
-- 
-- 
-- 
+Core features of our shell are:
+
+- **_as simple as it is: the same as bash :-P_**
+- search and launch executables (with relative and absolute path)
+- working history
+- handle quotes and $ (dollar sign)
+- redirections (<, >, <<, >>)
+- pipes
+- environment variables
+- `ctrl-C`, `ctrl-D` and `ctrl-\`
+- builtins such as echo, cd, pwd, export, unset, env, exit
+_Sure, it's not a full-grown shell, but pretty close. So please bare some abstractions in the implementation._
 
 Allowed external functions / libraries:
-- open, close, read, write, printf, malloc, free, perror, strerror, exit
-- All functions of the math library (-lm man man 3 math)
-
+- readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay, add_history, printf, malloc, free, write, access, open, read, close, fork, wait, waitpid, wait3, wait4, signal, sigaction, sigemptyset, sigaddset, kill, exit, getcwd, chdir, stat, lstat, fstat, unlink, execve, dup, dup2, pipe, opendir, readdir, closedir, strerror, perror, isatty, ttyname, ttyslot, ioctl, getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 - Libft - own library with basic functions such as calloc, strncpm, etc. (see submodule)
 
 _As usual: All heap allocated memory space must be properly freed. No leaks
