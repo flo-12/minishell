@@ -40,7 +40,7 @@ end-of-file (wanted `%s')\n", *nb, io->heredoc_delimiter);
 		return (false);
 	}
 	if (ft_strncmp(*line, io->heredoc_delimiter,
-			ft_strlen(io->heredoc_delimiter)) == 0)
+			ft_strlen(io->heredoc_delimiter) + 1) == 0)
 	{
 		*ret = true;
 		return (false);

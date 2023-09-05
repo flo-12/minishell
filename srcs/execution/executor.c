@@ -122,22 +122,3 @@ int	executor(t_data *data)
 		return (EXIT_FAILURE);
 	return (create_children(data));
 }
-
-/* int	execute(t_data *data)
-{
-	int	ret;
-
-	ret = prep_for_exec(data);
-	if (ret != CMD_NOT_FOUND)
-		return (ret);
-	if (!data->cmd->pipe_output && !data->cmd->prev
-		&& check_infile_outfile(data->cmd->io_fds))
-	{
-		redirect_io(data->cmd->io_fds);
-		ret = execute_builtin(data, data->cmd);
-		restore_io(data->cmd->io_fds);
-	}
-	if (ret != CMD_NOT_FOUND)
-		return (ret);
-	return (create_children(data));
-} */
