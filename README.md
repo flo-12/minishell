@@ -5,7 +5,7 @@
 Thanks [mvomiero](https://github.com/mvomiero) for the collaboration on this project!
 
 
-[Screencast Demo minishell](https://github.com/flo-12/minishell/assets/119588327/59e5489c-9a3c-47ae-a1b3-5745d6375108)
+[Screencast Demo minishell.webm](https://github.com/flo-12/minishell/assets/119588327/da43d6ee-f416-4bf2-a8d7-46ec46baa3e6)
 
 
 
