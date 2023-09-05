@@ -26,10 +26,7 @@ static void	free_io(t_io_fds *io)
 		return ;
 	restore_io(io);
 	if (io->heredoc_delimiter)
-	{
 		unlink(io->infile);
-		//free_pointer(io->heredoc_delimiter);
-	}
 	close_fds(io);
 	if (io->infile)
 		free_pointer(io->infile);

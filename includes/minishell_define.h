@@ -21,8 +21,6 @@
 # define PROMPT_HEREDOC ">"
 # define BUILTIN_ERR_IDENT "not a valid identifier"
 # define HEREDOC_NAME "/tmp/.minishell_heredoc_"
-// MV: error 127 (command not found) is defined in errno.h but as EKEYEXPIRED, 
-// so it's of course valid for other errors as well. That's why this macro here,
 // for better understanding in code.
 # define CMD_NOT_FOUND 127
 # define CMD_NOT_EXEC 126

@@ -57,22 +57,3 @@ int	main(int ac, char **av, char **env)
 	exit_minishell(&data, g_last_exit_code);
 	return (0);
 }
-
-/* int main(int ac, char **av, char **env)
-{
-	t_data	data;
-
-	ft_memset(&data, 0, sizeof(t_data));
-	if (ac != 1)
-		return (ft_putendl_fd("minishell doesn't accept arguments!", 2), 1);
-	if (!init_data(&data, env))
-		exit_minishell(&data, EXIT_FAILURE);
-	minishell(&data);
-	// if (ac == 3 && !ft_strncmp(av[1], "-c", 3) && av[2])
-	// 	minishell_testing(&data, av[2]);
-	// else
-	// 	minishell(&data);
-	(void)av;
-	exit_minishell(&data, g_last_exit_code);
-	return (0);
-} */

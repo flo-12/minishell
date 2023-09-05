@@ -80,11 +80,6 @@ void	parse_word(t_command **cmd, t_token **token_lst)
 			{
 				if (!create_first_cmd(&cmd_temp))
 					return ;
-				/*cmd_temp->args = malloc(sizeof * cmd_temp->args * 2);
-				if (!cmd_temp->args)
-					return ;
-				cmd_temp->args[0] = ft_strdup(cmd_temp->command);
-				cmd_temp->args[1] = NULL;*/
 			}
 			if (tkn_temp->type == SPACES)
 				tkn_temp = tkn_temp->next;

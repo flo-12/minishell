@@ -56,9 +56,6 @@ SRC			=	main.c \
 				builtins/builtin_pwd.c \
 				builtins/builtin_unset.c \
 				builtins/builtin_utils.c \
-				test/test_token_list.c \
-				test/print.c \
-				test/minishell_testing.c \
 				execution/executor.c execution/utils_pipe.c execution/execute_cmd.c \
 				execution/utils_io.c execution/utils_path.c execution/utils_expand.c\
 				utils/utils.c \
@@ -91,7 +88,6 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 	@mkdir $(OBJ_PATH)/exit
 	@mkdir $(OBJ_PATH)/initialization
-	@mkdir $(OBJ_PATH)/test
 	@mkdir $(OBJ_PATH)/parser
 	@mkdir $(OBJ_PATH)/lexer
 	@mkdir $(OBJ_PATH)/execution

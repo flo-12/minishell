@@ -36,10 +36,6 @@
 # include "libft.h"
 # include "minishell_define.h"
 
-// unify the headers before heading in the project
-# include "minishell_marco.h"
-//# include "minishell_flo.h"
-
 /************* FUNCTIONS *************/
 
 /* INITIALIZATION */
@@ -124,19 +120,12 @@ int			ft_isspace(int c);
 void		free_array_str(char **array);
 void		remove_token_spaces(t_token **token);
 
-
 /* EXIT */
-
 void		exit_minishell(t_data *data, int exno);
 void		free_pointer(void *ptr);
 void		free_data(t_data *data, bool clear_history);
 void		err_msg(char *s1, char *s2, char *s3);
 void		err_msg_syntax(int type);
 void		free_cmd_list(t_command **lst, void (*del)(void *));
-
-/* TEST - PRINT */
-void		print_cmd_list(t_data *data);
-void		print_token_list(t_token **tokens);
-void		minishell_testing(t_data *data, char *arg);
 
 #endif
