@@ -18,13 +18,13 @@ CC		= cc
 CFLAGS	= -Werror -Wextra -Wall
 
 # Libft
-LIBFT_PATH	= libft/
+LIBFT_PATH	= Libft/
 LIBFT_NAME	= libft.a
 LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # includes
 INC			=	-I ./includes/ \
-				-I ./libft/ \
+				-I ./$(LIBFT_PATH) \
 				-I /opt/homebrew/ \
 				-I/opt/homebrew/opt/readline/include
 
