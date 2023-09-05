@@ -2,22 +2,26 @@
 
 > Thanks to Minishell, we were able to travel through time and come back to problems people faced when Windows didn’t exist.
 
-Thanks [mvomiero](https://github.com/mvomiero) for the collaboration on this project!
+The first bigger project in the 42 curriculum: **recoding our own little bash**. A program capable of parsing a prompt and launching executables with arguments, along with a few built-in functions.
 
+MiniShell introduces us to the world of shells. It provides a convenient text interface to interact with the system. Shells might seem very easy to understand but have very specific and defined behaviour in almost every single case, most of which will need to be handled properly.
+
+The output is still far from the original shell - especially because of the Hotfix period at the end of the project, but comes pretty close.
+
+Thanks [mvomiero](https://github.com/mvomiero) for the collaboration on this project!
 
 [Screencast Demo minishell.webm](https://github.com/flo-12/minishell/assets/119588327/da43d6ee-f416-4bf2-a8d7-46ec46baa3e6)
 
 
 
 ## Learning goals
-- Lexer / Parser / Executor
-- structuring a project
+- how does the concept of `Lexer` -> `Parser` -> `Executor` work
+- how do I structure a bigger project to work on it in a team
 - how is a shell set-up and how does it exactly work
-- exit status and different concepts put to action
+- using known patterns such as _exit status_ in a bigger project
 - And of course **how to collaborate** on a project and split workload in an efficient way!
 
 Core features of our shell are:
-
 - **_as simple as it is: the same as bash :-P_**
 - search and launch executables (with relative and absolute path)
 - working history
@@ -27,6 +31,7 @@ Core features of our shell are:
 - environment variables
 - `ctrl-C`, `ctrl-D` and `ctrl-\`
 - builtins such as echo, cd, pwd, export, unset, env, exit
+- not crashing in any scenarios - sounds trivial, I know
 _Sure, it's not a full-grown shell, but pretty close. So please bare some abstractions in the implementation._
 
 Allowed external functions / libraries:
@@ -45,7 +50,7 @@ will be tolerated._
 3) ```make``` (automatically compiles the Libft)
 
 ## Execution
-_no arguments..._
+Simply run the minishell without arguments:
 * Example: `./minishell`
 
 
